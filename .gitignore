@@ -1,0 +1,11 @@
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.spl
+*.gz
+*.lot
+*.lof
+*.toc
+KhalilPhDThesisMK.pdf

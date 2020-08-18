@@ -1,0 +1,321 @@
+\documentclass[12pt,Bold,letterpaper,TexShade,twoside]{mcgilletdclass}
+%\usepackage{hyperref}
+\usepackage[dvips,final]{graphicx}
+\graphicspath{ {Images/} }
+\usepackage[dvips]{geometry}
+\usepackage{texshade}
+\usepackage{epsf}
+\usepackage{epsfig}
+\usepackage{bbm}
+
+\usepackage{amsmath}
+\usepackage{mathptm}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{tabularx}
+\usepackage{tikz}
+\usepackage{multirow}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}} % centered columns
+\newcolumntype{P}[1]{>{\arraybackslash}p{#1}} % left columns
+
+%========================================================%
+% \usepackage{adjustbox} % for rotating column headers
+% \newcolumntype{R}[2]{%
+%     >{\adjustbox{angle=#1,lap=\width-(#2),valign=b}\bgroup}%
+%     l%
+%     <{\egroup}%
+% }
+% \newcommand*\rot{\multicolumn{1}{R{-60}{1em}}}
+% \newcommand*\rotl{\multicolumn{1}{R{-60}{1em}|}}
+%========================================================%
+
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert_2}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\round}{\lfloor}{\rceil}
+\newcommand{\Int}{\int\limits}
+
+%\usepackage{algorithmicx}
+%\usepackage{algpseudocode}
+%\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+%\usepackage{algorithm}
+\usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+\usepackage{url}
+\usepackage{multirow}
+\usepackage{rotating}
+%\usepackage{slashbox}
+\usepackage{diagbox}
+\usepackage{pgfplots}
+
+\usepackage{color, colortbl}
+\definecolor{Gray}{gray}{0.9}
+\usepackage{xcolor,pgf}
+\usepackage[caption=false]{subfig}
+%\usepackage[utf8x]{inputenc} 
+\usepackage{caption}
+%\usepackage{algorithm,algpseudocode,float}
+\usepackage{lipsum}
+\usepackage{siunitx} % for scientific notation
+\usepackage{mathptm}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage[french,british]{babel}
+\usepackage[square, comma, numbers, compress]{natbib}
+
+\usepackage{color}
+\newcommand{\bl}{\color{blue}}
+\newcommand{\rd}{\color{red}}
+
+\usepackage{fancyhdr}
+\setlength{\headheight}{15pt}
+
+\pagestyle{fancy}
+
+
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[RE]{{ {{\it \leftmark}}} }
+\fancyhead[LO]{{ {\it \rightmark}} }
+
+\fancypagestyle{plain}{ %
+	\fancyhf{} % remove everything
+	\renewcommand{\headrulewidth}{0pt} % remove lines as well
+	\renewcommand{\footrulewidth}{0pt}
+}
+
+%========================= ACRONYMS ================================%
+\usepackage{acro}
+%\acsetup{list-long-format=\capitalisewords}
+%\usepackage{mfirstuc}% provides \capitalisewords
+\DeclareAcronym{AM}{ short = AM, long = additive manufacturing, short-plural = s, long-plural = s}
+\DeclareAcronym{DED}{ short = DED, long = directed energy deposition, short-plural = s, long-plural = s}
+\DeclareAcronym{LCA}{ short = LCA, long = life cycle analysis, short-plural = s, long-plural = s}
+\DeclareAcronym{MDO}{ short = MDO, long = multidisciplinary design optimization, short-plural = s, long-plural = s}
+\DeclareAcronym{FE}{ short = FE, long = finite element, short-plural = s, long-plural = s}
+\DeclareAcronym{SN}{ short = SN, long = W{\"o}hler, short-plural = s, long-plural = s}
+\DeclareAcronym{CDF}{ short = CDF, long = cumulative probability distribution function, short-plural = s, long-plural = s}
+\DeclareAcronym{PDF}{ short = PDF, long = probability density function, short-plural = s, long-plural = s}
+\DeclareAcronym{PBD}{ short = PBD, long = point-based design, short-plural = s, long-plural = s}
+\DeclareAcronym{CAD}{ short = CAD, long = computer aided design, short-plural = s, long-plural = s}
+\DeclareAcronym{CAE}{ short = CAE, long = computer aided engineering, short-plural = s, long-plural = s}
+\DeclareAcronym{LH}{ short = LH, long = latin hypercube, short-plural = s, long-plural = s}
+\DeclareAcronym{TRS}{ short = TRS, long = turbine rear structure, short-plural = s, long-plural = s}
+\DeclareAcronym{MADS}{ short = MADS, long = mesh adaptive direct search, short-plural = s, long-plural = s}
+\DeclareAcronym{OECV}{ short = OECV, long = order error with cross Validation, short-plural = s, long-plural = s}
+\DeclareAcronym{OE}{ short = OE, long = order error, short-plural = s, long-plural = s}
+\DeclareAcronym{KBN}{ short = KBN, long = kernel-based Bayesian network, short-plural = s, long-plural = s}
+\DeclareAcronym{BNC}{ short = BNC, long = Bayesian network classifier, short-plural = s, long-plural = s}
+\DeclareAcronym{SBD}{ short = SBD, long = set-based design, short-plural = s, long-plural = s}
+\DeclareAcronym{GA}{ short = GA, long = genetic algorithm, short-plural = s, long-plural = s}
+\DeclareAcronym{MOP}{ short = MOP, long = multi-objective problem, short-plural = s, long-plural = s}
+\DeclareAcronym{OAV}{ short = OAV, long = optimality \& variability, short-plural = s, long-plural = s}
+\DeclareAcronym{KDE}{ short = KDE, long = kernel density estimate, short-plural = s, long-plural = s}
+\DeclareAcronym{RSM}{ short = RSM, long = response surface methodology, short-plural = s, long-plural = s}
+\DeclareAcronym{FDR}{ short = FDR, long = feasible design region, short-plural = s, long-plural = s}
+\DeclareAcronym{EDR}{ short = EDR, long = effective design region, short-plural = s, long-plural = s}
+\DeclareAcronym{FDS}{ short = FDS, long = feasible design set, short-plural = s, long-plural = s}
+\DeclareAcronym{PLM}{ short = PLM, long = product lifecycle management, short-plural = s, long-plural = s}
+\DeclareAcronym{DOE}{ short = DOE, long = design of experiments, short-plural = s, long-plural = s}
+\DeclareAcronym{LOWESS}{ short = LOWESS, long = locally weighted scatterplot smoothing, short-plural = s, long-plural = s}
+\DeclareAcronym{EOL}{ short = EoL, long = end-of-life, short-plural = s, long-plural = s}
+\DeclareAcronym{CE}{ short = CE, long = circular economy, short-plural = s, long-plural = s}
+\DeclareAcronym{KS}{ short = KS, long = Kernel Smoothing , short-plural = s, long-plural = s}
+\DeclareAcronym{LCC}{ short = LCC, long = lifecyle cost, short-plural = s, long-plural = s}
+\DeclareAcronym{CLSC}{ short = CLSC, long = closed-loop supply chain, short-plural = s, long-plural = s}
+\DeclareAcronym{SM}{ short = SM, long = surrogate modeling, short-plural = s, long-plural = s}
+\DeclareAcronym{POA}{ short = POA, long = post-optimality analysis, short-plural = s, long-plural = s}
+\DeclareAcronym{DFRem}{ short = DFRem, long = design for remanufacturing, short-plural = s, long-plural = s}
+\DeclareAcronym{CP}{ short = CP, long = constraint programming, short-plural = s, long-plural = s}
+\DeclareAcronym{PRS}{ short = PRS, long = polynomial response surface, short-plural = s, long-plural = s}
+\DeclareAcronym{FEA}{ short = FEA, long = finite element analysis, short-plural = s, long-plural = s}
+\DeclareAcronym{OEM}{ short = OEM, long = original equipment manufacturer, short-plural = s, long-plural = s}
+\DeclareAcronym{TSE}{ short = TSE, long = tradespace exploration, short-plural = s, long-plural = s}
+\DeclareAcronym{FO}{ short = FO, long = filtered outdegree, short-plural = s, long-plural = s}
+%=================================================================%
+
+%\usepackage{natbib}
+%\usepackage[square, comma, numbers, sort&compress]{natbib}
+%\bibliographystyle{unsrtnat}
+
+\makeatletter
+\def\hlinewd#1{%
+	\noalign{\ifnum0=`}\fi\hrule \@height #1 %
+	\futurelet\reserved@a\@xhline}
+%\bibliographystyle{unsrtnat}
+\setlength{\parskip}{0pt}
+%\usepackage{tex4ht}
+%\usepackage{amsmath}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Have you configured your TeX system for proper  %%
+%% page alignment? See the McGillETD documentation %%
+%% for two methods that can be used to control     %%
+%% page alignment. One method is demonstrated      %%
+%% below. See documentation and the ufalign.tex    %%
+%% file for instructions on how to adjust these    %%
+%% parameters.                                     %%
+%%                                                 %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%       Define student-specific info
+\SetTitle{\huge{Optimization-driven set-based design for dynamic design requirements}}%
+\SetAuthor{Khalil Al Handawi}%
+\SetDegreeType{Doctor of Philosophy}%
+\SetDepartment{Department of Mechanical Engineering}%
+\SetUniversity{McGill University}%
+\SetUniversityAddr{Montreal,Quebec}%
+\SetThesisDate{\today}%
+\SetRequirements{A thesis submitted to McGill University in partial fulfilment of the requirements of
+	the degree of Doctor of Philosophy}%
+\SetCopyright{Khalil Al Handawi 2020
+}%
+
+%\makeindex[keylist]
+%\makeindex[abbr]
+
+%% Input any special commands below
+%\newcommand{\Kron}[1]{\ensuremath{\delta_{K}\left(#1\right)}}
+\listfiles%
+\begin{document}
+
+\maketitle%
+
+\begin{romanPagenumber}{2}%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%         Dedication                              %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\SetDedicationName{\MakeUppercase{Dedication}}%
+\SetDedicationText{\centering My effort, I dedicate to my sweet and loving \\ 
+	\textit{mother, father and sister},\\
+	whose love, encouragement and prays of day and night make me able to attain the highest and most honoroable of professions.}%
+\Dedication%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%         Acknowledgments                         %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\SetAcknowledgeName{\MakeUppercase{Acknowledgements}}%
+\SetAcknowledgeText{I would like to thank my supervisor, Prof. Michael Kokkolaras, for providing me with the oppurtunity and limitless freedom to innovate and pursue my research interests. Michael was an invaluable resource and mentor that has molded me into a professional and adept researcher and engineer. Michael always stressed the importance of quality research and responsible academic practices making them a part of my identity as a researcher. MIchael made me realize my full potential and capabilities through his encouragement and vision. Thank you for being available day and night and providing me with access to knowledge and resources that is unprecedented in all my years of eduction.\\
+%
+I also wish to thank my committee members Prof. Damiano Pasini and Prof. Mathias Legrand for their advice and guidance throughout my graduate studies at McGill University.\\
+%
+I would like to express my most profound appreciation to my collaborators at Chalmers University of Technology at Gothenburg, Sweden for providing me with the resources and connections to contexlualize my contributions and better bring them to the engineering design community. I wish to particularly thank Prof. Ola Isaksson and Dr. Massimo Panarotto for their constant guidance and suggestions for improving the relevance of my work to the industry in which it will be applied.\\
+%
+I am very grateful to GKN Aerospace, Engine Systems at Trollh\"{a}ttan, Sweden for giving me the opportunity to implement my work on challenging engineering applications. I wish to thank Dr. Petter Andersson for his steadfast support, advice, and guidance throughout my work.\\
+%
+I am grateful for the partial support of this work by grants NSERC CRDPJ 479630-15 X-243027 and CARIC CRDPJ479630-15 X-243067. I am also very grateful for the partial support of FRQNT through the {\em Bourses de doctorat en recherche} program (file 273486). I am also grateful to the Faculty of Engineering at McGill University for its partial support through a McGill Engineering Doctoral Award.\\
+%
+To my mother Chaza, thank you for your persistent encouragement and support. You are the reason I am, and you are all my reasons. To my father Bassam, thank you for everything you gave and taught me and for instilling a sense of curiosity for discovery and learning ever since I was a child by taking me to your chemistry lab. To my sister Marieh, thank you for your continuous steady support. Whenever I fall, I always find you by my side helping me to stand back up again. Finally, I would like to acknowledge my pet cat Daboos for his emotional support that meant a lot to me. I hope you are in a better place now.
+}%
+\Acknowledge%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%         Contributions                          %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\SetContributionName{\MakeUppercase{Contributions to original knowledge}}%
+\SetContributionText{The thesis presents a number of design frameworks for addressing uncertain and dynamic design requirements. They are listed as follows:
+%
+\begin{enumerate}
+	\item{A \acf{SBD} framework for identifying sets of parametric optimal designs and scalable optimal designs.}\\
+	%
+	The following metrics and algorithms were developed as part of this framework.
+	%
+	\begin{enumerate}
+		\item{A surrogate enabled parameteric optimization scheme using derivative free methods for obtaining parameteric optimal designs.}
+		\item{A response surface methodology for performing post optimality anaylsis on the parameteric optimal designs and evaluating their scalability.}
+		\item{A scalability constraint formulated in the parameter space.}
+		\item{A methodology for mapping scalable optimal designs from the parameter space to the design space using random sampling techniques.}
+	\end{enumerate}
+	%
+	\item{A design margin quantification and allocation tool for addressing changing requirements throughout a product's lifecycle or development process.}\\
+	%
+	The following metrics and algorithms were developed as part of this framework.
+	%
+	\begin{enumerate}
+		\item{A method for computing reliability and excess of a particular design and requirement using Monte Carlo integration.}
+		\item{A method for generating different product development or lifecycle scenarious using Monte Carlo simulation and importance sampling.}
+		\item{A \acf{SBD} combinatorial optimization approach for obtaining sets of optimal designs.}
+		\item{A \acf{SBD} method for obtaining flexible and robust sets of solutions.}
+		\item{A tradespace exploration strategy for visualizing and comparing flexible, robust and optimal sets of solutions.}
+	\end{enumerate}
+\end{enumerate}
+%
+\textbf{Contribution of Authors}\\
+%
+The author of this thesis and his supervisor are the only contributors to the entire material presented in this thesis. The thesis author has developed all of the ideas and their implementation under the guidance and supervision of his supervisor. The work included collaborators, but they only contributed to the discussion of ideas and editing of papers and did not contribute to the material presented in this thesis.
+}%
+\Contribution%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%         English Abstract                        %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\SetAbstractEnName{\MakeUppercase{Abstract}}%
+\SetAbstractEnText{This thesis presents novel design methodologies for obtaining a set of design solutions that can address design requirements that may change during the design process or over a product or system’s lifetime. These methodologies aim at supporting design engineers quantitatively so they can make informed decisions in the early phases of product development when uncertainty is high.
+The presented methodologies consider design problems commonly encountered in industry. The applications used in this thesis demonstrate the efficacy of these methodologies and are centered around product remanufacturing by means of direct energy deposition, an additive manufacturing technique. Specifically, they aim at providing design solutions in the form of geometry of the deposit and the remanufacturing process parameters. 
+The first methodology considers remanufacturing as a strategy to address changing requirements in design problems. Sets of optimal design solutions, as opposed to single-point designs, are obtained using numerical optimization. The optimization problem objective is to maximize structural performance subject to design and process constraints. Since optimality and feasibility depend on varying design parameters, parametric studies are conducted to obtain optimal solutions for different parameter values. A response surface of the optimization solutions captures the effect of changing one or more parameters on the optimal solution and provides a method to map designs from the design space to the parameter space. In the parameter space, a manufacturing transition rule is formulated to identify sets of design solutions that are scalable by additive manufacturing. The transition rule is based on the physical limitations of the manufacturing method. Scalable design solutions are then mapped back to the design space to obtain the corresponding design variable values. This methodology draws inspiration from set-based design principles used to generate sets of design solutions rather than converging to a single design solution early in the product development process. 
+The first methodology focuses on making decisions using information that is available to the designer. Since product development involves several design iterations and stages, a second methodology for making decisions based on information from past iterations is introduced in this thesis. It focuses on additive manufacturing problems where design requirements remain constant throughout a time interval referred to as an epoch and only change at discrete times in between epochs. This results in a series of design decisions that must be made at the end of each epoch referred to as a decision arc. This methodology considers selecting the best combination of design decisions from a set of discrete design choices. A combinatorial optimization problem is formulated to minimize the level of overdesign subject to reliability constraints. The reliability constraints are computed by evaluating the probability that a design will satisfy a design requirement given by a joint probability density function. Several design requirements are chained together and defined at the end of each epoch to form a requirement arc. Several requirement arc samples are generated using importance sampling. The combinatorial optimization problem is solved for each requirement arc to obtain a set of corresponding decision arcs. This set of optimal decision arcs is compared against sets of robust and flexible designs arcs. A tradespace is used to visualize the design sets and identify the relative degree of flexibility and robustness in the set of optimal decision arcs.
+The remanufacturing of a turbine rear structure, an aeroengine structural component is used to test the proposed methodologies. A stiffener is deposited on the outer casing of the turbine rear structure to increase its stiffness when subjected to thermal loads due to the exhaust gases. The first methodology is used to determine the set of optimal stiffener designs and the set of scalable stiffener designs by optimizing the geometry and laser power used to deposit the stiffener. The second methodology is used to identify the set of optimal design arcs by chaining together several discrete stiffener designs to minimize the overall level of overdesign while maintaining a threshold reliability throughout the design process or the product’s lifecycle.
+The two methodologies form a complete set-based design paradigm for addressing changing requirements in design problems featuring continuous and discrete design variables for instantaneous or progressive change in the design requirements.}
+\AbstractEn%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%         French Abstract                         %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{otherlanguage}{french} 
+\SetAbstractFrName{\MakeUppercase{ABR\'{E}G\'{E}}}%
+\SetAbstractFrText{~~}%
+\AbstractFr%
+\end{otherlanguage}
+\TOCHeading{\MakeUppercase{Table of Contents}}%
+\LOTHeading{\MakeUppercase{List of Tables}}%
+\LOFHeading{\MakeUppercase{List of Figures}}%
+\tableofcontents %
+\listoftables %
+\listoffigures %
+
+\end{romanPagenumber}
+
+%\mainmatter %
+
+% Chapter 01: Introduction
+\include{Chapter_01}
+
+% Chapter 02: Methodology
+\include{Chapter_02}
+
+% Chapter 03: Thermomechanical
+\include{Chapter_03}
+
+% Chapter 04: Scalable SBD
+\include{Chapter_04}
+
+% Chapter 05: Design margins
+\include{Chapter_05}
+
+% Chapter 06: Stochastic optimization
+\include{Chapter_06}
+
+% Chapter 07: Conclusion
+\include{Chapter_07}
+
+\bibHeading{References}
+
+\bibliographystyle{unsrtnat}
+% \bibliography{mcgilletd}
+\bibliography{mcgilletd_KA}
+%\bibliographystyle{unsrtnat}
+
+
+\end{document}
+
+
+ 
+
+
+
+
+
+
