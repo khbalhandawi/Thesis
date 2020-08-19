@@ -6,16 +6,16 @@
 \label{ch:stohasticopt}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-This chapter explores the use of upcoming stochastic optimization algorithms for managing uncertain requirements in design problems. We show how a set of design solutions can be obtained from the models defined in Chapter~\ref{ch:thermomechanical} via a stochastic version of \ac{MADS}, \texttt{StoMADS} \cite{Audet2019}.
+This chapter explores the use of state-of-the-art stochastic optimization algorithms for managing uncertain requirements in design problems. We show how a set of design solutions can be obtained from the models defined in Chapter~\ref{ch:thermomechanical} via a stochastic version of \ac{MADS}, \texttt{StoMADS} \cite{Audet2019}.
 
-The method described in this chapter can help simplify the algorithms introduced in Chapter~\ref{ch:scalableSBD} and \ref{ch:TSEcont} by eliminating the steps involved in searching for a set of parametric optimal solutions.
+The method described in this chapter can help simplify the algorithms introduced in Chapters \ref{ch:scalableSBD} and \ref{ch:TSEcont} by eliminating the steps involved in searching for a set of parametric optimal solutions.
 
 %============================ METHODOLOGY ============================%
 \section{Methodology} \label{sec:STOmethods}
 
 Consider the optimization problem defined in Section \ref{subsec:SBDparametric} in Equation~(\ref{eq:SBDoptproblem}).
 
-The objectives and constraints are a function of uncertain parameters $\mathbf{p}$. In this section we denote the uncertain parameters by random variables $\mathbf{P} = \left[P_1,P_2,\cdots,P_m\right]$. The objective and constraints functions in Equation~(\ref{eq:SBDoptproblem}) are deterministic in nature. By replacing the uncertain parameters with their random counterparts, the objective and constraint functions become stochastic:
+The objectives and constraints are a function of uncertain parameters $\mathbf{p}$. In this section we denote the uncertain parameters by random variables $\mathbf{P} = \left[P_1,P_2,\cdots,P_m\right]$ (not to be confused with the reliability vector defined in Chapter~\ref{ch:TSEcont}). The objective and constraints functions in Equation~(\ref{eq:SBDoptproblem}) are deterministic in nature. By replacing the uncertain parameters with their random counterparts, the objective and constraint functions become stochastic:
 
 \begin{equation}
 	\begin{aligned}
@@ -27,16 +27,16 @@ The objectives and constraints are a function of uncertain parameters $\mathbf{p
 	\label{eq:STOoptproblem}
 \end{equation}
 
-where $\mathbb{E}_{\mathbf{P}}$ denotes the expectation with respect to the vector of random variables $\mathbf{P}$. $f_{\mathbf{P}}$ and $\hat{\mathbf{g}}_{\mathbf{P}}(\mathbf{x})$ denote the stochastic version of the surrogate models for the engineering design problem being solved.
+where $\mathbb{E}_{\mathbf{P}}$ denotes the expectation with respect to the vector of random variables $\mathbf{P}$. $\hat{f}_{\mathbf{P}}$ and $\hat{\mathbf{g}}_{\mathbf{P}}(\mathbf{x})$ denote the stochastic version of the surrogate models for the engineering design problem being solved.
 
-$f_{\mathbf{P}}$ and $\hat{\mathbf{g}}_{\mathbf{P}}(\mathbf{x})$ are obtained from their deterministic counterparts $\hat{f}(\mathbf{x};{\mathbf{p}})$ and $\hat{\mathbf{g}}(\mathbf{x};{\mathbf{p}})$ by randomly sampling the components of the parameter vector $\mathbf{p}$ from a joint \ac{PDF} $F_{\mathbf{X}}(\mathbf{p})$. In this chapter we use a uniform distribution for the joint \ac{PDF} although other distributions can be used depending on the problem.
+$\hat{f}_{\mathbf{P}}$ and $\hat{\mathbf{g}}_{\mathbf{P}}(\mathbf{x})$ are obtained from their deterministic counterparts $\hat{f}(\mathbf{x};{\mathbf{p}})$ and $\hat{\mathbf{g}}(\mathbf{x};{\mathbf{p}})$ by randomly sampling the components of the parameter vector $\mathbf{p}$ from a joint \ac{PDF} $F_{\mathbf{X}}(\mathbf{p})$. In this chapter we use a uniform distribution for the joint \ac{PDF} although other distributions can be used depending on the problem.
 
-The optimization problem in Equation~(\ref{eq:STOoptproblem}) is solved via \texttt{StoMADS} to obtain a set of candidate solutions for the optimizer $\mathbf{X}^*=  \{ \mathbf{x}^*_1,\mathbf{x}^*_1,\ldots,\mathbf{x}^*_w \} $.
+The optimization problem in Equation~(\ref{eq:STOoptproblem}) is solved via \texttt{StoMADS} to obtain a set of candidate solutions for the optimizer $\mathbf{X}^*=  \{ \mathbf{x}^*_1,\mathbf{x}^*_2,\ldots,\mathbf{x}^*_w \} $.
 
 We demonstrate the capabilities of \texttt{StoMADS} by solving a \ac{TRS} remanufacturing problem where uncertain parameters ae involved.
 
 %========================= APPLICATION PROBLEM =======================%
-\section{Application problem} \label{sec:TSEcasestudy}
+\section{Application problem} \label{sec:STOcasestudy}
 
 We investigate the deposition of a circumferential stiffener on the outer casing of a \ac{TRS} (shown in Figure~\ref{fig:TRSoverview}) subject to 4 uncertain temperature loads (shown in Figure~\ref{fig:thermalloads}). We formulate the problem as follows:
 
@@ -47,13 +47,13 @@ We investigate the deposition of a circumferential stiffener on the outer casing
         & \text{subject to}
         & & {g_{\textrm{linear}}}(\mathbf{x}) = x_3 + x_1 - W_{\textrm{total}} \le 0\\
         & \text{where}
-        & & \mathbf{x}^T = \left[x_1,x_2,x_3\right]\\
+        & & \mathbf{x} = \left[x_1,x_2,x_3\right]^{\mathrm{T}}\\
     \end{aligned}
 \end{equation}
 
-The objective function is obtained from a surrogate model for the safety factor $n_{\textrm{safety}}$ where the inputs are the stiffener dimensions $x_1,x_2,$ and $x_3$ and temperature loads $T_1,T_2,T_3,$ and $T_4$.
+The objective function is obtained from a surrogate model for the safety factor $\hat{n_{\textrm{safety}}}$ where the inputs are the stiffener dimensions $x_1,x_2,$ and $x_3$ and temperature loads $T_1,T_2,T_3,$ and $T_4$.
 
-The design variables for this problem govern the circumferential stiffener geometry ()$x_1,x_2,$ and $x_3$). The uncertain parameters for this problem are the 4 temperature loads experienced by the \ac{TRS} ($T_1,T_2,T_3,$ and $T_4$). We extract the relevant design variables and parameters from Table~\ref{table:modelinputs} and list them in the tables below:
+The design variables for this problem govern the circumferential stiffener geometry (given by $x_1,x_2,$ and $x_3$). The uncertain parameters for this problem are the 4 temperature loads experienced by the \ac{TRS} ($T_1,T_2,T_3,$ and $T_4$). We extract the relevant design variables and parameters from Table~\ref{table:modelinputs} and list them in the tables below:
 
 
 \begin{table}[h!]
@@ -115,7 +115,7 @@ The design problem in Equation~(\ref{eq:Stoproblemdet}) is transformed to its st
 	\label{eq:STOproblemsto}
 \end{equation}
 
-and $\hat{f}_{\mathbf{P}}(\mathbf{x})$ is the stochastic version of the objective where the random vector $\mathbf{P}$ has its components sampled from a uniform distribution. The constraint remains unchanged since its does not involve uncertain parameters.
+where $\hat{f}_{\mathbf{P}}(\mathbf{x})$ is the stochastic version of the objective and the random vector $\mathbf{P}$ has its components sampled from a uniform distribution. The constraint remains unchanged since its does not involve uncertain parameters.
 
 Before solving the problem in Equation~(\ref{eq:STOproblemsto}), we perform Monte Carlo simulation on the stochastic objective function to determine the effect of the design variables on the expected value of the objective.
 
@@ -124,7 +124,7 @@ Before solving the problem in Equation~(\ref{eq:STOproblemsto}), we perform Mont
 \subsection{Monte Carlo simulation of stochastic objective function} \label{subsec:MCSsto}
 
 
-For each design variables in $\mathbf{x}$, we vary one variable at a time while holding the others fixed at their nominal values as given by Table~\ref{table:STOmodelinputs}. The stochastic objective function is called $1000$ times for a given combination of variables while randomly sampling the design parameters in $P$ from a uniform distribution. The upper and lower bound for the uniform distribution that each random parameter $P_m$ follows is given by Table~\ref{table:STOmodelparameters}.
+For each design variable in $\mathbf{x}$, we vary one variable at a time while holding the others fixed at their nominal values as given by Table~\ref{table:STOmodelinputs}. The stochastic objective function is called $1000$ times for a given combination of variables while randomly sampling the design parameters in $\mathbf{P}$ from a uniform distribution. The upper and lower bound for the uniform distribution that each random parameter $P_m$ follows is given by Table~\ref{table:STOmodelparameters}.
 
 The results of the Monte Carlo simulation are visualized in Figure~\ref{fig:MSCStoblackbox}. From these results, it can be seen that the expectation of the stochastic objective function $\mathbb{E}_{\mathbf{P}}\left[\hat{f}_{\mathbf{P}}(\mathbf{x})\right]$ as given by the mean of the 1000 samples for each run is dependant on the variables in $\mathbf{x}$. It can be seen that $\mathbb{E}_{\mathbf{P}}\left[\hat{f}_{\mathbf{P}}(\mathbf{x})\right]$ is maximized in the range $ 72.5 \le x_1 \le 100 $ and at $x_2 \approx 15$ and $x_3 \approx 87.5$.
 
@@ -133,13 +133,13 @@ The results of the Monte Carlo simulation are visualized in Figure~\ref{fig:MSCS
 	\subfloat[Effect of $x1$, $x2=6$ mm, $x_3=25$ mm\label{fig:X1sweep}]{\includegraphics[width=0.9\textwidth]{PDF_nsafety_X1}} 
 	
 	\subfloat[Effect of $x2$, $x1=91$ mm, $x_3=25$ mm\label{fig:X2sweep}]{\includegraphics[width=0.9\textwidth]{PDF_nsafety_X2}} 
-
+	\caption[]{Monte Carlo simulation of $\hat{f}_{\mathbf{P}}(\mathbf{x})$ using $1000$ samples}
 \end{figure}
 
 \begin{figure}[h!]
 	\ContinuedFloat % split subfigure across multiple pages
 	\subfloat[Effect of $x3$, $x1=91$ mm, $x_2=6$ mm\label{fig:X3sweep}]{\includegraphics[width=0.9\textwidth]{PDF_nsafety_X3}} 
-	\caption{Monte Carlo simulation of $\hat{f}_{\mathbf{P}}(\mathbf{x})$ using $1000$ samples}
+	\caption[Monte Carlo simulation of $\hat{f}_{\mathbf{P}}(\mathbf{x})$ using $1000$ samples]{Monte Carlo simulation of $\hat{f}_{\mathbf{P}}(\mathbf{x})$ using $1000$ samples \emph{(cont.)}}
 	\label{fig:MSCStoblackbox}
 \end{figure}
 
@@ -153,7 +153,7 @@ We solved the problem in Equation~(\ref{eq:STOproblemsto}) using \texttt{StoMADS
 
 The problem is also solved using the deterministic version of the algorithm \texttt{NOMAD} in order to be used as a benchmark for the quality of the solutions obtained via \texttt{StoMADS-PB} \cite{LeDigabel2011}. 
 
-It is recommended by the developers of \texttt{StoMADS-PB} to set the maximum number of blackbox evaluation parameter of the algorithm \texttt{max\_bb\_eval}$ = (n+1) \times 1000$, where $n$ is the number of variables. As a result, 4000 iterations where used with \texttt{StoMADS-PB}.
+It is recommended by the developers of \texttt{StoMADS-PB} to set the maximum number of blackbox evaluations parameter of the algorithm to \texttt{max\_bb\_eval}$ = (n+1) \times 1000$, where $n$ is the number of variables. As a result, 4000 iterations where used with \texttt{StoMADS-PB}.
 
 The best four solutions in terms of the expectation of the objective function are listed in Table~\ref{table:StoMADSresults}. In order to compute the expectation, a Monte Carlo simulation was performed for each of the solutions obtained in Table~\ref{table:StoMADSresults}. The results of the Monte Carlo simulation are shown in Figure~\ref{fig:MCSstomadsresults}.
 
@@ -210,10 +210,10 @@ We will now summarize the implications of this approach for obtaining set-based 
 \section{Summary}
 \label{sec:stohasticoptsummary}
 
-This chapter presented an alternative strategy for solving parametric optimization problems. Rather than sampling the parameter space and solving the optimization problem for a given sample of parameter values, \texttt{StomMADS} can be used to directly obtain a set of solutions with an equivalent stochastic objective and constraint functions where the parameters are samples from their respective random distributions.
+This chapter presented an alternative strategy for solving parametric optimization problems. Rather than sampling the parameter space and solving the optimization problem for a given sample of parameter values, \texttt{StomMADS} can be used to directly obtain a set of solutions with an equivalent stochastic objective and constraint functions where the parameters are sampled from their respective random distributions.
 
-The approach presented in this chapter can be used to improve the Algorithms~\ref{algo:PODalgo} and \ref{algo:SBDOptalgo}. Solving the problem in Equation~(\ref{eq:STOoptproblem}) can substitute steps 1 through 8 in Algorithm~\ref{algo:PODalgo}. However, the solution to problem in Equation~(\ref{eq:STOoptproblem}) only outputs the optimizer values in the design space. Corresponding parameter values cannot be obtained since they are intrinsic to the stochastic version of the objective and constraint functions.
+The approach presented in this chapter can be used to improve the Algorithms~\ref{algo:PODalgo} and \ref{algo:SBDOptalgo}. Solving the problem in Equation~(\ref{eq:STOoptproblem}) can substitute steps 1 through 8 in Algorithm~\ref{algo:PODalgo}. However, the solution to the problem in Equation~(\ref{eq:STOoptproblem}) only outputs the optimizer values in the design space. Corresponding parameter values cannot be obtained since they are intrinsic to the stochastic version of the objective and constraint functions. The set of optimizers and their corresponding parameter values are needed by Algorithm~\ref{algo:PODalgo} to construct a response surface in the parameter space.
 
-However, the approach in this chapter can substitute steps 1 through 5 with in Algorithm~\ref{algo:SBDOptalgo} by randomly selecting requirement arcs from $\Omega_R$ in the stochastic version of the problem. The requirement arc corresponding to each solution in $S_{E}^*$ is not needed since only the frequency of the design arcs is needed to isolate the set-based solution.
+However, the approach in this chapter can substitute steps 3 through 5 within Algorithm \ref{algo:SBDOptalgo} by randomly selecting requirement arcs from $\Omega_R$ in the stochastic version of the problem. The requirement arc corresponding to each solution in $S_{E}^*$ is not needed since only the frequency of the design arcs is needed to isolate the set-based solution.
 
 The approach presented in this chapter can prove useful to designers who are accustomed to more traditional design practices involving point-based design. This is because \texttt{StoMADS} has a similar interface to most available deterministic design optimization approaches that output a single design solution.
