@@ -17,7 +17,7 @@ We begin by defining the methodology for obtaining the set-based solutions for a
 
 Engineering design optimization problems involve decision variables $\mathbf{x}  \in \mathbb{R}^n$ and design parameters ${\mathbf{p}}  \in \mathbb{R}^m$. Objective (${f}(\mathbf{x};\mathbf{p})$) and constraint ($\mathbf{g}(\mathbf{x};\mathbf{p})$) functions are used to reflect design requirements. Given bounded design optimization variables and parameters $\mathbf{L} \leq \mathbf{x} \leq \mathbf{U}$ and $\mathbf{L}_p \leq \mathbf{p} \leq \mathbf{U}_p$, respectively, we define the design space $\mathit{D}$ and the parameter space $\mathit{P}$. We also consider constraint sets $\mathit{C}_u$ for $u = 1,2,\ldots,q$ where $q$ is the number of constraints. In a product design context, constraints are part of the design requirements and are driven by the parameters $\mathbf{p}$. Finally, the feasible set $\mathit{F}$ is defined as the intersection of all constraint sets and contains designs that meet all design requirements. The set $\mathit{F}$ is the \ac{FDS} and represents the outcome of \ac{SBD} before elimination of potential designs. 
 
-Design parameters may affect the optimal solution of the optimization problem due to their influence on design requirements. As a result, designs that are optimal throughout the parameter space $\mathit{P}$ and satisfy the design requirements comprise the set of parametric optimal designs which is a reduction of the \ac{FDS}. Since practical \ac{SBD} methodologies require solutions sets that can be easily communicated across design teams, response surfaces are used as a surrogate model to evaluate feasibility and performance and to classify membership of each design to the feasible set and the set of parametric optimal designs. 
+Design parameters may affect the optimal solution of the optimization problem due to their influence on design requirements. As a result, designs that are optimal throughout the parameter space $\mathit{P}$ and satisfy the design requirements comprise the set of parametric optimal designs which is a reduction of the \ac{FDS}. Since practical \ac{SBD} methodolog\-ies require solutions sets that can be easily communicated across design teams, response surfaces are used as a surrogate model to evaluate feasibility and performance and to classify membership of each design to the feasible set and the set of parametric optimal designs. 
 
 % --------------------------- Surrogate modeling ------------------------------ %
 \subsection{Surrogate modeling} \label{subsec:RSM}
@@ -92,7 +92,7 @@ For the remainder of this subsection, let us use the typical notation between an
 \ac{KS} models consist of a weighted sum of training points where the weight for each training point decreases as the distance from the prediction point increases:
 \begin{multline}
  \label{eq:ksexpansion}
-	\hat{y}(\mathbf{x}) = \dfrac{\sum_{j=1}^{w} \phi_j(\mathbf{x})y_j}{\sum_{j=1}^{k} \phi_j(\mathbf{x})} = \\
+	\hat{y}(\mathbf{x}) = \dfrac{\sum_{j=1}^{w} \phi_j(\mathbf{x})y_j}{\sum_{j=1}^{k} \phi_j(\mathbf{x})} =
 	\dfrac{\phi_1(\mathbf{x}) y_1 + \phi_2(\mathbf{x}) y_2 +\cdots + \phi_w(\mathbf{x}) y_w}{\phi_1(\mathbf{x})+ \phi_2(\mathbf{x})+\cdots + \phi_w(\mathbf{x})} = \\
 	\dfrac{\phi_1(\mathbf{x}) y_1}{\phi_1(\mathbf{x})+ \phi_2(\mathbf{x}) + \cdots + \phi_w(\mathbf{x})} + \dfrac{\phi_2(\mathbf{x}) y_2}{\phi_1(\mathbf{x})+ \phi_2(\mathbf{x})+\cdots + \phi_w(\mathbf{x})} + \\
 	 \cdots + \dfrac{\phi_w(\mathbf{x}) y_w}{\phi_1(\mathbf{x})+ \phi_2(\mathbf{x})+\cdots + \phi_w(\mathbf{x})},
@@ -105,9 +105,9 @@ To determine the gradient of $\hat{y}(\mathbf{x})$, the quotient rule of differe
 %\end{table*}
 \begin{multline}
 \label{eq:jacobiancomponent}
-\nabla\hat{y}(\mathbf{x}) = \dfrac{\phi_1(\mathbf{x})+ \phi_2(\mathbf{x})+\cdots + \phi_w(\mathbf{x})}{\left[\phi_1(\mathbf{x})+ \phi_2(\mathbf{x})+\cdots + \phi_w(\mathbf{x})\right]^2} \times \\
+\nabla\hat{y}(\mathbf{x}) = \dfrac{\phi_1(\mathbf{x})+ \phi_2(\mathbf{x})+\cdots + \phi_w(\mathbf{x})}{\left[\phi_1(\mathbf{x})+ \phi_2(\mathbf{x})+\cdots + \phi_w(\mathbf{x})\right]^2} \times
 \left[\nabla\phi_1(\mathbf{x}) y_1 + \nabla\phi_2(\mathbf{x}) y_2 +\cdots + \nabla\phi_w(\mathbf{x}) y_w\right] - \\
-\dfrac{\nabla\phi_1(\mathbf{x})+ \nabla\phi_2(\mathbf{x})+ \cdots + \nabla\phi_w(\mathbf{x})}{\left[\phi_1(\mathbf{x})+ \phi_2(\mathbf{x})+\cdots + \phi_w(\mathbf{x})\right]^2} \times \\
+\dfrac{\nabla\phi_1(\mathbf{x})+ \nabla\phi_2(\mathbf{x})+ \cdots + \nabla\phi_w(\mathbf{x})}{\left[\phi_1(\mathbf{x})+ \phi_2(\mathbf{x})+\cdots + \phi_w(\mathbf{x})\right]^2} \times
 \left[\phi_1(\mathbf{x}) y_1 + \phi_2(\mathbf{x}) y_2 +\cdots + \phi_w(\mathbf{x}) y_w\right] =\\
 %\end{multline}
 %Compacting the terms yields
@@ -126,9 +126,9 @@ We used the Gaussian kernel function (and its gradient ) defined as
 \end{gather}
 where $\lambda$ is the bandwidth of the kernel function. The bandwidth parameter's effect on the order-based error is also used to determine the optimal bandwidth for adequately capturing the Jacobian of the \ac{KS} model.
 
-Equations~(\ref{eq:kernelfunction}) and (\ref{eq:kernelfunctiongrad}) are substituted into Equation~(\ref{eq:jacobiancomponent}) to provide the gradient of the prediction function $\hat{y}(\mathbf{x})$. This process is repeated for each of the design variables $\hat{x_1^*}(\mathbf{p}), \hat{x_2^*}(\mathbf{p}), \cdots \hat{x_n^*}(\mathbf{p})$ to populate the Jacobian in Equation~(\ref{eq:jacobian}).
+Equations~(\ref{eq:kernelfunction}) and (\ref{eq:kernelfunctiongrad}) are substituted into Equation~(\ref{eq:jacobiancomponent}) to provide the gradient of the prediction function $\hat{y}(\mathbf{x})$. This process is repeated for each of the design variables $\hat{x_1^*}(\mathbf{p}), \hat{x_2^*}(\mathbf{p}), \cdots \hat{x_n^*}(\mathbf{p})$ to populate the Jacobian in Equation~(\ref{eq:jacobian}). The Jacobian is used to formulate a transition rule in the parameter space to obtain the set of scalable optimal designs.
 
-Algorithm~\ref{algo:PODalgo} presents the methodology followed to obtain the set of parametric optimal designs.
+Algorithm~\ref{algo:PODalgo} presents the methodology followed to obtain the set of parametric optimal designs. The procedure including the calculcation of the order-based error is demonstrated by means of a numerical example in Section~\ref{subsec:numex}.
 
 \begin{algorithm}
 	\DontPrintSemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
@@ -142,13 +142,13 @@ Algorithm~\ref{algo:PODalgo} presents the methodology followed to obtain the set
 		Solve the parametric optimization problem in Equation~(\ref{eq:SBDoptproblem}) to obtain $\mathbf{x}^*(\mathbf{p}_k)$\;
 		Augment $\mathbf{X}^* \gets \mathbf{X}^* \cup \{ \mathbf{x}^*(\mathbf{p}_k) \} $\;
 		Train response surface $\hat{\mathbf{x}^*}(\mathbf{p})$ using $\mathbf{X}^*$\;
-		Compute order error for $k$th sample $\varepsilon_{OE}$ using Equation~(\ref{eq:oeobjective}), $\hat{\mathbf{x}^*}(\mathbf{p})$, and $\mathbf{X_{cv}}^*$\;
+		Compute order-based error for $k$th sample $\varepsilon_{OE}$ using Equation~(\ref{eq:oeobjective}), $\hat{\mathbf{x}^*}(\mathbf{p})$, and $\mathbf{X_{cv}}^*$\;
 	}
-	Find index $k_{\textrm{min}}$ that minimizes order error $\varepsilon_{OE}$\;
+	Find index $k_{\textrm{min}}$ that minimizes order-based error $\varepsilon_{OE}$\;
 	Set $k \gets k_{\textrm{min}} $ \;
 	Set $\mathbf{X}^* \gets \mathbf{X}^*= \{ \mathbf{x}^*(\mathbf{p}_1),\mathbf{x}^*(\mathbf{p}_2),\ldots,\mathbf{x}^*(\mathbf{p}_k) \} $ \;
 	Train response surface $\hat{\mathbf{x}^*}(\mathbf{p})$ using $\mathbf{X}^*$ \;
-	Find bandwidth $\lambda$ that minimizes order error of response surface $\hat{\mathbf{x}^*}(\mathbf{p})$\;
+	Find bandwidth $\lambda$ that minimizes order-based error of response surface $\hat{\mathbf{x}^*}(\mathbf{p})$\;
 	Compute Jacobian of response surface $\nabla\hat{{x}^*}(\mathbf{p)}$ using Equation~(\ref{eq:jacobiancomponent})\;
 	\caption{Pseudo-algorithm for obtaining the set of parametric optimal designs $\mathbf{X}^*$ and \ac{KS} response surface of parameter space $\hat{{x}^*}(\mathbf{p})$}
 	\label{algo:PODalgo}
@@ -284,7 +284,7 @@ In addition, we use the order-based error proposed in \cite{Audet2018} since it 
 	\varepsilon_{OE} = \frac{1}{n_{cv}^2} \sum_{i=1}^{n_{cv}} \sum_{l=1}^{n_{cv}} \theta\left(\mathbf{x}^*(\mathbf{p}_i) - \mathbf{x}^*(\mathbf{p}_l),\hat{\mathbf{x}^*}(\mathbf{p}_i) - \hat{\mathbf{x}^*}(\mathbf{p}_l)\right),
 \end{equation}
 %
-where $n_{cv}$ is the number of validation points. The function $\theta$ is defined as:
+where $n_{cv}$ is the number of validation points. The function $\theta$ is defined as
 %
 \begin{equation}
     \label{eq:theta}
@@ -303,7 +303,7 @@ The proposed methodology, is presented as a flow diagram in Figure~\ref{fig:SBDm
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=.8\textwidth]{5_methodology_V2.pdf}
+	\includegraphics[width=.95\textwidth]{5_methodology_V2.pdf}
 	\caption{ \label{fig:SBDmethods} Set-based design space reduction methodology}
 \end{figure}
 

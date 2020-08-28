@@ -1,8 +1,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%              Stochastic optimization              %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Emerging algorithms for managing uncertain requirements via stochastic optimization}
-\chaptermark{Emerging algorithms for managing uncertain requirements via stochastic optimization}
+\chapter{Managing uncertain requirements by means of stochastic optimization}
+\chaptermark{Managing uncertain requirements by means of stochastic optimization}
 \label{ch:stohasticopt}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -13,23 +13,21 @@ The method described in this chapter can help simplify the algorithms introduced
 %============================ METHODOLOGY ============================%
 \section{Methodology} \label{sec:STOmethods}
 
-Consider the optimization problem defined in Section \ref{subsec:SBDparametric} in Equation~(\ref{eq:SBDoptproblem}).
-
-The objectives and constraints are a function of uncertain parameters $\mathbf{p}$. In this section we denote the uncertain parameters by random variables $\mathbf{P} = \left[P_1,P_2,\cdots,P_m\right]$ (not to be confused with the reliability vector defined in Chapter~\ref{ch:TSEcont}). The objective and constraints functions in Equation~(\ref{eq:SBDoptproblem}) are deterministic in nature. By replacing the uncertain parameters with their random counterparts, the objective and constraint functions become stochastic:
+Consider the optimization problem defined in Section \ref{subsec:SBDparametric} in Equation~(\ref{eq:SBDoptproblem}). The objectives and constraints are a function of uncertain parameters $\mathbf{p}$. In this section we denote the uncertain parameters by random variables $\mathbf{P} = \left[P_1,P_2,\cdots,P_m\right]$ (not to be confused with the reliability vector defined in Chapter~\ref{ch:TSEcont}). The objective and constraints functions in Equation~(\ref{eq:SBDoptproblem}) are deterministic in nature. By replacing the uncertain parameters with their random counterparts, the objective and constraint functions become stochastic
 
 \begin{equation}
 	\begin{aligned}
 		& \underset{\mathbf{x}}{\text{minimize}}
 		& & \hat{f}(\mathbf{x})~\textrm{where}~\hat{f}(\mathbf{x})=\mathbb{E}_{\mathbf{P}}\left[\hat{f}_{\mathbf{P}}(\mathbf{x})\right]\\
 		& \text{subject to}
-		& & \hat{\mathbf{g}}(\mathbf{x}) \le \mathbf{0}~\textrm{where}~\hat{\mathbf{g}}(\mathbf{x})=\mathbb{E}_{\mathbf{P}}\left[\hat{\mathbf{g}}_{\mathbf{P}}(\mathbf{x})\right].
+		& & \hat{\mathbf{g}}(\mathbf{x}) \le \mathbf{0}~\textrm{where}~\hat{\mathbf{g}}(\mathbf{x})=\mathbb{E}_{\mathbf{P}}\left[\hat{\mathbf{g}}_{\mathbf{P}}(\mathbf{x})\right],
 	\end{aligned}
 	\label{eq:STOoptproblem}
 \end{equation}
 
-where $\mathbb{E}_{\mathbf{P}}$ denotes the expectation with respect to the vector of random variables $\mathbf{P}$. $\hat{f}_{\mathbf{P}}$ and $\hat{\mathbf{g}}_{\mathbf{P}}(\mathbf{x})$ denote the stochastic version of the surrogate models for the engineering design problem being solved.
+where $\mathbb{E}_{\mathbf{P}}$ denotes the expectation with respect to the vector of random variables $\mathbf{P}$. $\hat{f}_{\mathbf{P}}(\mathbf{x})$ and $\hat{\mathbf{g}}_{\mathbf{P}}(\mathbf{x})$ denote the stochastic version of the surrogate models for the engineering design problem being solved.
 
-$\hat{f}_{\mathbf{P}}$ and $\hat{\mathbf{g}}_{\mathbf{P}}(\mathbf{x})$ are obtained from their deterministic counterparts $\hat{f}(\mathbf{x};{\mathbf{p}})$ and $\hat{\mathbf{g}}(\mathbf{x};{\mathbf{p}})$ by randomly sampling the components of the parameter vector $\mathbf{p}$ from a joint \ac{PDF} $F_{\mathbf{X}}(\mathbf{p})$. In this chapter we use a uniform distribution for the joint \ac{PDF} although other distributions can be used depending on the problem.
+$\hat{f}_{\mathbf{P}}(\mathbf{x})$ and $\hat{\mathbf{g}}_{\mathbf{P}}(\mathbf{x})$ are obtained from their deterministic counterparts $\hat{f}(\mathbf{x};{\mathbf{p}})$ and $\hat{\mathbf{g}}(\mathbf{x};{\mathbf{p}})$ by randomly sampling the components of the parameter vector $\mathbf{p}$ from a joint \ac{PDF} $F_{\mathbf{X}}(\mathbf{p})$. In this chapter we use a uniform distribution for the joint \ac{PDF} although other distributions can be used depending on the problem.
 
 The optimization problem in Equation~(\ref{eq:STOoptproblem}) is solved via \texttt{StoMADS} to obtain a set of candidate solutions for the optimizer $\mathbf{X}^*=  \{ \mathbf{x}^*_1,\mathbf{x}^*_2,\ldots,\mathbf{x}^*_w \} $.
 
@@ -95,12 +93,13 @@ The design variables for this problem govern the circumferential stiffener geome
 	Laser beam radius & ${r_l}$ & mm & 14.2 \\ 
 	Scanning speed& ${V}$ & mm/s & 5.0 \\ 
 	Laser penetration depth & $D_p$ & mm & 5.0 \\
+	Substrate base width & $W_{\textrm{total}}$ & mm & $155$ \\
 	%================================================================
 	\hline\hline
 	\end{tabular}
 \end{table}
 
-The design problem in Equation~(\ref{eq:Stoproblemdet}) is transformed to its stochastic counterpart by randomly sampling the uncertain parameters from a uniform distribution:
+The design problem in Equation~(\ref{eq:Stoproblemdet}) is transformed to its stochastic counterpart by randomly sampling the uncertain parameters from a uniform distribution
 
 \begin{equation}
 	\begin{aligned}
@@ -204,7 +203,7 @@ The best four solutions in terms of the expectation of the objective function ar
 
 It can be seen from Table~\ref{table:StoMADSresults} that the \texttt{StoMADS-PB} algorithm performs better than the \texttt{NOMAD} algorithm when comparing the expected value of the objective function at the optimizer. Only \texttt{StoMADS-PB} candidate solution 2 underperformed in terms of the expectation of the objective function relative to the \texttt{NOMAD} solution. Furthermore it can be seen that the constraint was inactive for the best performing candidate solution. It should also be noted that although the \texttt{NOMAD} algorithm is deterministic, running the problem with the same initial conditions and algorithm parameters will yield a variety of solutions due to the stochastic nature of the objective function.
 
-We will now summarize the implications of this approach for obtaining set-based solutions in relation to the set-based design approaches that have been developed in this thesis 
+We will now summarize the implications of this approach for obtaining set-based solutions in relation to the set-based design approaches that have been developed in this thesis.
 
 %============================== SUMMARY ================================%
 \section{Summary}
@@ -212,7 +211,7 @@ We will now summarize the implications of this approach for obtaining set-based 
 
 This chapter presented an alternative strategy for solving parametric optimization problems. Rather than sampling the parameter space and solving the optimization problem for a given sample of parameter values, \texttt{StomMADS} can be used to directly obtain a set of solutions with an equivalent stochastic objective and constraint functions where the parameters are sampled from their respective random distributions.
 
-The approach presented in this chapter can be used to improve the Algorithms~\ref{algo:PODalgo} and \ref{algo:SBDOptalgo}. Solving the problem in Equation~(\ref{eq:STOoptproblem}) can substitute steps 1 through 8 in Algorithm~\ref{algo:PODalgo}. However, the solution to the problem in Equation~(\ref{eq:STOoptproblem}) only outputs the optimizer values in the design space. Corresponding parameter values cannot be obtained since they are intrinsic to the stochastic version of the objective and constraint functions. The set of optimizers and their corresponding parameter values are needed by Algorithm~\ref{algo:PODalgo} to construct a response surface in the parameter space.
+The approach presented in this chapter can be used to improve Algorithms~\ref{algo:PODalgo} and \ref{algo:SBDOptalgo}. Solving the problem in Equation~(\ref{eq:STOoptproblem}) can substitute steps 1 through 8 in Algorithm~\ref{algo:PODalgo}. However, the solution to the problem in Equation~(\ref{eq:STOoptproblem}) only outputs the optimizer values in the design space. Corresponding parameter values cannot be obtained since they are intrinsic to the stochastic version of the objective and constraint functions. The set of optimizers and their corresponding parameter values are needed by Algorithm~\ref{algo:PODalgo} to construct a response surface in the parameter space.
 
 However, the approach in this chapter can substitute steps 3 through 5 within Algorithm \ref{algo:SBDOptalgo} by randomly selecting requirement arcs from $\Omega_R$ in the stochastic version of the problem. The requirement arc corresponding to each solution in $S_{E}^*$ is not needed since only the frequency of the design arcs is needed to isolate the set-based solution.
 

@@ -55,7 +55,7 @@ In other studies, flexibility is defined as the ability of a system to be modifi
 
 Other studies look at flexibility from a cost of change perspective which is important to realize the needed design changes. \citeauthor{Rapp2018} quantify design flexibility in terms of development and integration costs associated with adding a subsystem option to a set of design solutions \cite{Rapp2018}. 
 
-\citeauthor{Cardin2017} explore alternative flexible design scenarios by solving a multistage stochastic programming problem to minimize a cost function \cite{Cardin2017}. The authors solve a waste-to-energy system design problem to determine the appropriate upgrade capacities and times. The cost function for flexibility is formulated in terms of net present value of the system in previous work \cite{Cardin2016}. Several waste demand (requirements) scenarios are generated via Monte Carlo simulation. The average profit of all the scenarios for a given system design (upgrade levels and times) is maximized subject to a number of constraints. The most important constraint governing the behavior of the decision maker is the nonanticipativity constraint. It implies that decisions up to a certain time period during the lifecycle are made solely based on previous and current knowledge of the system demands (requirements). This approach simulates a realistic design problem that progresses over the course of a product's lifecycle. Furthermore, a set of solutions can be obtained simply by minimizing the cost function of each Monte Carlo sample to obtain a corresponding solution.
+\citeauthor{Cardin2017} explore alternative flexible design scenarios by solving a multistage stochastic programming problem to minimize a cost function \cite{Cardin2017}. The authors solve a waste-to-energy system design problem to determine the appropriate upgrade capacities and times. The cost function for flexibility is formulated in terms of net present value of the system in previous work \cite{Cardin2016}. Several waste demand (requirements) scenarios are generated via Monte Carlo simulation. The average profit of all the scenarios for a given system design (upgrade levels and times) is maximized subject to a number of constraints. The most important constraint governing the behavior of the decision maker is the nonanticipativity constraint. It implies that decisions made at a certain time during the lifecycle are made solely based on previous and current knowledge of the system demands (requirements). This approach simulates a realistic design problem that progresses over the course of a product's lifecycle. Furthermore, a set of solutions can be obtained simply by minimizing the cost function of each Monte Carlo sample to obtain a corresponding solution.
 
 Flexibility can be considered in both the design and requirements spaces \cite{Ferguson2008}. When reviewing the available literature, it appears that quantifying changeability is performed largely in the requirements space rather than the design space and a methodology for mapping between the two spaces is required to identify the most flexible designs \cite{Tackett2014,Olewnik2004,Liu2008,Yannou2003}. Furthermore, when considering changeability due to changes in the operating environment and the product, it is important to consider a set of solutions that are changeable in order to leverage the added flexibility of the design solutions \cite{Olewnik2004,Liu2008,Suh2007}. A single point design that is flexible would not be justified if no alternatives are offered. Finally, among the mentioned aspects of changeability, flexibility and specifically scalability appear to be of relevance to remanufacturing since it involves upgrading the specifications of a product's components to achieve the required change. As a result, we will focus on set-based design principles while considering a metric for identifying scalable solution sets for remanufacturing purposes in Chapter \ref{ch:scalableSBD}.
 
@@ -75,7 +75,7 @@ Another system design characteristic that reacts to changing operational environ
 
 Another study has quantified resilience and some of its aspects including survivability using a probability tree \cite{Small2019}. For example the reliability of an unmanned aerial vehicle is calculated by multiplying the reliability of the system during the mission with the probability that the system is available (availability). This is a measure of the ability of the system to perform reliably provided that the system is available to perform during the mission. The probability value for each resilience metric is computed based on design decisions and mission requirements. Monte Carlo simulation is used to investigate model uncertainty. Parameter uncertainty is then investigated in the tradespace by randomly sampling different parameter samples that drive the requirements and performances from a normal distribution \cite{Small2019}. 
 
-In summary, design flexibility is associated with the ease of modifying the design to meet changing requirements outside the operational context. Robustness is associated with passively accommodating changing requirements outside the operational context. Resilience is an umbrella term for robustness and adaptability and describes the ability of the design to passively or actively cope with changing requirements and operational contexts. In this thesis, we will focus on quantifying and designing for flexibility and robustness as we are concerned with changes to requirements during the product development cycle or its lifecycle. Since flexibility is usually defined in the tradespace via the filtered outdegree, we review some tradespace exploration studies in the context of flexible design in Section \ref{sec:tradespace}. In order to check robustness, the probability of meeting a requirement can be used to impose reliability constraints on the design solution under consideration. These design practices are showcased as part our design framework for a product development problem where requirements change progressively in Chapter~\ref{ch:TSEcont}.
+In summary, design flexibility is associated with the ease of modifying the design to meet changing requirements outside the operational context. Robustness is associated with passively accommodating changing requirements outside the operational context. Resilience is an umbrella term for robustness and adaptability and describes the ability of the design to passively or actively cope with changing requirements and operational contexts. In this thesis, we will focus on quantifying and designing for flexibility and robustness as we are concerned with changes to requirements during the product development cycle or its lifecycle. Since flexibility is usually defined in the tradespace via the filtered outdegree, we review some tradespace exploration studies in the context of flexible design in Section \ref{sec:tradespace}. In order to check robustness, the probability of meeting a requirement can be used to impose reliability constraints on the design solution under consideration. These design practices are showcased as part of our design framework for a product development problem where requirements change progressively in Chapter~\ref{ch:TSEcont}.
 
 The studies reviewed in this section are summarized in Table \ref{table:changeabilitysummary} and classified based on the changeability aspects considered and the metrics used to quantify them. We also position our contributions in Chapters \ref{ch:scalableSBD} and \ref{ch:TSEcont} relative to some of the most notable studies that have been reviewed in this section.
 
@@ -107,7 +107,7 @@ The amount of design changeability embedded in a product is derived from its fle
 % \end{table}
 
 \newcommand{\changeCW}{0.55cm}
-\newcommand{\mycontCW}{1.2cm}
+\newcommand{\mycontCW}{1.5cm}
 
 \begin{table}[h!]
 	\centering
@@ -118,8 +118,8 @@ The amount of design changeability embedded in a product is derived from its fle
 	\begin{tabular}{lC{2.5cm}|C{\changeCW}C{\changeCW}C{\changeCW}C{\changeCW}C{\changeCW}C{\changeCW}C{\changeCW}C{\changeCW}C{\changeCW}C{\changeCW}|C{\mycontCW}C{\mycontCW}}
 	\hline\hline
 
-	\multicolumn{2}{c|}{ \multirow{2}{*}[-0.0pt]{\bf Feature} } & \multicolumn{9}{c}{\bf Contribution(s)} \\ \cline{3-11}
-	 & & \cite{Tackett2014} & \cite{Olewnik2004} & \cite{Liu2008} & \cite{Suh2007} & \cite{Rehn2018} & \cite{Viscito2009} & \cite{Rapp2018} & \cite{Cardin2017,Cardin2016} & \cite{McManus2007} & \cite{Small2019} & Chapter \ref{ch:scalableSBD} & Chapter \ref{ch:TSEcont} \\ \hline
+	\multicolumn{2}{c|}{ \multirow{2}{*}[-0.0pt]{\bf Feature} } & \multicolumn{9}{c}{\bf Contribution(s)} \\ \cline{3-14}
+	 & & \cite{Tackett2014} & \cite{Olewnik2004} & \cite{Liu2008} & \cite{Suh2007} & \cite{Rehn2018} & \cite{Viscito2009} & \cite{Rapp2018} & $\dagger$ & \cite{McManus2007} & \cite{Small2019} & Chapter \ref{ch:scalableSBD} & Chapter \ref{ch:TSEcont} \\ \hline
 	%================================================================
 	\multirow{2}{*}[-0.0pt]{\bf Change type} & Internal & ~ & ~ & \cmark & ~ & ~ & ~ & \cmark & ~ & ~ & \cmark & ~ \\
 	 & External & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark & \cmark \\ \hline
@@ -149,6 +149,8 @@ The amount of design changeability embedded in a product is derived from its fle
 	%================================================================
 	\hline\hline
 	\end{tabular}
+	\\
+	\footnote[2]{}\citeauthor{Cardin2017} \cite{Cardin2017}, \citeauthor{Cardin2016} \cite{Cardin2016}
 \end{table}
 
 %=============================== MARGINS ===============================%
@@ -179,12 +181,12 @@ The need for scaling up the dimensionality of design problems in terms of number
 
 We summarize the methods reviewed for computing design margins in Table \ref{table:marginssummary} in terms of the dimensionality of the requirements considered and the numerical method used for calculating them. They are also compared to the methods used as part of our framework in Chapter \ref{ch:TSEcont}.
 
-Table \ref{table:marginssummary} shows that we present a novel method for quantifying both the excess and buffer components of design margins. We use Monte Carlo integration to compute the size of the excess and buffer sets defined in a multi-dimensional parameter space.
+Table \ref{table:marginssummary} shows that we present a novel method for quantifying and distinguishing the excess and buffer components of design margins. We use Monte Carlo integration to compute the size of the excess and buffer sets defined in a multi-dimensional parameter space.
 
 In order to leverage the added design changeability enabled by strategically allocating design margins or scalability in product design, a set of equally changeable solutions is needed. We review the most recent advances in \ac{SBD} in the following section to use them as part of our frameworks.
 
 \renewcommand{\changeCW}{0.55cm}
-\renewcommand{\mycontCW}{1.2cm}
+\renewcommand{\mycontCW}{1.5cm}
 
 \begin{table}[h!]
 	\centering
@@ -195,7 +197,7 @@ In order to leverage the added design changeability enabled by strategically all
 	\begin{tabular}{lC{2.5cm}|C{\changeCW}C{\changeCW}C{\changeCW}C{\changeCW}C{\changeCW}|C{\mycontCW}C{\mycontCW}}
 	\hline\hline
 
-	\multicolumn{2}{c|}{ \multirow{2}{*}[-0.0pt]{\bf Feature} } & \multicolumn{6}{c}{\bf Contribution(s)} \\ \cline{3-8}
+	\multicolumn{2}{c|}{ \multirow{2}{*}[-0.0pt]{\bf Feature} } & \multicolumn{6}{c}{\bf Contribution(s)} \\ \cline{3-9}
 	 & & \cite{Tackett2014} & \cite{Cansler2016} & \cite{Rehn2018} & \cite{Cross2015} & \cite{Villanueva2014} & Chapter \ref{ch:scalableSBD} & Chapter \ref{ch:TSEcont} \\ \hline
 	%================================================================
 	\multirow{3}{*}[-0.0pt]{\bf Margins} & Excess & \cmark & \cmark & \cmark & ~ & ~ & ~ & \cmark \\
@@ -219,9 +221,9 @@ In order to leverage the added design changeability enabled by strategically all
 
 Due to the high level of uncertainty at the early phases of the product development process, designers have adopted iterative product design methods. Traditionally, the design problem is solved by selecting an initial design based on existing knowledge or expert opinion as an initial ``seed'' in the design space. The initial seed design is improved iteratively until a satisfactory design that meets the design requirements is reached. This paradigm is known as \ac{PBD} \cite{Qureshi2014, Kerga2014, SobekIi1999}. \ac{PBD} allows the design engineers to arrive at a solution in a short time frame. However, once the design engineers commit to a solution in the design phase, it becomes difficult to modify the design should the system requirements change during the later stages of the product development process \cite{Levandowski2014a, Carlson2000a}.
 
-A possible remedy to the above shortcomings is to delay commitment to a single design early in the design stage. \acf{SBD} is another design paradigm that addresses this by exploring alternative designs in the early stages of product development and delay commitment to a single design. The set of alternative designs is developed simultaneously until the variable parameters driving the requirements have been refined. Only the set of designs that has been refined by the updated requirements is developed further. This results in several designs rather than a single design that are gradually refined over the course of the product development process.
+A possible remedy to the above shortcomings is to delay commitment to a single design early in the design stage. \Acf{SBD} is another design paradigm that addresses this by exploring alternative designs in the early stages of product development and delay commitment to a single design. The set of alternative designs is developed simultaneously until the variable parameters driving the requirements have been refined. Only the set of designs that has been refined by the updated requirements is developed further. This results in several designs rather than a single design that are gradually refined over the course of the product development process.
 
-\citeauthor{SobekIi1999} identify three principles to be observed during \ac{SBD} \cite{SobekIi1999}. 1) The design space is explored to identify feasible designs comprising the \ac{FDS} with respect to each design requirement and quantify trade-offs between possible design solutions. 2) The intersection of the \acp{FDS} is identified in 1) while still maintaining flexibility in the offered design solutions. 3) The \ac{FDS} is gradually narrowed down by eliminating undesirable solutions as design requirements become more well-defined and constraints are tightened. It can be concluded that an \ac{SBD} methodology should feature (i) design maps of the \acp{FDS} that are transferable to ease communication between different engineering teams, (ii) must capture arbitrarily shaped \acp{FDS}, (iii) assess feasibility of design solutions efficiently to offset the longer lead time associated with \ac{SBD} and (iv) have the ability to incorporate designer preferences as a means for eliminating designs.
+\citeauthor{SobekIi1999} identify three principles to be observed during \ac{SBD} \cite{SobekIi1999}. 1) The design space is explored to identify feasible designs comprising the \ac{FDS} with respect to each design requirement and quantify trade-offs between possible design solutions. 2) The intersection of the \acp{FDS} is identified in 1) while still maintaining flexibility in the offered design solutions. 3) The \ac{FDS} is gradually narrowed down by eliminating undesirable solutions as design requirements become more well-defined and constraints are tightened. It can be concluded that an \ac{SBD} methodology should feature (i) design maps of the \acp{FDS} that are transferable to ease communication between different engineering teams, (ii) must capture arbitrarily shaped \acp{FDS}, (iii) assess feasibility of design solutions efficiently to offset the longer lead time associated with \ac{SBD}, and (iv) have the ability to incorporate designer preferences as a means for eliminating designs.
 
 There are several works that address the \ac{SBD} principles introduced by \citeauthor{SobekIi1999} quantitatively. They can be classified into works that focus on either design feasibility assessment or design space reduction based on performance and designer preferences.
 
@@ -251,7 +253,7 @@ We classify the \ac{SBD} methods based on the set-based representation of the ob
 
 Finally, a number of techniques for narrowing down the set-based solution has been proposed. These techniques include Pareto set membership \cite{Olewnik2004,Miller2018}, optimality of a ranged set with respect to an objective function (design performance or flexibility) \cite{Hannapel2014,Liu2008,Suh2007}, and interval dominance for ranged sets \cite{Malak2009,Miller2018}.
 
-A summary of these finding are summarized in Table \ref{table:SBDsummary} with respect to the principles of set-based design established by \citeauthor{SobekIi1999} \cite{SobekIi1999}. Our contributions in Chapters \ref{ch:scalableSBD} and \ref{ch:TSEcont} are also compared against the most recent advances in \ac{SBD}.
+A summary of these findings are summarized in Table \ref{table:SBDsummary} with respect to the principles of set-based design established by \citeauthor{SobekIi1999} \cite{SobekIi1999}. Our contributions in Chapters \ref{ch:scalableSBD} and \ref{ch:TSEcont} are also compared against the most recent advances in \ac{SBD}.
 
 Table \ref{table:SBDsummary} shows that we address the limitation of using ranged sets to represents the solution set. We use response surfaces to identify set-based solutions in Chapter~\ref{ch:scalableSBD}. In Chapter~\ref{ch:TSEcont} we used a convex hull to represent our set-based solutions due to the finiteness and discreteness of the design space being considered. This is because the case study used in that chapter featured categorical and discrete design variables. However, as explained in Chapter~\ref{ch:conclusion} response surfaces should be used when adapting the methodology in Chapter~\ref{ch:TSEcont} for continuous or mixed variable problems.
 
@@ -268,7 +270,7 @@ Table \ref{table:SBDsummary} shows that we address the limitation of using range
 	\hline\hline
 
 	\multicolumn{2}{c|}{ \multirow{2}{*}[-0.0pt]{\bf Features of reported sets} } & \multicolumn{13}{c}{\bf Contribution(s)} \\ \cline{3-15}
-	 & & \cite{Qureshi2014} & \cite{Nahm2005} & \cite{Olewnik2004} & \cite{Liu2008} & \cite{Gventer1999} & \cite{Kizer2014} & \cite{Shahan2012,Yannou2003,Ge2005} & \cite{Miller2018} & \cite{Hannapel2014} & \cite{Suh2007} & \cite{Malak2009} & Chapter \ref{ch:scalableSBD} & Chapter \ref{ch:TSEcont} \\ \hline
+	 & & \cite{Qureshi2014} & \cite{Nahm2005} & \cite{Olewnik2004} & \cite{Liu2008} & \cite{Gventer1999} & \cite{Kizer2014} & $\dagger$ & \cite{Miller2018} & \cite{Hannapel2014} & \cite{Suh2007} & \cite{Malak2009} & Chapter \ref{ch:scalableSBD} & Chapter \ref{ch:TSEcont} \\ \hline
 	%================================================================
 	\multirow{4}{*}[-0.0pt]{\bf Represenation} & Interval & \cmark & ~ & \cmark & \cmark & ~ & ~ & ~ & \cmark & \cmark & \cmark & \cmark & ~ & ~ \\
 	 & Fuzzy set & ~ & \cmark & ~ & ~ & \cmark & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ \\
@@ -289,6 +291,7 @@ Table \ref{table:SBDsummary} shows that we address the limitation of using range
    %================================================================
 	\hline\hline
 	\end{tabular}
+	\footnote[2]{}\citeauthor{Shahan2012} \cite{Shahan2012}, \citeauthor{Yannou2003} \cite{Yannou2003}, \citeauthor{Ge2005} \cite{Ge2005}
 \end{table}
 
 Studies that utilize tradespace exploration will be reviewed in order to utilize the concepts presented as part of the framework in Chapter \ref{ch:TSEcont} for quantitatively comparing sets of design solutions.
@@ -310,12 +313,20 @@ The real utility of tradespace exploration lies in its ability to visualize and 
 The gaps in the studies reviewed so far will be identified in order to position our contributions relative to the literature.
 
 %=============================== SUMMARY ===============================%
-\section{Summary}
+\section{Research gaps and opportunities}
 \label{sec:bgsummary}
 
-Our objective is to generate a set of changeable component designs that can be upgraded as necessary through remanufacturing to meet changing requirements that may arise at a product or system's \ac{EOL}. 
+The literature reviewed on this subject featured several studies that have attempted to quantify the aspects of changeability related to modifiability, robustness and scalability of the design. We narrow down these studies to those that report set-based solutions. Among those studies, several research gaps in the field are evident.
 
-In our first contribution, we propose a systematic design space reduction methodology using optimization and response surfaces. An optimization problem is formulated to include parameters reflecting the requirements at the current stage of the product development process or its lifecycle. We then obtain a set of parametric optimal solutions to maximize the performance of the remanufactured products. 
+\begin{itemize}
+	\item None of the set-based representations featured a metamodel to represent the arbitrarily\-shaped solutions sets. Intervals where used for reporting set-based solutions.
+	\item Only one study used \ac{MDO} to reduce the feasible design space to a flexible design set by narrowing down the intervals on design variables \cite{Hannapel2014}.
+	\item Studies that used metamodels for reporting set-based solutions focused on identifying the feasible design space without further reduction \cite{Shahan2012,Yannou2003}.
+\end{itemize}
+
+We aim to address these research gaps in our first contribution. Our objective is to generate a set of changeable component designs that can be upgraded as necessary through remanufacturing to meet changing requirements that may arise at a product or system's \ac{EOL}. 
+
+We propose a systematic design space reduction methodology using optimization and response surfaces. An optimization problem is formulated to include parameters reflecting the requirements at the current stage of the product development process or its lifecycle. We then obtain a set of parametric optimal solutions to maximize the performance of the remanufactured products. 
 
 Since designers must commit to a solution eventually, it is important to consider the {changeability} of a product throughout its lifecycle and not just at the current stage to allow products to retain most of their economic value \cite{Fricke2005}. We therefore incorporate a scalability constraint in our \ac{SBD} methodology to further reduce our solutions set to readily changeable designs. The scalability constraint is evaluated in the requirements space since changeability and scalability by proxy are defined in the requirements space. The set of possible parameter values related to performance requirements are used as a proxy for the requirements space. We provide a mapping between the design space and the parameter space to transfer scalable designs identified in the parameter space back to the design space.
 
@@ -331,9 +342,13 @@ The proposed methodology is based on:
 %=======================================================================%
 %=======================================================================%
 
-The literature surveyed thus far suggests that the study of excess is relatively nascent. A methodology on how to strategically place excess is required. The successful implementation of such a methodology requires a metric for measuring excess in a theoretical design, while providing a means to reduce the uncertainty surrounding the types and quantities of requirements likely to be encountered throughout a product's lifecycle or development process. Finally, the value of excess must be identified and traded against during system design \cite{Long2017}.
+The literature surveyed thus far suggests that the study of excess is relatively nascent. A methodology on how to strategically place excess is required. The successful implementation of such a methodology requires a metric for measuring excess in a theoretical design, while providing a means to reduce the uncertainty surrounding the types and quantities of requirements likely to be encountered throughout a product's lifecycle or development process. Finally, the value of excess must be identified and traded against during system design \cite{Long2017}. In this field, the following research gaps have been identified.
 
-There appears to be no attempt at quantifying design margins (or its constituents, buffer and excess) in a multi-dimensional space by means other than ranged intervals. Furthermore, although there is an abundance of studies on quantifying design robustness and flexibility, the tradeoff between these important aspects of design for uncertain requirements has not been investigated within a tradespace exploration framework. Little work has been done to examine the evolutionary path of products in response to changes in their environment or requirements hence the need for an epoch-era analysis that explores product changes in a progressive manner as requirements change \cite{Long2017,Cardin2017}. 
+\begin{itemize}
+	\item There appears to be no attempt at quantifying design margins (or its constituents, buffer and excess) in a multi-dimensional space by means other than ranged intervals. 
+	\item Despite the abundance of studies on quantifying design robustness and flexibility, the tradeoff between these important aspects of design for uncertain requirements has not been investigated within a tradespace exploration framework. 
+	\item Little work has been done to examine the evolutionary path of products in response to changes in their environment or requirements hence the need for an epoch-era analysis that explores product changes in a progressive manner as requirements change \cite{Long2017,Cardin2017}.
+\end{itemize}
 
 In our second contribution, we propose a methodology where we define the components of design margins mathematically. We define design reliability, capability, buffer, and excess and compute them using Monte Carlo integration. We use Monte Carlo simulation to chain multiple requirements together to generate a requirement arc representative of all the stages encountered during the product development process or its lifecycle. An arc is defined as several requirement instantiations chained together across multiple epochs. A corresponding design arc is found by combinatorial optimization such that excess is minimized while reliability is maintained above a threshold. Monte Carlo simulation is used to generate multiple requirement arcs (multiple development or lifecycle scenarios) to obtain a set of solutions that balances robustness with flexibility by minimizing excess.
 
@@ -349,4 +364,4 @@ Our methodology features:
 	\item a tradespace for visualizing the set of optimal design arcs and positioning it relative to sets that maximize filtered outdegree (flexible design set) and sets that satisfy the largest number of requirement arcs without regards to minimizing excess (robust design sets).
 \end{itemize}
 
-We will begin by describing the problem that we solve in this thesis to demonstrate the efficacy of our frameworks. It is an industrial case study were we consider the remanufacturing of an aeroengine structural component that is subject to changing load requirements.
+In the following chapter, we describe the design problem that we use to demonstrate the efficacy of our frameworks. It is an industrial case study were we consider the remanufacturing of an aeroengine structural component that is subject to changing load requirements. The details of our contributions are outlined in the following chapters.

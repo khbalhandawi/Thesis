@@ -16,6 +16,8 @@
 \usepackage{tabularx}
 \usepackage{tikz}
 \usepackage{multirow}
+
+\DeclareMathOperator{\Tr}{Tr} % trace operator
 \newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}} % centered columns
 \newcolumntype{P}[1]{>{\arraybackslash}p{#1}} % left columns
 
@@ -52,6 +54,10 @@
 \usepackage{diagbox}
 \usepackage{pgfplots}
 
+\usepackage[symbol]{footmisc} % dagger symbol in footnotes
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+% \usepackage{ragged2e} % left justify text
 \usepackage{color, colortbl}
 \definecolor{Gray}{gray}{0.9}
 \usepackage{xcolor,pgf}
@@ -166,11 +172,11 @@
 \SetDegreeType{Doctor of Philosophy}%
 \SetDepartment{Department of Mechanical Engineering}%
 \SetUniversity{McGill University}%
-\SetUniversityAddr{Montreal,Quebec}%
+\SetUniversityAddr{Montreal, Quebec}%
 \SetThesisDate{\today}%
 \SetRequirements{A thesis submitted to McGill University in partial fulfilment of the requirements of
 	the degree of Doctor of Philosophy}%
-\SetCopyright{Khalil Al Handawi 2020
+\SetCopyright{\copyright~Khalil Al Handawi 2020
 }%
 
 %\makeindex[keylist]
@@ -186,16 +192,16 @@
 \begin{romanPagenumber}{2}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%         Dedication                              %%
+%%                  Dedication                     %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \SetDedicationName{\MakeUppercase{Dedication}}%
 \SetDedicationText{\centering My effort, I dedicate to my sweet and loving \\ 
-	\textit{mother, father and sister},\\
-	whose love, encouragement and prays of day and night make me able to attain the highest and most honoroable of professions.}%
+	\textit{mother, father, and sister},\\
+	whose love, encouragement, and prays of day and night make me able to attain the highest and most honorable of professions.}%
 \Dedication%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%         Acknowledgments                         %%
+%%                Acknowledgments                  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \SetAcknowledgeName{\MakeUppercase{Acknowledgements}}%
 \SetAcknowledgeText{I would like to thank my supervisor, Prof. Michael Kokkolaras, for providing me with the oppurtunity and limitless freedom to innovate and pursue my research interests. Michael was an invaluable resource and mentor that has molded me into a professional and adept researcher and engineer. Michael always stressed the importance of quality research and responsible academic practices making them a part of my identity as a researcher. Michael made me realize my full potential and capabilities through his encouragement and vision. Thank you for being available day and night and providing me with access to knowledge and resources that is unprecedented in all my years of eduction.\\
@@ -208,17 +214,17 @@ I am very grateful to GKN Aerospace, Engine Systems at Trollh\"{a}ttan, Sweden f
 %
 I am grateful for the partial support of this work by grants NSERC CRDPJ 479630-15 X-243027 and CARIC CRDPJ479630-15 X-243067. I am also very grateful for the partial support of FRQNT through the {\em Bourses de doctorat en recherche} program (file 273486). I am also grateful to the Faculty of Engineering at McGill University for its partial support through a McGill Engineering Doctoral Award.\\
 %
-To my mother Chaza, thank you for your persistent encouragement and support. Your belief in me and my abilities pushes me ever further in my educational journey. To my father Bassam, thank you for everything you gave and taught me and for instilling a sense of curiosity for discovery and learning ever since I was a child by taking me to your chemistry lab. To my sister Marieh, thank you for your continuous steady support. Whenever I fall, I always find you by my side helping me to stand back up again. I would like to acknowledge my pet cat Daboos for his emotional support that meant a lot to me. I hope you are in a better place now.\\
+To my mother Chaza, thank you for your persistent encouragement and support. Your belief in me and my abilities propels me ever further in my educational journey. To my father Bassam, thank you for everything you gave and taught me and for instilling a sense of curiosity and love for discovery and learning ever since I was a child by taking me to your chemistry lab. To my sister Marieh, thank you for your continuous steady support. Whenever I fall, I always find you by my side helping me to stand back up again. I would like to acknowledge my pet cat Daboos for his emotional support that meant a lot to me. I hope you are in a better place now.\\
 %
 Finally, I would like to show appreciation for my fellow graduate students at McGill for making this a memorable experience. We have forged lifelong friendships through the experiences we shared.
 }%
 \Acknowledge%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%         Contributions                          %%
+%%                 Contributions                   %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \SetContributionName{\MakeUppercase{Contributions to original knowledge}}%
-\SetContributionText{The thesis presents a number of design frameworks for addressing uncertain and dynamic design requirements. They are listed as follows:
+\SetContributionText{The thesis presents a number of design frameworks for addressing uncertain and dynamic design requirements. They are listed as follows.
 %
 \begin{enumerate}
 	\item{A \acl{SBD} framework for identifying sets of parametric optimal designs and scalable optimal designs.}\\
@@ -247,16 +253,18 @@ Finally, I would like to show appreciation for my fellow graduate students at Mc
 %
 \textbf{Contribution of Authors}\\
 %
-The author of this thesis and his supervisor are the only contributors to the entire material presented in this thesis. The thesis author has developed all of the ideas and their implementation under the guidance and supervision of his supervisor. The work included collaborators, but they only contributed to the discussion of ideas and editing of papers and did not contribute to the material presented in this thesis.
+The author of this thesis is the sole contributor to the entire material of each chapter presented in this thesis; he has developed all of the ideas and their implementation under the guidance of his supervisor.\\
+%
+Some of the material presented in this thesis has appeared in conference and journal papers that include additional co-authors who contributed to discussion and exchange of ideas (during the author's summer visit stays at Chalmers University of Technology and collaboration with GKN Aerospace Engine Systems Sweden), review of manuscript drafts, and practical interpretation of case study results. None of the material presented in this thesis has been developed by any of these co-authors.
 }%
 \Contribution%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%         English Abstract                        %%
+%%                English Abstract                 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \SetAbstractEnName{\MakeUppercase{Abstract}}%
 \SetAbstractEnText{This thesis presents novel design methodologies for obtaining a set of design solutions that can address design requirements that may change during the design process or over a product or system’s lifetime. These methodologies aim at supporting design engineers quantitatively so they can make informed decisions in the early phases of product development when uncertainty is high.
-The presented methodologies consider design problems commonly encountered in industry. The applications used in this thesis demonstrate the efficacy of these methodologies and are centered around product remanufacturing by means of direct energy deposition, an additive manufacturing technique. Specifically, they aim at providing design solutions in the form of geometry of the deposit and the remanufacturing process parameters. 
+The presented methodologies consider design problems commonly encountered in industry. The applications used in this thesis demonstrate the efficacy of these methodologies and are centered around product remanufacturing by means of directed energy deposition, an additive manufacturing technique. Specifically, they aim at providing design solutions in the form of geometry of the deposit and the remanufacturing process parameters. 
 The first methodology considers remanufacturing as a strategy to address changing requirements in design problems. Sets of optimal design solutions, as opposed to single-point designs, are obtained using numerical optimization. The optimization problem objective is to maximize structural performance subject to design and process constraints. Since optimality and feasibility depend on varying design parameters, parametric studies are conducted to obtain optimal solutions for different parameter values. A response surface of the optimization solutions captures the effect of changing one or more parameters on the optimal solution and provides a method to map designs from the design space to the parameter space. In the parameter space, a manufacturing transition rule is formulated to identify sets of design solutions that are scalable by additive manufacturing. The transition rule is based on the physical limitations of the manufacturing method. Scalable design solutions are then mapped back to the design space to obtain the corresponding design variable values. This methodology draws inspiration from set-based design principles used to generate sets of design solutions rather than converging to a single design solution early in the product development process. 
 The first methodology focuses on making decisions using information that is available to the designer. Since product development involves several design iterations and stages, a second methodology for making decisions based on information from past iterations is introduced in this thesis. It focuses on additive manufacturing problems where design requirements remain constant throughout a time interval referred to as an epoch and only change at discrete times in between epochs. This results in a series of design decisions that must be made at the end of each epoch referred to as a decision arc. This methodology considers selecting the best combination of design decisions from a set of discrete design choices. A combinatorial optimization problem is formulated to minimize the level of overdesign subject to reliability constraints. The reliability constraints are computed by evaluating the probability that a design will satisfy a design requirement given by a joint probability density function. Several design requirements are chained together and defined at the end of each epoch to form a requirement arc. Several requirement arc samples are generated using importance sampling. The combinatorial optimization problem is solved for each requirement arc to obtain a set of corresponding decision arcs. This set of optimal decision arcs is compared against sets of robust and flexible designs arcs. A tradespace is used to visualize the design sets and identify the relative degree of flexibility and robustness in the set of optimal decision arcs.
 The remanufacturing of a turbine rear structure, an aeroengine structural component is used to test the proposed methodologies. A stiffener is deposited on the outer casing of the turbine rear structure to increase its stiffness when subjected to thermal loads due to the exhaust gases. The first methodology is used to determine the set of optimal stiffener designs and the set of scalable stiffener designs by optimizing the geometry and laser power used to deposit the stiffener. The second methodology is used to identify the set of optimal design arcs by chaining together several discrete stiffener designs to minimize the overall level of overdesign while maintaining a threshold reliability throughout the design process or the product’s lifecycle.
@@ -264,12 +272,12 @@ The two methodologies form a complete set-based design paradigm for addressing c
 \AbstractEn%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%         French Abstract                         %%
+%%                French Abstract                  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{otherlanguage}{french} 
 \SetAbstractFrName{\MakeUppercase{ABR\'{E}G\'{E}}}%
 \SetAbstractFrText{Cette thèse présente de nouvelles méthodologies de conception pour obtenir un ensemble de solutions de conception qui peuvent répondre aux exigences de conception qui peuvent changer au cours du processus de conception ou au cours de la durée de vie d'un produit ou d'un système. Ces méthodologies visent à aider les ingénieurs de conception quantitativement afin qu'ils puissent prendre des décisions éclairées dans les premières phases du développement de produits lorsque l'incertitude est élevée.
-Les méthodologies présentées prennent en compte les problèmes de conception couramment rencontrés dans l'industrie. Les applications utilisées dans cette thèse démon\allowbreak trent l'efficacité de ces méthodo-\allowbreak logies et sont centrées sur la refabrication de produits par dépôt d'énergie directe, une technique de fabrication additive. Plus précisément, ils visent à fournir des solutions de conception sous la forme de la géométrie du gisement et des paramètres du processus de reconditionnement.
+Les méthodologies présentées prennent en compte les problèmes de conception couramment rencontrés dans l'industrie. Les applications utilisées dans cette thèse démon\allowbreak trent l'efficacité de ces méthodo-\allowbreak logies et sont centrées sur la refabrication de produits par dépôt d'énergie dirigé, une technique de fabrication additive. Plus précisément, ils visent à fournir des solutions de conception sous la forme de la géométrie du gisement et des paramètres du processus de reconditionnement.
 La première méthodologie considère le reconditionnement comme une stratégie pour répondre aux exigences changeantes des problèmes de conception. Des ensembles de solutions de conception optimales, par opposition aux conceptions à un seul point, sont obtenus à l'aide de l'optimisation numérique. L'objectif du problème d'optimisation est de maximiser les performances structurelles soumises aux contraintes de conception et de processus. Étant donné que l'optimalité et la faisabilité dépendent de paramètres de conception variables, des études paramétriques sont menées pour obtenir des solutions optimales pour différentes valeurs de paramètres. Une surface de réponse des solutions d'optimisation capture l'effet de la modification d'un ou plusieurs paramètres sur la solution optimale et fournit une méthode pour mapper des conceptions de l'espace de conception à l'espace de paramètres. Dans l'espace des paramètres, une règle de transition de fabrication est formulée pour identifier des ensembles de solutions de conception qui sont évolutives par fabrication additive. La règle de transition est basée sur les limites physiques de la méthode de fabrication. Les solutions de conception évolutives sont ensuite mappées vers l'espace de conception pour obtenir les valeurs des variables de conception correspondantes. Cette méthodologie s'inspire des principes de conception basés sur des ensembles utilisés pour générer des ensembles de solutions de conception plutôt que de converger vers une solution de conception unique au début du processus de développement du produit.
 La première méthodologie se concentre sur la prise de décisions en utilisant les informations dont dispose le concepteur. Étant donné que le développement de produits implique plusieurs itérations et étapes de conception, une deuxième méthodologie pour prendre des décisions basées sur les informations des itérations passées est introduite dans cette thèse. Il se concentre sur les problèmes de fabrication additive où les exigences de conception restent constantes tout au long d'un intervalle de temps appelé époque et ne changent qu'à des moments discrets entre les époques. Il en résulte une série de décisions de conception qui doivent être prises à la fin de chaque époque, appelées arc de décision. Cette méthodologie considère la sélection de la meilleure combinaison de décisions de conception à partir d'un ensemble de choix de conception discrets. Un problème d'optimisation combinatoire est formulé pour minimiser le niveau de sur-conception soumis à des contraintes de fiabilité. Les contraintes de fiabilité sont calculées en évaluant la probabilité qu'une conception satisfasse à une exigence de conception donnée par une fonction de densité de probabilité conjointe. Plusieurs exigences de conception sont enchaînées et définies à la fin de chaque époque pour former un arc d'exigences. Plusieurs échantillons d'arc d'exigence sont générés en utilisant un échanti\-llonnage d'importance. Le problème d'optimisation combinatoire est résolu pour chaque arc d'exi\-gence pour obtenir un ensemble d'arcs de décision correspondants. Cet ensemble d'arcs de décision optimaux est comparé à des ensembles d'arcs de conception robustes et flexibles. Un espace commercial est utilisé pour visualiser les ensembles de conception et identifier le degré relatif de flexibilité et de robustesse dans l'ensemble des arcs de décision optimaux.
 La remise à neuf d'une structure arrière de turbine, un composant structurel de moteur d'avion est utilisé pour tester les méthodologies proposées. Un raidisseur est déposé sur le carter extérieur de la structure arrière de la turbine pour augmenter sa rigidité lorsqu'elle est soumise à des charges thermiques dues aux gaz d'échappement. La première méthodologie est utilisée pour déterminer l'ensemble des conceptions optimales de raidisseurs et l'ensemble des conceptions de raidisseurs évolutifs en optimisant la géométrie et la puissance laser utilisées pour déposer le raidisseur. La deuxième méthodologie est utilisée pour identifier l’ensemble des arcs de conception optimaux en enchaînant plusieurs conceptions de raidisseurs discrets pour minimiser le niveau global de sur-conception tout en maintenant un seuil de fiabilité tout au long du processus de conception ou du cycle de vie du produit.
@@ -311,9 +319,8 @@ Les deux méthodologies forment un paradigme de conception basé sur un ensemble
 \bibHeading{References}
 
 \bibliographystyle{unsrtnat}
-% \bibliography{mcgilletd}
 \bibliography{mcgilletd_KA}
-%\bibliographystyle{unsrtnat}
+
 
 
 \end{document}

@@ -1,8 +1,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                 TSE design margins                %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Design Margin Quantification and Optimization}
-\chaptermark{Design Margin Quantification and Optimization}
+\chapter{Design margin quantification and optimization}
+\chaptermark{Design margin quantification and optimization}
 \label{ch:TSEcont}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -19,25 +19,25 @@ We begin by defining the methodology for obtaining the set-based solutions for a
 
 We consider a product design problem where requirements change throughout the product's lifecycle or development process at certain epochs. In this chapter, we will refer to these two time periods as the product cycle for conciseness.
 
-A decision regarding product redesign is made at each epoch depending on a number of factors. The factors driving these decisions include capability, buffer, excess, and reliability. We will begin by formally defining these terms.
+A decision regarding product redesign is made at each epoch depending on a number of factors. The factors driving these decisions include capability, buffer, excess, and reliability. We will formally define these terms.
 
 %---------------------------------------------------------------------%
 % Mathematical definitions
 \subsection{Mathematical formulation of design metrics} \label{subsec:designmetrics}
 
-We begin by defining the parameter space in which our design metrics are defined. The parameter space is the set of values assumed by the uncertain parameters driving the requirements and feasibility criteria. The parameter vector $\mathbf{p} = \left[p_1 ~ p_2 ~ \cdots ~ p_n\right]^{\mathrm{T}}$ is defined in the multi-dimensional parameter space $\mathbf{p}\in\mathbb{R}^n$, where $n$ is the number of uncertain parameters.
+The parameter space in which our design metrics are defined is the set of values assumed by the uncertain parameters driving the requirements and feasibility criteria. The parameter vector $\mathbf{p} = \left[p_1 ~ p_2 ~ \cdots ~ p_n\right]^{\mathrm{T}}$ is defined in the multi-dimensional parameter space $\mathbf{p}\in\mathbb{R}^n$, where $n$ is the number of uncertain parameters.
 
-Capability is defined as the set of possible values for a design parameter for which feasibility is maintained \cite{Eckert2019}. The feasibility criteria are imposed as a set of constraints that the design must satisfy $\mathbf{g}_{f}(\mathbf{p}) - \mathbf{t} \le 0$, where $\mathbf{t}$ is a vector of threshold values that the constraint function $\mathbf{g}_{f}(\mathbf{p})$ must exceed. Unlike requirements, feasibility constraints are fixed throughout the product cycle. The set defining capability is given by the following definition:
+Capability is defined as the set of possible values for a design parameter for which feasibility is maintained \cite{Eckert2019}. The feasibility criteria are imposed as a set of constraints that the design must satisfy $\mathbf{g}_{f}(\mathbf{p}) - \mathbf{t} \le 0$, where $\mathbf{t}$ is a vector of threshold values that the constraint function $\mathbf{g}_{f}(\mathbf{p})$ must exceed. Unlike requirements, feasibility constraints are fixed throughout the product cycle. The set defining capability is given by the following definition.
 
 \begin{equation} \label{eq:capability}
 	\textit{C} = \left\{\mathbf{p} \in \mathbb{R}^n~|~\mathbf{g}_{f}(\mathbf{p}) - \mathbf{t} \le 0\right\}.
 \end{equation}
 
-In engineering problems, such constraints may be obtained from computational models instead of analytical expressions. In order to, alleviate the computational effort used to classify regions of the parameter space into capability, buffer and excess, a surrogate may be used.
+In engineering problems, such constraints may be obtained from computational models instead of analytical expressions. In order to alleviate the computational effort used to classify regions of the parameter space into capability, buffer, and excess, a surrogate may be used.
 
 We represent requirements using a joint \acf{PDF} $F_{\mathbf{X}}\left(\mathbf{p}\right)$ as was done in the literature \cite{Villanueva2014,Pradlwarter2005,Frangopol2003a,Zhu2013a}. This method has the advantage of being able to specify requirements in a multi-dimensional parameter space. $F_{\mathbf{X}}\left(\mathbf{p}\right)$ could be any kind of \ac{PDF} such as Gaussian or uniform distributions and describes the distribution of the uncertain parameters.
 
-Knowing the capability of a design and the corresponding requirement joint \ac{PDF} we can calculate reliability in terms of the probability that the design satisfies the requirement \cite{ForouzandehShahraki2014,Bucher2009}. The probability is calculated from the joint \ac{PDF} such that a value for the uncertain parameter sampled from $F_{\mathbf{X}}\left(\mathbf{p}\right)$ lies within the capability set $C$. This probability value represents reliability of the design $\mathbb{P}(\mathbf{p} \in C)$. Reliability is defined by the following expression:
+Knowing the capability of a design and the corresponding requirement joint \ac{PDF}, we can calculate reliability in terms of the probability that the design satisfies the requirement \cite{ForouzandehShahraki2014,Bucher2009}. The probability is calculated from the joint \ac{PDF} such that a value for the uncertain parameter sampled from $F_{\mathbf{X}}\left(\mathbf{p}\right)$ lies within the capability set $C$. This probability value represents reliability of the design $\mathbb{P}(\mathbf{p} \in C)$. Reliability is defined by the following expression.
 
 \begin{equation} \label{eq:reliability}
 	\mathbb{P}(\mathbf{p} \in C) = \dfrac{\int\limits_{C\cap R} F_{\mathbf{X}}(\mathbf{p}) d\mathbf{p}}{\int\limits_{R} F_{\mathbf{X}}(\mathbf{p}) d\mathbf{p}}.
@@ -45,27 +45,27 @@ Knowing the capability of a design and the corresponding requirement joint \ac{P
 
 $R$ in the denominator is the requirement set defined by the set of parameter values that yield significant probability density values from the joint \ac{PDF} used. 
 
-We show how the requirement set $R$ is defined for a a uniform joint \ac{PDF}. A uniform distribution is defined as follows:
+We show how the requirement set $R$ is defined for a a uniform joint \ac{PDF}. A uniform distribution is defined as
 
 \begin{equation} \label{eq:uniformpdf}
 	F_\mathbf{X}(\mathbf{p})={\begin{cases}{\dfrac {1}{\prod\limits_{j=1}^{n} \left|b_j - a_j\right|}}&\mathrm {for} \ \mathbf{a}\leq \mathbf{p}\leq \mathbf{b},\\[8pt]0&\mathrm {for} \ \mathbf{p}<\mathbf{a}\ \mathrm {or} \ \mathbf{p}>\mathbf{b}\end{cases}},
 \end{equation}
 
-where $\mathbf{a}$ and $\mathbf{b}$ are the lower and upper bound vectors respectively. Each bound vector contains $n$ elements corresponding to the dimensionality of the parameter space. In the case of a uniform joint \ac{PDF}, the requirement set $R$ is simply defined as the values of $\mathbf{p}$ that lie within the bounds $\mathbf{a}$ and $\mathbf{b}$. In other words,
+where $\mathbf{a}$ and $\mathbf{b}$ are the lower and upper bound vectors respectively. Each bound vector contains $n$ components corresponding to the dimensionality of the parameter space. In the case of a uniform joint \ac{PDF}, the requirement set $R$ is simply defined as the values of $\mathbf{p}$ that lie within the bounds $\mathbf{a}$ and $\mathbf{b}$. In other words,
 
 \begin{equation} \label{eq:requirementsetuniform}
 	\textit{R} = \left\{\mathbf{p} \in \mathbb{R}^n~|~\mathbf{a}\leq \mathbf{p}\leq \mathbf{b}\right\}.
 \end{equation}
 
-Requirements may be defined by a Gaussian joint \ac{PDF} given by Equation~(\ref{eq:gaussianpdf}).
+Requirements may be defined by a Gaussian joint \ac{PDF} given by
 
 \begin{equation} \label{eq:gaussianpdf}
 	F_\mathbf{X}(\mathbf{p})={\frac {\exp \left(-{\frac {1}{2}}({\mathbf {p} }-{\boldsymbol {\mu }})^{\mathrm {T} }{\boldsymbol {\Sigma }}^{-1}({\mathbf {p} }-{\boldsymbol {\mu }})\right)}{\sqrt {(2\pi )^{n}|{\boldsymbol {\Sigma }}|}}},
 \end{equation}
 
-where, $\boldsymbol{\mu}$ is the mean vector and $\boldsymbol{\Sigma}$ is the covariance matrix. In this chapter, we focus on requirements where there is no correlation between uncertain parameters. This results in a diagonal covariance matrix given by $\boldsymbol{\Sigma} = \mathrm{diag}\left(\boldsymbol{\sigma}\right)$, where $\boldsymbol{\sigma}$ is the standard deviation vector. In the denominator of Equation~(\ref{eq:gaussianpdf}), $|{\boldsymbol {\Sigma }}|\equiv \det {\boldsymbol {\Sigma }} \equiv \prod\limits_{j=1}^{n} \sigma_j$, where $\sigma_j$ are the elements of $\boldsymbol{\sigma}$.
+where, $\boldsymbol{\mu}$ is the mean vector and $\boldsymbol{\Sigma}$ is the covariance matrix. In this chapter, we focus on requirements where there is no correlation between uncertain parameters. This results in a diagonal covariance matrix where the trace of the covariance matrix $\Tr\left(\boldsymbol{\Sigma}\right) = \boldsymbol{\sigma}$ and all other non-diagonal elements are equal to 0. $\boldsymbol{\sigma}$ is the standard deviation vector. In the denominator of Equation~(\ref{eq:gaussianpdf}), $|{\boldsymbol {\Sigma }}|\equiv \det {\boldsymbol {\Sigma }} \equiv \prod\limits_{j=1}^{n} \sigma_j$, where $\sigma_j$ are the components of $\boldsymbol{\sigma}$.
 
-The requirement set $R$ is defined as the values of $\mathbf{p}$ that result in a probability density level greater than that at the $3 \boldsymbol{\sigma}$ isocontour of a Gaussian $F_\mathbf{X}(\mathbf{p})$. This is because the probability that a random parameter value sampled from a Gaussian \ac{PDF} lies outside the $3\sigma$ isocontour is minuscule ($<0.3\%$). As a result, the requirement set $R$ is given by the set of parameter values that lie within the $3\sigma$ isocontour:
+The requirement set $R$ is defined as the values of $\mathbf{p}$ that result in a probability density level greater than that at the $3{\sigma}$ isocontour of a Gaussian $F_\mathbf{X}(\mathbf{p})$. This is because the probability that a random parameter value sampled from a Gaussian \ac{PDF} lies outside the $3{\sigma}$ isocontour is minuscule ($<0.3\%$). As a result, the requirement set $R$ is given by the set of parameter values that lie within the $3\sigma$ isocontour.
 
 \begin{equation} \label{eq:requirementsetgaussian}
 	\textit{R} = \left\{\mathbf{p} \in \mathbb{R}^n~|~F_\mathbf{X}(\mathbf{p}) \geq F_\mathbf{X}(\boldsymbol{\mu} + \left[3\sigma_1~0~\cdots~0\right]^\mathrm{T}) \right\}.
@@ -81,14 +81,14 @@ Importance sampling can be used if a Gaussian \ac{PDF} is used for $F_\mathbf{X}
 	\mathbb{P}(\mathbf{p} \in C) \approx \dfrac{\sum\limits_{i=1}^{|{C\cap R}|} F_{\mathbf{X}}(\mathbf{p}_i)}{\sum\limits_{i=1}^{|R|} F_{\mathbf{X}}(\mathbf{p}_i)},
 \end{equation}
 
-where $i$ is a sample from the requirement set $R$. The notation $\sum_{i=1}^{|{C\cap R}|}$ in the numerator of Equation~(\ref{eq:reliability}) means that only the samples that lie within the intersection of sets $C$ and $R$ are summed. The sum in the denominator is for all the samples $p_i \in R$.
+where $i$ is a sample from the requirement set $R$. The notation $\sum_{i=1}^{|{C\cap R}|}$ in the numerator of Equation~(\ref{eq:reliabilitymontecarlo}) means that only the samples that lie within the intersection of sets $C$ and $R$ are summed. The sum in the denominator is for all the samples $\mathbf{p}_i \in R$.
 
 We use a 2-dimensional parameter space to illustrate the calculation of the reliability $\mathbb{P}(\mathbf{p} \in C)$ as shown in Figure~\ref{fig:2Dexamplereliability}.
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.9\textwidth]{1_2D_example_reliability.pdf}
-	\caption{Contours of feasibility constraint $g_{f1}(\mathbf{p})$ in the 2 dimensional parameter space for different types of requirement \acp{PDF}}
+	\caption{Contours of feasibility constraint $g_{f1}(\mathbf{p})$ in a 2D parameter space for different types of requirement \acp{PDF}}
 	\label{fig:2Dexamplereliability}
 \end{figure}
 
@@ -113,14 +113,14 @@ The sets defined thus far are shown on the same 2-dimensional parameter space us
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.9\textwidth]{2_2D_example_excess.pdf}
-	\caption{Contours of feasibility constraint $g_{f1}(\mathbf{p})$ in the 2 dimensional parameter space for different types of requirement \acp{PDF}}
+	\caption{Projections of the sets defining capability, requirements, buffer, and excess in a 2D parameter space for different types of requirement \acp{PDF}}
 	\label{fig:2Dexampleexcess}
 \end{figure}
 
-We are particularly interested in minimizing excess during the product redesign cycle. We quantify excess using the volume of the set $E$ which can be found by Monte Carlo integration:
+We are particularly interested in minimizing excess during the product redesign cycle. We quantify excess using the volume of the set $E$ which can be found by Monte Carlo integration.
 
 \begin{equation} \label{eq:excessmontecarlo}
-	V_E \approx \dfrac{\sum\limits_{i=1}^{|{E}|} H\left(\mathbf{p}_i\right)}{\sum\limits_{i=1}^{N} H\left(\mathbf{p}_i\right)}, ~\mathrm{where}~ H\left(\mathbf{p}_i\right)={\begin{cases}1&{\text{if }}\mathbf{p}_i\in E\\0&{\text{else}}\end{cases}},
+	V_E \approx \dfrac{1}{N} {\sum\limits_{i=1}^{N} H\left(\mathbf{p}_i\right)}, ~\mathrm{where}~ H\left(\mathbf{p}_i\right)={\begin{cases}1&{\text{if }}\mathbf{p}_i\in E\\0&{\text{else}}\end{cases}},
 \end{equation}
 
 where $N$ is the number of samples from the parameter space used for the integration such that $\mathbf{p}_i \in \mathbb{R}^n$. However, a large number of Monte Carlo samples is needed to capture the complex profile of the set $E$ in multi-dimensional parameter spaces.
@@ -131,13 +131,13 @@ We can make use of the reliability $\mathbb{P}(\mathbf{p} \in C)$ calculation an
 	V_R = {\begin{cases} \prod\limits_{j=1}^{n} \left|b_j - a_j\right| &{\text{if }}F_\mathbf{X}(\mathbf{p})\text{ is uniform}\\\dfrac{\pi^2}{32}\prod\limits_{j=1}^{n} \left|b_j - a_j\right| &{\text{if }}F_\mathbf{X}(\mathbf{p})\text{ is Gaussian}\end{cases}}.
 \end{equation}
 
-We can compute the volume of set $C$ using the following approach:
+We can compute the volume of set $C$ using the following approach.
 
 \begin{equation} \label{eq:Cmontecarlo}
-	V_C \approx \dfrac{\sum\limits_{i=1}^{|{C}|} H\left(\mathbf{p}_i\right)}{\sum\limits_{i=1}^{N} H\left(\mathbf{p}_i\right)}, ~\mathrm{where}~ H\left(\mathbf{p}_i\right)={\begin{cases}1&{\text{if }}\mathbf{p}_i\in C\\0&{\text{else}}\end{cases}}.
+	V_C \approx \dfrac{1}{N} {\sum\limits_{i=1}^{N} H\left(\mathbf{p}_i\right)}, ~\mathrm{where}~ H\left(\mathbf{p}_i\right)={\begin{cases}1&{\text{if }}\mathbf{p}_i\in C\\0&{\text{else}}\end{cases}}.
 \end{equation}
 
-The reliability approximates the percentage of $R$ in $C$ and can be used as as proxy for the volume of $C\cap R$ such that $V_{C\cap R} \approx \mathbb{P}(\mathbf{p} \in C) \times V_R$. $V_E$ can now be approximated using the following:
+The reliability approximates the percentage of $R$ in $C$ and can be used as as proxy for the volume of $C\cap R$ such that $V_{C\cap R} \approx \mathbb{P}(\mathbf{p} \in C) \times V_R$. $V_E$ can now be approximated using
 
 \begin{equation} \label{eq:excesssimple}
 	V_E \approx V_C - \mathbb{P}(\mathbf{p} \in C) \times V_R.
@@ -155,7 +155,7 @@ We consider a problem where a product is redesigned as time progresses and the p
 	\mathbf{D} = \left[D_1 ~ D_2 ~ \cdots ~ D_o\right]^{\mathrm{T}},
 \end{equation}
 
-with possible choices $D_d \in \mathcal{D}^o$, where $1 \leq o \leq q+1$. The maximum number of redesign choices $q + 1$ dictates the maximum number of possible design arc combinations where no choice is repeated twice. For example, consider a case where there are $q + 1 = 3$ redesign choices. We drop the transpose operator $^{\mathrm{T}}$ when reporting design arcs in this thesis for convenience. The possible design arcs that can be obtained for the set of redesign choices $\mathcal{D} = \left\{0,1,2\right\}$ is:
+with possible choices $D_d \in \mathcal{D}^o$, where $1 \leq o \leq q+1$. The maximum number of redesign choices $q + 1$ dictates the maximum number of possible design arc combinations where no choice is repeated twice. For example, consider a case where there are $q + 1 = 3$ redesign choices. We drop the transpose operator $^{\mathrm{T}}$ when reporting design arcs in this thesis for convenience. The possible design arcs that can be obtained for the set of redesign choices $\mathcal{D} = \left\{0,1,2\right\}$ is
 
 \begin{equation*}
 	\begin{aligned}
@@ -201,7 +201,7 @@ These enumerations of the set $\mathcal{D}$ comprise a set of possible design ar
 
 We define a product cycle with $m$ number of epochs and $m$ number of corresponding decisions $S \in \mathcal{S}^m$, where $S_k$ is the decision at epoch $k$ and $\mathcal{S}$ is the set of possible decisions. In this chapter, we consider discrete redesign choices only. A non-negative integer value from the set $\mathcal{S}$ implies a redesign choice. A value of $-1$ implies no redesign is performed at the current epoch. This means that $\mathcal{S} = \left\{-1,0,1,2,\cdots,q\right\}$, where $q + 1$ is the number of available redesign choices.
 
-The vector of all the decisions taken throughout the product cycle is referred to as the decision arc and is defined as follows:
+The vector of all the decisions taken throughout the product cycle is referred to as the decision arc and is defined as
 
 \begin{equation} \label{eq:decisionarc}
 	\mathbf{S} = \left[S_1 ~ S_2 ~ \cdots ~ S_m\right]^{\mathrm{T}}.
@@ -209,9 +209,9 @@ The vector of all the decisions taken throughout the product cycle is referred t
 
 We also drop the transpose operator $^{\mathrm{T}}$ when reporting decision arcs in this thesis for convenience. The set of possible decision arcs that can be generated from the set of possible decisions $\mathcal{S}$ is governed by some feasibility constraints. A feasible decision arc cannot contain repeated choices in a manner similar to design arcs $\mathbf{D}$. For example, the decision arc $\mathbf{S} = \left[0 ~ -1 ~ 0 ~ -1 ~ 1 ~ 3\right]$ is infeasible since the choice $0$ was repeated twice, while the decision arc $\mathbf{S} = \left[0 ~ -1 ~ 2 ~ -1 ~ 1 ~ 3\right]$ is feasible since it has no repeated choices. Furthermore, the first decision cannot be empty, i.e. $S_1 \neq -1$. This is because a decision arc must begin with some sort of design. These restrictions make computing the cardinality of the set of possible decision arcs $\Omega_S$ challenging. However, the cardinality of $\Omega_S$ is given by a finite positive integer similar to $\Omega_D$ in Table~\ref{table:omegadcardinality}.
 
-A corresponding design arc can be extracted from the decision arc by removing all negative elements from $\mathbf{S}$ to obtain $\mathbf{D} = \left[0 ~ 2 ~ 1 ~ 3\right]$. 
+A corresponding design arc can be extracted from the decision arc by removing all negative components from $\mathbf{S}$ to obtain $\mathbf{D} = \left[0 ~ 2 ~ 1 ~ 3\right]$. 
 
-For each epoch $k$, a design arc can be extracted by excluding values from $\mathbf{S}$ that are equal to $-1$. The vector $\mathbf{D}_k = \left[D_1 ~ D_2 ~ \cdots ~ D_o\right]$ represents this design arc at epoch $k$ where the elements of $\mathbf{D}$ are non-negative integers and $o$ is the number of non-negative integers in $\mathbf{S}_k = \left[S_1 ~ S_2 ~ \cdots ~ S_k\right]$ up to the current epoch $k$. For example, consider the following decision arc for a problem with $m=6$ epochs:
+For each epoch $k$, a design arc can be extracted by excluding values from $\mathbf{S}$ that are equal to $-1$. The vector $\mathbf{D}_k = \left[D_1 ~ D_2 ~ \cdots ~ D_o\right]$ represents this design arc at epoch $k$ where the components of $\mathbf{D}$ are non-negative integers and $o$ is the number of non-negative integers in $\mathbf{S}_k = \left[S_1 ~ S_2 ~ \cdots ~ S_k\right]$ up to the current epoch $k$. For example, consider the following decision arc for a problem with $m=6$ epochs.
 
 \begin{equation*} \label{eq:decisionarcex}
 	\mathbf{S} = \left[0 ~ -1 ~ 2 ~ -1 ~ 1 ~ 3\right].
@@ -230,35 +230,33 @@ $m$ design arcs can be extracted from $\mathbf{S}$ at each epoch.
 	\end{aligned}
 \end{equation*}
 
-Logically, it follows that each design arc cannot feature repeated elements due to the uniqueness of the positive decision arc elements. Each design arc has a unique capability set $C_k$.
+Logically, it follows that each design arc cannot feature repeated components due to the uniqueness of the positive decision arc components. Each design arc has a unique capability set $C_k$.
 
-We now define the requirement arc as a vector of joint \acp{PDF} that has $m$ elements. Each element corresponds to a different epoch $k$ with a requirement joint \ac{PDF} $F_{\mathbf{X}k}(\mathbf{p})$. The requirement arc is defined as follows:
+We now define the requirement arc as a vector of joint \acp{PDF} that has $m$ components. Each component corresponds to a different epoch $k$ with a requirement joint \ac{PDF} $F_{\mathbf{X}k}(\mathbf{p})$. The requirement arc is defined as
 
 \begin{equation} \label{eq:requirementarc}
 	\mathbf{R} = \left[F_{\mathbf{X}1}(\mathbf{p}) ~ F_{\mathbf{X}2}(\mathbf{p}) ~ \cdots ~ F_{\mathbf{X}m}(\mathbf{p})\right]^{\mathrm{T}}.
 \end{equation}
 
-The reliability at epoch $k$, $\mathbb{P}_k(\mathbf{p} \in C_k)$ can be calculated from $C_k$ (derived from $\mathbf{D}_k$) and the requirement joint \ac{PDF} $F_{\mathbf{X}k}(\mathbf{p})$ to yield a reliability vector defined as follows:
+The reliability at epoch $k$, $\mathbb{P}_k(\mathbf{p} \in C_k)$ can be calculated from $C_k$ (derived from $\mathbf{D}_k$) and the requirement joint \ac{PDF} $F_{\mathbf{X}k}(\mathbf{p})$ to yield a reliability vector defined as
 
 \begin{equation} \label{eq:reliabilityvector}
-	\mathbf{P}(\mathbf{p} \in \mathbf{C}) = \left[\mathbb{P}_1(\mathbf{p} \in C_1) ~ \mathbb{P}_2(\mathbf{p} \in C_2) ~ \cdots ~ \mathbb{P}_m(\mathbf{p} \in C_m)\right]^{\mathrm{T}},
+	\mathbf{P}_{\mathbf{p} \in {C}} = \left[\mathbb{P}_1(\mathbf{p} \in C_1) ~ \mathbb{P}_2(\mathbf{p} \in C_2) ~ \cdots ~ \mathbb{P}_m(\mathbf{p} \in C_m)\right]^{\mathrm{T}}.
 \end{equation}
 
-where $\mathbf{C}$ is the vector of capability sets $\mathbf{C} = \left[C_1 ~ C_2 ~ \cdots ~ C_m\right]^{\mathrm{T}}$.
-
-At each epoch, a reliability threshold $P_k$ is defined to yield a vector of reliability thresholds defined as follows:
+At each epoch, a reliability threshold $P_k$ is defined to yield a vector of reliability thresholds defined as
 
 \begin{equation} \label{eq:reliabilitythvector}
 	\mathbf{P}_{th} = \left[P_1 ~ P_2 ~ \cdots ~ P_m\right]^{\mathrm{T}}.
 \end{equation}
 
-The volume of the excess set at epoch $k$, $V_{Ek}$ can be calculated from $C_k$ and the requirement joint \ac{PDF} $F_{\mathbf{X}k}(\mathbf{p})$ using Equations~(\ref{eq:excess}) and (\ref{eq:excesssimple}) to yield an excess vector defined as follows:
+The volume of the excess set at epoch $k$, $V_{Ek}$ can be calculated from $C_k$ and the requirement joint \ac{PDF} $F_{\mathbf{X}k}(\mathbf{p})$ using Equations~(\ref{eq:excess}) and (\ref{eq:excesssimple}) to yield an excess vector defined as
 
 \begin{equation} \label{eq:excessvector}
-	\mathbf{E} = \left[V_{E1} ~ V_{E2} ~ \cdots ~ V_{Em}\right]^{\mathrm{T}},
+	\mathbf{E} = \left[V_{E1} ~ V_{E2} ~ \cdots ~ V_{Em}\right]^{\mathrm{T}}.
 \end{equation}
 
-The cumulative excess for a given decision arc can be formulated as:
+The cumulative excess for a given decision arc can be formulated as
 
 \begin{equation} \label{eq:excesscumulative}
 	E_c = \sum\limits_{k=1}^{m} V_{Ek}.
@@ -268,13 +266,13 @@ In addition to the decision arc $\mathbf{S}$, a fixed design concept $c_t\in\mat
 
 Each concept type $C_t$ has a set of redesign options $\mathcal{D}_t$ with $q+1$ redesign choices attached to it. Accordingly, each concept type $c_t$ will have a set of possible design arcs $\Omega_{Dt}$ and a set of possible decision arcs $\Omega_{St}$. The combination of a concept and design arc $\left\{c,\mathbf{D}\right\}$ will be referred to as a design arc in this thesis for conciseness. Similarly, the combination of a concept and a decision arc $\left\{c,\mathbf{S}\right\}$ will be referred to as a decision arc.
 
-The cardinality of the set of possible design arcs $\Omega_{cD}$ is simply obtained by adding the cardinalities of all the sets $\Omega_{Dt}$ for a given set of concept choices $\mathcal{C}$:
+The cardinality of the set of possible design arcs $\Omega_{cD}$ is simply obtained by adding up all the cardinalities of the sets $\Omega_{Dt}$ for a given set of concept choices $\mathcal{C}$
 
 \begin{equation} \label{eq:cardinailitycdarc}
 	\beta = |\Omega_{cD}| = \sum\limits_{t=0}^{r} |\Omega_{Dt}|,
 \end{equation}
 
-where $|\Omega_{Dt}|$ can be obtained from Table~\ref{table:omegadcardinality} knowing the number of redesign choices $q+1$ for each concept. The set of possible design arcs represents the feasible design space in this chapter and is defined as follows:
+where $|\Omega_{Dt}|$ can be obtained from Table~\ref{table:omegadcardinality} knowing the number of redesign choices $q+1$ for each concept. The set of possible design arcs represents the feasible design space in this chapter and is defined as
 
 \begin{equation} \label{eq:feasibledesignset}
 	\Omega_{cD} = \left\{\left\{c,\mathbf{D}\right\}_1,\left\{c,\mathbf{D}\right\}_2,\cdots,\left\{c,\mathbf{D}\right\}_\beta\right\}.
@@ -286,7 +284,7 @@ A similar approach can be used to calculate the cardinality of the set of possib
 	|\Omega_{cS}| = \sum\limits_{t=0}^{r} |\Omega_{St}|.
 \end{equation}
 
-We now formulate an optimization problem for choosing the optimal concept $c$ and decision arc $\mathbf{S}$ such that cumulative excess $E_c$ is minimized subject to reliability constraints $\mathbf{g}(c,\mathbf{S}) = \mathbf{P}_{th} - \mathbf{P}(\mathbf{p} \in \mathbf{C}) \le \mathbf{0}$:
+We now formulate an optimization problem for choosing the optimal concept $c$ and decision arc $\mathbf{S}$ such that cumulative excess $E_c$ is minimized subject to reliability constraints $\mathbf{g}(c,\mathbf{S}) = \mathbf{P}_{th} - \mathbf{P}_{\mathbf{p} \in \mathbf{C}} \le \mathbf{0}$
 
 \begin{equation}
 	\label{eq:TSEoptproblem}
@@ -294,7 +292,7 @@ We now formulate an optimization problem for choosing the optimal concept $c$ an
 		& \underset{\{c,\mathbf{S}\}\in\Omega_{cS}}{\text{minimize}}
 		& & {f}(c,\mathbf{S};\mathbf{R}) = E_c = \sum\limits_{k=1}^{m} V_{Ek}(c,\mathbf{D}_k;F_{\mathbf{X}k}(\mathbf{p}))\\
 		& \text{subject to}
-		& & \mathbf{g}(c,\mathbf{S};\mathbf{R}) = \mathbf{P}_{th} - \mathbf{P}(\mathbf{T} \in \mathbf{C}) \le \mathbf{0}\\
+		& & \mathbf{g}(c,\mathbf{S};\mathbf{R}) = \mathbf{P}_{th} - \mathbf{P}_{\mathbf{p} \in \mathbf{C}} \le \mathbf{0}\\
 		& \text{where,}
 		& & \Omega_{cS}\text{: all feasible decision arcs}.\\
 	\end{aligned}
@@ -308,15 +306,15 @@ We also define a second optimization problem to simulate the effect of accumulat
 		& \underset{\{c,\mathbf{S}\}\in\Omega_{cS}}{\text{minimize}}
 		& & {f}(c,\mathbf{S}) = W_c = \sum\limits_{k=1}^{m} W_{k}(c,\mathbf{D}_k)\\
 		& \text{subject to}
-		& & \mathbf{g}(c,\mathbf{S};\mathbf{R}) = \mathbf{P}_{th} - \mathbf{P}(\mathbf{T} \in \mathbf{C}) \le \mathbf{0}\\
+		& & \mathbf{g}(c,\mathbf{S};\mathbf{R}) = \mathbf{P}_{th} - \mathbf{P}_{\mathbf{p} \in \mathbf{C}} \le \mathbf{0}\\
 		& \text{where,}
-		& & \Omega\text{: all feasible decision arcs}.\\
+		& & \Omega_{cS}\text{: all feasible decision arcs}.\\
 	\end{aligned}
 \end{equation}
 
-The problem in Equation~(\ref{eq:TSEoptproblem}) is solved using a combinatorial optimization algorithm rather than a discrete optimization algorithm. This is because the feasible set $\Omega_{cS}$ is not given by the possible combinations of integers in $\mathcal{S} = \left\{-1,0,1,2,\cdots,q\right\}$. The choice of concept is restricted to non-negative integers, while the decision arc may not feature repeated non-negative integers as explained earlier. As a result, the set $\Omega_{cS}$ must be algorithmically defined as is done with combinatorial optimization problems such as simulated annealing \cite{Kirkpatrick1983}. However, such heuristic optimization algorithms require a large number of iterations to converge making computations intractable especially when reliability constraints are involved. A mixed variable optimization variant of \ac{MADS} is provided by the \texttt{NOMAD} algorithm \cite{Abramson2009}. This implementation of \ac{MADS} allow users to specify categorical constraints via an extended poll subroutine and is called during the search step \cite{Abramson2004,Abramson2008}.
+The problems in Equations~(\ref{eq:TSEoptproblem}) and (\ref{eq:optproblemweight}) are solved using a combinatorial optimization algorithm rather than a discrete optimization algorithm. This is because the feasible set $\Omega_{cS}$ is not given by the possible combinations of integers in $\mathcal{S} = \left\{-1,0,1,2,\cdots,q\right\}$. The choice of concept is restricted to non-negative integers, while the decision arc may not feature repeated non-negative integers as explained earlier. As a result, the set $\Omega_{cS}$ must be algorithmically defined as is done with combinatorial optimization problems such as simulated annealing \cite{Kirkpatrick1983}. However, such heuristic optimization algorithms require a large number of iterations to converge making computations intractable especially when reliability constraints are involved. A mixed variable optimization variant of \ac{MADS} is provided by the \texttt{NOMAD} algorithm \cite{Abramson2009}. This implementation of \ac{MADS} allow users to specify categorical constraints via an extended poll subroutine and is called during the search step \cite{Abramson2004,Abramson2008}.
 
-The optimization problems given by Equations~(\ref{eq:TSEoptproblem}) and Equations~(\ref{eq:optproblemweight}) yield a solution $\mathbf{x}^*(\mathbf{R})$ which depends on the requirement arc. The nature of requirements is that they are subject to change. As a result, we adopt a set-based design strategy to manage changing requirements.
+The optimization problems given by Equations~(\ref{eq:TSEoptproblem}) and (\ref{eq:optproblemweight}) yield a solution $\mathbf{x}^*(\mathbf{R})$ which depends on the requirement arc $\mathbf{R}$. The nature of requirements is that they are subject to change. As a result, we adopt a set-based design strategy to manage changing requirements.
 
 %---------------------------------------------------------------------%
 % Set-based approach
@@ -326,7 +324,7 @@ The optimization problems given by Equations~(\ref{eq:TSEoptproblem}) and Equati
 %g: constraint functions
 %n: dimensionality of parameter space
 %i: requirement set sample index 
-%j: element index of bound vectors for Gaussian and uniform pdfs
+%j: component index of bound vectors for Gaussian and uniform pdfs
 %m: number of stages
 %k: index of stage
 %o: number of designs in design arcs
@@ -344,7 +342,7 @@ The optimization problems given by Equations~(\ref{eq:TSEoptproblem}) and Equati
 %\zeta: number of possible enumerations of decision arcs from design arcs
 %\gamma: index of decision arc in enumerations from design arcs
 
-The set-based design strategy involves sampling requirement arcs $\mathbf{R}$ from the set of possible requirement arcs $\Omega_R$. A sample from the set $\Omega_R$, $\mathbf{R}_w$ involves populating the requirement arc with joint \acp{PDF} at each epoch $k$ by selecting a joint \ac{PDF} from the set of possible joint \acp{PDF} $\mathcal{R} = \left\{F_{\mathbf{X}1}(\mathbf{p}),F_{\mathbf{X}2}(\mathbf{p}),\cdots,F_{\mathbf{X}v}(\mathbf{p})\right\}$, where $v$ is the number of joint \ac{PDF} choices. $\mathbf{R}_w$ is constructed by selecting $m$ joint \acp{PDF} from $\mathcal{R}$ such that $\mathbf{R}_w \in \mathcal{R}^m$. $\Omega_R$ is now defined as:
+The set-based design strategy involves sampling requirement arcs $\mathbf{R}$ from the set of possible requirement arcs $\Omega_R$. A sample from the set $\Omega_R$, $\mathbf{R}_w$ involves populating the requirement arc with joint \acp{PDF} at each epoch $k$ by selecting a joint \ac{PDF} from the set of possible joint \acp{PDF} $\mathcal{R} = \left\{F_{\mathbf{X}1}(\mathbf{p}),F_{\mathbf{X}2}(\mathbf{p}),\cdots,F_{\mathbf{X}v}(\mathbf{p})\right\}$, where $v$ is the number of joint \ac{PDF} choices. $\mathbf{R}_w$ is constructed by selecting $m$ joint \acp{PDF} from $\mathcal{R}$ such that $\mathbf{R}_w \in \mathcal{R}^m$. $\Omega_R$ is defined as
 
 \begin{equation} \label{eq:Rarcsample}
 	\Omega_R = \left\{\mathbf{R}_1,\mathbf{R}_2\cdots,\mathbf{R}_s\right\},
@@ -352,39 +350,45 @@ The set-based design strategy involves sampling requirement arcs $\mathbf{R}$ fr
 
 where $s = |\Omega_R|$ is the cardinality of $\Omega_R$.
 
-The set of joint \ac{PDF} choices $\mathcal{R}$ is constructed by generating different joint \acp{PDF} defined by their mean vector $\boldsymbol{\mu}$, interval $\boldsymbol{\sigma}$ and type $t\in\mathcal{T} = \left\{\mathrm{``Uniform"},\mathrm{``Gaussian"}\right\}$. The interval $\boldsymbol{\sigma}$ is the same as the standard deviation vector defined for the Gaussian joint \ac{PDF} in Equation~(\ref{eq:gaussianpdf}). For a uniform joint \ac{PDF}, the bounds are obtained from the interval vector such that $\mathbf{a} = \boldsymbol{\mu} - 3\boldsymbol{\sigma}$ and $\mathbf{b} = \boldsymbol{\mu} + 3\boldsymbol{\sigma}$. This allows any joint \ac{PDF} to be fully parametrized by three parameters, the type $t$, the mean vector $\boldsymbol{\mu}$ and the interval vector $\boldsymbol{\sigma}$.
+The set of joint \ac{PDF} choices $\mathcal{R}$ is constructed by generating different joint \acp{PDF} defined by their mean vector $\boldsymbol{\mu}$, interval vector $\boldsymbol{\sigma}$ and type $t\in\mathcal{T} = \left\{\mathrm{``Uniform"},\mathrm{``Gaussian"}\right\}$. The interval vector $\boldsymbol{\sigma}$ is the same as the standard deviation vector defined for the Gaussian joint \ac{PDF} in Equation~(\ref{eq:gaussianpdf}). For a uniform joint \ac{PDF}, the bounds are obtained from the interval vector such that $\mathbf{a} = \boldsymbol{\mu} - 3\boldsymbol{\sigma}$ and $\mathbf{b} = \boldsymbol{\mu} + 3\boldsymbol{\sigma}$. This allows any joint \ac{PDF} to be fully parametrized by three parameters, the type $t$, the mean vector $\boldsymbol{\mu}$ and the interval vector $\boldsymbol{\sigma}$.
 
-The method for populating the set $\mathcal{R}$ is based on the designer's experience with the requirements and previous knowledge. For example if requirements are expected to become well-defined over time around a certain value in the parameter space, then a set of mean vectors $M = \left\{\boldsymbol{\mu}_1,\boldsymbol{\mu}_2,\cdots,\boldsymbol{\mu}_e\right\}$ and a set of interval vectors $\Sigma = \left\{\boldsymbol{\sigma}_1,\boldsymbol{\sigma}_2,\cdots,\boldsymbol{\sigma}_e\right\}$ can be obtained by linearly interpolating between the start and end states given by $\boldsymbol{\mu}_1,\boldsymbol{\sigma}_1$ and $\boldsymbol{\mu}_e,\boldsymbol{\sigma}_e$ respectively for each type of joint \ac{PDF}. 
+The method for populating the set $\mathcal{R}$ is based on the designer's experience with the requirements and previous knowledge. For example if requirements are expected to become well-defined over time around a certain value in the parameter space, then a matrix of mean vectors $\mathbf{M} = \left[\boldsymbol{\mu}_1,\boldsymbol{\mu}_2,\cdots,\boldsymbol{\mu}_e\right]^{\textrm{T}}$ and a matrix of interval vectors $\boldsymbol{\Sigma} = \left[\boldsymbol{\sigma}_1,\boldsymbol{\sigma}_2,\cdots,\boldsymbol{\sigma}_e\right]^{\textrm{T}}$ can be obtained by linearly interpolating between the start and end states given by $\boldsymbol{\mu}_1,\boldsymbol{\sigma}_1$ and $\boldsymbol{\mu}_e,\boldsymbol{\sigma}_e$ respectively for each type of joint \ac{PDF}. 
 
 An example of this kind of interpolation search strategy is shown in Figure~\ref{fig:2Dexampleinterp} for the same 2D example used in Section~\ref{subsec:designmetrics}.
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.9\textwidth]{3_2D_example_interpolation.pdf}
-	\caption{Contours of feasibility constraint $g_{f1}(\mathbf{p})$ in the 2 dimensional parameter space for different types of requirement \acp{PDF}}
+	\caption{Interpolation between two end states of different joint \acp{PDF} in a 2D parameter space}
 	\label{fig:2Dexampleinterp}
 \end{figure}
 
-The set of possible requirement arcs $\Omega_R$ spans every possible combination of the joint \ac{PDF} types $t$, means $M$ and intervals $\Sigma$. Consider an example with $m=6$ epochs. If $e=5$ interpolation levels are used to obtain $M$ and $\boldsymbol{\Sigma}$ and two \ac{PDF} types $\mathcal{T} = \left\{\mathrm{``Uniform"},\mathrm{``Gaussian"}\right\}$ are available, the number of choices $v$ for $\mathcal{R}$ and the cardinality $s$ for $\Omega_R$ is calculated as follows:
+The set of possible requirement arcs $\Omega_R$ spans every possible combination of the joint \ac{PDF} types $t$, means $\mathbf{M}$ and intervals $\boldsymbol{\Sigma}$. Consider an example with $m=6$ epochs. If $e=5$ interpolation levels are used to obtain $\mathbf{M}$ and $\boldsymbol{\Sigma}$ and two \ac{PDF} types 
+
+\begin{equation*}
+	\mathcal{T} = \left\{\mathrm{``Uniform"},\mathrm{``Gaussian"}\right\}
+\end{equation*} 
+
+are available, the number of choices $v$ for $\mathcal{R}$ and the cardinality $s$ for $\Omega_R$ is calculated as
 
 \begin{equation*}
 	\begin{aligned}
-		& v = e \times e \times |\mathcal{T}| = 5 \times 5 \times 2 = 50,\\
+		& v = e \times e \times |\mathcal{T}| = 5 \times 5 \times 2 = 50,~\textrm{and}\\
 		& s = |\Omega_R| = m^v = 6^{50},~\mathrm{respectively}.\\
 	\end{aligned}
 \end{equation*}
 
-It can be deduced that a small increase in the number of joint \ac{PDF} choices causes the cardinality of $\Omega_R$ to increase exponentially. For practicality only the first few elements of $\Omega_R$ will be used during the set-based design analysis and $s$ will be capped at $10^5$ samples. The reasons for this choice will be explained in results Section~\ref{sec:TSEresults}.
+It can be deduced that a small increase in the number of joint \ac{PDF} choices causes the cardinality of $\Omega_R$ to increase exponentially. For practicality, only the first few elements of $\Omega_R$ will be used during the set-based design analysis and $s$ will be capped at $10^5$ samples. The reasons for this choice will be explained in results Section~\ref{sec:TSEresults}.
 
 The first set-based solution is obtained by solving the optimization problem in Equation~(\ref{eq:TSEoptproblem}) for every requirement arc sample $\mathbf{R}_w$ in $\Omega_R$ to obtain a corresponding solution $\mathbf{x}_S^*(\mathbf{R}_w) = \left\{c^*,\mathbf{S}^*\right\}(\mathbf{R}_w)$. In order to compare the overdesign levels across different design arcs rather than different decision arcs, the corresponding optimal design arc $\mathbf{D}^*$ can be extracted from the optimal decision arc $\mathbf{S}^*$ to obtain the solution $\mathbf{x}^*(\mathbf{R}_w) = \left\{c^*,\mathbf{D}^*\right\}(\mathbf{R}_w)$
 
-The set of parametric optimal design arcs with respect to excess is defined as:
+The set of parametric optimal design arcs with respect to excess is defined as
 
 \begin{equation} \label{eq:SBDexcessopt}
 	S_E^* = \left\{\mathbf{x}^*(\mathbf{R}_1),\mathbf{x}^*(\mathbf{R}_2)\cdots,\mathbf{x}^*(\mathbf{R}_s)\right\}.
 \end{equation}
 
-We track the number of times a specific design arc $\left\{c,\mathbf{D}\right\}_\lambda$ appears as the solution to the parametric optimization problem in $S_E^*$ via a design optimality vector defined as follows:
+We track the number of times a specific design arc $\left\{c,\mathbf{D}\right\}_\lambda$ appears as the solution to the parametric optimization problem in $S_E^*$ via a design optimality vector defined as
 
 \begin{equation} \label{eq:optimalityvec}
 	\mathbf{N}_E = \left[n_{E1} ~ n_{E2} ~ \cdots ~ n_{E\beta}\right]^{\mathrm{T}},
@@ -398,7 +402,7 @@ where $n_{E\lambda}$ is equal to the number of times design arc $\left\{c,\mathb
 
 where the subscript $E1,E2,\cdots,E\alpha$ indicates that the corresponding base is ordered by frequency in the set of parametric optimal solutions with respect to excess $S_E^*$.
 
-The same procedure is repeated for the optimization problem in Equation~(\ref{eq:optproblemweight}) to obtain the second set-based solution comprising the best performing design arcs in terms of minimizing weight throughout the product cycle:
+The same procedure is repeated for the optimization problem in Equation~(\ref{eq:optproblemweight}) to obtain the second set-based solution comprising the best performing design arcs in terms of minimizing weight throughout the product cycle.
 
 \begin{equation} \label{eq:SBDweight}
 	S_W = \left\{\left\{c,\mathbf{D}\right\}_{W1},\left\{c,\mathbf{D}\right\}_{W2}\cdots,\left\{c,\mathbf{D}\right\}_{W\alpha}\right\},
@@ -406,7 +410,7 @@ The same procedure is repeated for the optimization problem in Equation~(\ref{eq
 
 where the subscripts $W1,W2,\cdots,W\beta$ indicate that the corresponding base is ordered by frequency in the set of parametric optimal solutions with respect to weight $S_W^*$.
 
-Algorithm~\ref{algo:SBDOptalgo} describes the methodology to be followed for obtaining the sets of optimal design arcs with respect to excess or weight.
+Algorithm~\ref{algo:SBDOptalgo} describes the methodology to be followed for obtaining the set of optimal design arcs with respect to excess or weight.
 
 \begin{algorithm}
 	\DontPrintSemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
@@ -428,9 +432,9 @@ Algorithm~\ref{algo:SBDOptalgo} describes the methodology to be followed for obt
 	\label{algo:SBDOptalgo}
 \end{algorithm}
 
-The third set-based solution is the robust design set. We define robustness of a design arc by the number of design arcs satisfied from the set $\Omega_R$. We evaluate the feasibility of each design arc $\left\{c,\mathbf{D}\right\}_\lambda$ sampled from the set of possible design arcs in Equation~(\ref{eq:feasibledesignset}) with respect to every requirement arc $\mathbf{R}_w$ in $\Omega_R$.
+The third set-based solution is the robust design set. We define robustness of a design arc by the number of requirement arcs satisfied from the set $\Omega_R$. We evaluate the feasibility of each design arc $\left\{c,\mathbf{D}\right\}_\lambda$ sampled from the set of possible design arcs in Equation~(\ref{eq:feasibledesignset}) with respect to every requirement arc $\mathbf{R}_w$ in $\Omega_R$.
 
-We generate all the possible decision arcs for a given design arc $\left\{c,\mathbf{D}\right\}_\lambda$. These combinations are generated by randomly inserting the $-1$ decisions into the design arc vector until it has the same number of elements as the number of epochs $m$. We show this using an example. Consider the design arc $\left\{c = 1,\mathbf{D} = \left[2 ~ 0 ~ 1\right]\right\}$. The possible decision arcs are:
+We generate all the possible decision arcs for a given design arc $\left\{c,\mathbf{D}\right\}_\lambda$. These combinations are generated by randomly inserting the $-1$ decisions into the design arc vector until it has as many components as there are epochs $m$. We show this using an example. Consider the design arc $\left\{c = 1,\mathbf{D} = \left[2 ~ 0 ~ 1\right]\right\}$. The possible decision arcs are
 
 \begin{equation*}
 	\begin{aligned}
@@ -444,7 +448,7 @@ We generate all the possible decision arcs for a given design arc $\left\{c,\mat
 	\end{aligned}
 \end{equation*}
 
-These enumerations result in a set of the decision arcs defined as follows:
+These enumerations result in a set of the decision arcs defined as
 
 \begin{equation} \label{eq:enumeratedcS}
 	S_{cD} = \left\{\left\{c,\mathbf{S}\right\}_{1},\left\{c,\mathbf{S}\right\}_{2}\cdots,\left\{c,\mathbf{S}\right\}_{\zeta}\right\},\mathrm{~where~} \left\{c,\mathbf{S}\right\}_{\gamma} \in S_{cD}
@@ -452,7 +456,7 @@ These enumerations result in a set of the decision arcs defined as follows:
 
 and $\zeta$ is the number of possible enumerations. In the previous example $\zeta = 7$.
 
-The feasibility in terms of reliability is checked for every possible decision arc $\left\{c,\mathbf{S}\right\}_{\gamma}$ for a given $\left\{c,\mathbf{D}\right\}_\lambda$ and requirement arc $\mathbf{R}_w$ using $\mathbf{g}(c_{\gamma},\mathbf{S}_{\gamma};\mathbf{R}_w) = \mathbf{P}_{th} - \mathbf{P}(\mathbf{T} \in \mathbf{C}) \le \mathbf{0}$. If any of the decision arcs in set $S_{cD}$ satisfy all the reliability constraints then the corresponding design arc $\left\{c,\mathbf{D}\right\}_\lambda$ is considered feasible. We track the number of requirement arcs satisfied by design arc $\left\{c,\mathbf{D}\right\}_\lambda$ through a robustness vector defined as follows:
+The feasibility in terms of reliability is checked for every enumerated decision arc $\left\{c,\mathbf{S}\right\}_{\gamma}$ for a given $\left\{c,\mathbf{D}\right\}_\lambda$ and requirement arc $\mathbf{R}_w$ using $\mathbf{g}(c_{\gamma},\mathbf{S}_{\gamma};\mathbf{R}_w) = \mathbf{P}_{th} - \mathbf{P}_{\mathbf{p} \in \mathbf{C}} \le \mathbf{0}$. If any of the decision arcs in set $S_{cD}$ satisfy all the reliability constraints then the corresponding design arc $\left\{c,\mathbf{D}\right\}_\lambda$ is considered feasible. We track the number of requirement arcs satisfied by design arc $\left\{c,\mathbf{D}\right\}_\lambda$ through a robustness vector defined as
 
 \begin{equation} \label{eq:robustnessvec}
 	\mathbf{N}_R = \left[n_{R1} ~ n_{R2} ~ \cdots ~ n_{R\beta}\right]^{\mathrm{T}},
@@ -466,7 +470,7 @@ where $n_{R\lambda}$ is equal to the number of requirement arcs $\mathbf{R}_w \i
 
 where the subscripts $R1,R2,\cdots,R\alpha$ indicate that these design arcs are ordered by number of requirement arcs satisfied from the set $\Omega_R$.
 
-The final set-based solution is the flexible design set. All the possible design arcs form the set $\Omega_{cD}$ are ranked in terms of filtered outdegree. The filtered outdegree is defined as the number of possible design arcs that can be obtained from the current design arc by adding exactly one redesign choice that is not an element of the current design arc. The filtered outdegree for a design arc $\left\{c,\mathbf{D}\right\}_\lambda$ having $o$ elements and $q + 1$ redesign choices is simply equal to:
+The final set-based solution is the flexible design set. All the possible design arcs form the set $\Omega_{cD}$ are ranked in terms of filtered outdegree. The filtered outdegree is defined as the number of possible design arcs that can be obtained from the current design arc by adding exactly one redesign choice that is not a component of the current design arc. The filtered outdegree for a design arc $\left\{c,\mathbf{D}\right\}_\lambda$ having $o$ components and $q + 1$ redesign choices is simply equal to
 
 \begin{equation} \label{eq:filteredoutdegree}
 	FO_{\lambda} = q - o.
@@ -540,7 +544,7 @@ The Pareto front for such a tradespace can be obtained by solving the following 
 	\begin{aligned}
 		& \underset{\{c,\mathbf{D}\}\in\Omega_{cD}}{\text{minimize}}
 		& & {f_1}(c,\mathbf{D}) = -V_c(c,\mathbf{D})\\
-		& & & {f_2}(c,\mathbf{D}) = \textrm{W}\left(c,\mathbf{D}\right)\\
+		& & & {f_2}(c,\mathbf{D}) = \textrm{W}\left(c,\mathbf{D}\right).\\
 	\end{aligned}
 \end{equation}
 
@@ -570,7 +574,7 @@ There are several stiffener geometries available to the designer of the \ac{TRS}
 	\label{fig:designspacestiff}
 \end{figure}
 
-We compute the cardinality of the set $\Omega_{cD}$ using Table~\ref{table:omegadcardinality} and Equation~(\ref{eq:cardinailitycdarc}) for this problem as follows:
+We compute the cardinality of the set $\Omega_{cD}$ using Table~\ref{table:omegadcardinality} and Equation~(\ref{eq:cardinailitycdarc}) for this problem.
 
 \begin{equation*}
 	\begin{aligned}
@@ -589,7 +593,28 @@ We now describe the analysis steps for obtaining the capability of a given stiff
 
 The uncertain temperature loads in Figure~\ref{fig:thermalloads} are used to specify the vector of uncertain parameters given by $\mathbf{p} = \left[T_1 ~ T_2 ~ T_3 ~ T_4\right]^{\mathrm{T}}$ and the corresponding parameter space $\mathbf{p}\in\mathbb{R}^4$, where $n = 4$ is dimensionality of the problem. We constrain our study to a parameter space defined by the following bounds on $\mathbf{p}$.
 
-$\mathbf{p} = \left\{\mathbf{p}: \mathbf{L} \le \mathbf{p} \le \mathbf{U}\right\}$, where $\mathbf{L} = \left[-100 ~ -100 ~ -100 ~ -100\right]^{\mathrm{T}}$ and $\mathbf{U} = \left[100 ~ 100 ~ 100 ~ 100\right]^{\mathrm{T}}$. Note that these bounds are relative to nominal temperature values of $\mathbf{p}_{\textrm{nominal}} = \left[300 ~ 400 ~ 450 ~ 600\right]^{\mathrm{T}}$. A value of $\mathbf{p} = \left[50 ~ 25 ~ -40 ~ -20\right]^{\mathrm{T}} \equiv \mathbf{p} + \mathbf{p}_{\textrm{nominal}} = \left[350 ~ 425 ~ 410 ~ 580\right]^{\mathrm{T}}$.
+\begin{equation*}
+	\begin{aligned}
+		& \mathbf{p} = \left\{\mathbf{p}: \mathbf{L} \le \mathbf{p} \le \mathbf{U}\right\},~\textrm{where}\\
+		& \mathbf{L} = \left[-100 ~ -100 ~ -100 ~ -100\right]^{\mathrm{T}}~\textrm{and}\\
+		& \mathbf{U} = \left[100 ~ 100 ~ 100 ~ 100\right]^{\mathrm{T}}\\
+	\end{aligned}
+\end{equation*}
+
+Note that these bounds are relative to nominal temperature values of 
+
+\begin{equation*}
+	\mathbf{p}_{\textrm{nominal}} = \left[300 ~ 400 ~ 450 ~ 600\right]^{\mathrm{T}}.
+\end{equation*}
+
+A value of 
+
+\begin{equation*}
+	\begin{aligned}
+		& \mathbf{p} = \left[50 ~ 25 ~ -40 ~ -20\right]^{\mathrm{T}} \equiv \\
+		& \mathbf{p} + \mathbf{p}_{\textrm{nominal}} = \left[350 ~ 425 ~ 410 ~ 580\right]^{\mathrm{T}}.
+	\end{aligned}
+\end{equation*}
 
 In this chapter, we assume that there is no correlation between these temperature loads. This is because environmental factors such as the atmospheric temperature are independent of the exhaust temperature. This allows us to assume that the requirement \acp{PDF} defined in Section~\ref{subsec:designmetrics} feature diagonal covariance matrices.
 
@@ -607,7 +632,7 @@ Two types of requirement joint \acp{PDF} will be used, the uniform distribution 
 
 All design metrics and requirements are calculated for uncertain parameter spaces that are scaled between $0$ and $1$. This helps when making comparisons between different design arcs in terms of hypervolume of sets with $0$ being the minimum possible hypervolume and $1$ being the maximum possible hypervolume.
 
-$e=5$ interpolation levels are used to obtain $M$ and $\boldsymbol{\Sigma}$. The starting mean and interval vectors are $\boldsymbol{\mu}_1 = \left[0.15 ~ 0.80 ~ 0.80 ~ 0.85\right]^{\mathrm{T}}$ and $\boldsymbol{\sigma}_1 = \left[0.1875 ~ 0.125 ~ 0.125 ~ 0.1875\right]^{\mathrm{T}}$ respectively. The ending mean and interval vectors are $\boldsymbol{\mu}_5 = \left[0.85 ~ 0.20 ~ 0.20 ~ 0.15\right]^{\mathrm{T}}$ and $\boldsymbol{\sigma}_5 = \left[0.375 ~ 0.250 ~ 0.250 ~ 0.375\right]^{\mathrm{T}}$ respectively. As a result, the set of mean and interval vectors is given by:
+$e=5$ interpolation levels are used to obtain $\mathbf{M}$ and $\boldsymbol{\Sigma}$. The starting mean and interval vectors are $\boldsymbol{\mu}_1 = \left[0.15 ~ 0.80 ~ 0.80 ~ 0.85\right]^{\mathrm{T}}$ and $\boldsymbol{\sigma}_1 = \left[0.1875 ~ 0.125 ~ 0.125 ~ 0.1875\right]^{\mathrm{T}}$ respectively. The ending mean and interval vectors are $\boldsymbol{\mu}_5 = \left[0.85 ~ 0.20 ~ 0.20 ~ 0.15\right]^{\mathrm{T}}$ and $\boldsymbol{\sigma}_5 = \left[0.375 ~ 0.250 ~ 0.250 ~ 0.375\right]^{\mathrm{T}}$ respectively. As a result, the matrices of mean and interval vectors are given by
 
 % \begin{equation*}
 % 	M = \begin{Bmatrix} 
@@ -630,39 +655,51 @@ $e=5$ interpolation levels are used to obtain $M$ and $\boldsymbol{\Sigma}$. The
 % \end{equation*}
 
 \begin{equation*}
-	M = \left\{ \begin{aligned}
-		& \left[ 0.15 ~ 0.80 ~ 0.80 ~ 0.85 \right]^{\mathrm{T}},\\ 
-		& \left[ 0.325 ~ 0.65 ~ 0.65 ~ 0.675 \right]^{\mathrm{T}},\\
-		& \left[ 0.5 ~ 0.5, 0.5 ~ 0.5 \right]^{\mathrm{T}},\\
-		& \left[ 0.675 ~ 0.35 ~ 0.35 ~ 0.325 \right]^{\mathrm{T}},\\
-		& \left[ 0.85 ~ 0.20 ~ 0.20 ~ 0.15 \right]^{\mathrm{T}},
-	\end{aligned} \right\}
+	\mathbf{M} = \begin{bmatrix}
+		\boldsymbol{\mu}_1 ^ {\mathrm{T}} \\ 
+		\boldsymbol{\mu}_2 ^ {\mathrm{T}} \\
+		\boldsymbol{\mu}_3 ^ {\mathrm{T}} \\
+		\boldsymbol{\mu}_4 ^ {\mathrm{T}} \\
+		\boldsymbol{\mu}_5 ^ {\mathrm{T}} 
+	\end{bmatrix} = \begin{bmatrix}
+		0.15 & 0.80 & 0.80 & 0.85 \\ 
+		0.325 & 0.65 & 0.65 & 0.675 \\
+		0.5 & 0.5 70.5 & 0.5 \\
+		0.675 & 0.35 & 0.35 & 0.325 \\
+		0.85 & 0.20 & 0.20 & 0.15 
+	\end{bmatrix}
 \end{equation*}
 
 and
 
 \begin{equation*}
-	\Sigma = \left\{ \begin{aligned}
-		& \left[ 0.1875 ~ 0.125 ~ 0.125 ~ 0.1875 \right]^{\mathrm{T}},\\ 
-		& \left[ 0.234375 ~ 0.15625 ~ 0.15625 ~ 0.234375 \right]^{\mathrm{T}},\\
-		& \left[ 0.28125 ~ 0.1875 , 0.1875 ~ 0.28125 \right]^{\mathrm{T}},\\
-		& \left[ 0.328125 ~ 0.21875 ~ 0.21875 ~ 0.328125 \right]^{\mathrm{T}},\\
-		& \left[ 0.375 ~ 0.250 ~ 0.250 ~ 0.375 \right]^{\mathrm{T}}
-	\end{aligned} \right\}
+	\boldsymbol{\Sigma} = \begin{bmatrix}
+		\boldsymbol{\sigma}_1 ^ {\mathrm{T}} \\ 
+		\boldsymbol{\sigma}_2 ^ {\mathrm{T}} \\
+		\boldsymbol{\sigma}_3 ^ {\mathrm{T}} \\
+		\boldsymbol{\sigma}_4 ^ {\mathrm{T}} \\
+		\boldsymbol{\sigma}_5 ^ {\mathrm{T}} 
+	\end{bmatrix} = \begin{bmatrix}
+		0.1875 & 0.125 & 0.125 & 0.1875 \\ 
+		0.234375 & 0.15625 & 0.15625 & 0.234375 \\
+		0.28125 & 0.1875 & 0.1875 & 0.28125 \\
+		0.328125 & 0.21875 & 0.21875 & 0.328125 \\
+		0.375 & 0.250 & 0.250 & 0.375
+	\end{bmatrix}
 \end{equation*}
 
 respectively.
 
-We define a remanufacturing design problem with $m = 6$ epochs. The number of choices $v$ for $\mathcal{R} = \left\{F_{\mathbf{X}1}(\mathbf{p}),F_{\mathbf{X}2}(\mathbf{p}),\cdots,F_{\mathbf{X}v}(\mathbf{p})\right\}$ and the cardinality $s$ for $\Omega_R$ is calculated as follows:
+We define a remanufacturing design problem with $m = 6$ epochs. The number of choices $v$ for $\mathcal{R} = \left\{F_{\mathbf{X}1}(\mathbf{p}),F_{\mathbf{X}2}(\mathbf{p}),\cdots,F_{\mathbf{X}v}(\mathbf{p})\right\}$ and the cardinality $s$ for $\Omega_R$ is calculated as
 
 \begin{equation*}
 	\begin{aligned}
-		& v = e \times e \times |\mathcal{T}| = 5 \times 5 \times 2 = 50,\\
+		& v = e \times e \times |\mathcal{T}| = 5 \times 5 \times 2 = 50,~\mathrm{and}\\
 		& s = |\Omega_R| = m^v = 6^{50},~\mathrm{respectively}.\\
 	\end{aligned}
 \end{equation*}
 
-Only the first few elements of $\Omega_R$ will be used during the set-based design analysis and $s$ will be capped at $10^5$ samples. This is because the set-based solutions stabilize and do not change after sampling $10^3$ requirement arc samples.
+Only the first few elements of $\Omega_R$ will be used during the set-based design analysis and $s$ will be capped at $10^5$ samples. This is because the set-based solutions stabilize and do not change after sampling $10^3$ requirement arcs.
 
 The reliability threshold vector for this application problem is defined as 
 
@@ -672,7 +709,7 @@ The reliability threshold vector for this application problem is defined as
 
 The reliability threshold gradually increases as a product development cycle progresses. This is in contrast to the reliabilities encountered during a product's lifecycle where the reliability is generally high in aerospace industries. The designer can test and react to different lifecycle scenarios by adjusting the reliability threshold for the problem.
 
-We now summarize the important problem parameters and constants in Table~\ref{table:modelsummary}.
+We summarize the important problem parameters and constants in Table~\ref{table:modelsummary}.
 
 \begin{table}[h!]
 	\centering
@@ -730,7 +767,7 @@ We investigate the remanufacturing design problem of a \ac{TRS} by using the sur
 % Example calculation
 \subsection{Example for calculating the design properties of a given design arc} \label{subsec:exampleprob4D}
 
-The requirements are defined in the parameter space by either a uniform or Gaussian \ac{PDF} is given by Equations~(\ref{eq:uniformpdf}) and (\ref{eq:gaussianpdf}) respectively. We choose two design arcs from the set $\Omega_{cD}$ to visualize their feasibility constraints, capabilities and reliabilities in the 4-dimensional parameter space in Figure~\ref{fig:4Dexamplepspace}. The design arcs and their filtered outdegree, weight and hypervolume of capability are reported in Table~\ref{table:pdf4Dexample}. Additionally, two different requirement joint \acp{PDF} are specified and the corresponding reliability, hypervolume of requirement and hypervolume of excess are reported in Table~\ref{table:pdf4Dexample}.
+The requirements are defined in the parameter space by either a uniform or Gaussian \ac{PDF} given by Equations~(\ref{eq:uniformpdf}) and (\ref{eq:gaussianpdf}) respectively. We choose two design arcs from the set $\Omega_{cD}$ to visualize their feasibility constraints, capabilities, and reliabilities in the 4-dimensional parameter space in Figure~\ref{fig:4Dexamplepspace}. The design arcs and their filtered outdegree, weight, and hypervolume of capability are reported in Table~\ref{table:pdf4Dexample}. Additionally, two different requirement joint \acp{PDF} are specified and the corresponding reliability, hypervolume of requirement and hypervolume of excess are reported in Table~\ref{table:pdf4Dexample}.
 
 \newcommand{\cwaa}{0.75cm} % index column width
 \newcommand{\cwa}{1.5cm} % design arc column width
@@ -753,7 +790,7 @@ The requirements are defined in the parameter space by either a uniform or Gauss
 	\begin{tabular}{>{\centering\arraybackslash}p{\cwaa}>{\centering\arraybackslash}p{\cwa}|>{\centering\arraybackslash}p{\cwc}c>{\centering\arraybackslash}p{\cwe}>{\centering\arraybackslash}p{\cwf}cc>{\centering\arraybackslash}p{\cwi}>{\centering\arraybackslash}p{\cwj}>{\centering\arraybackslash}p{\cwb}}
 	\hline\hline
 	\bf Index & \bf Design arc & \bf Filtered outdegree & \bf Weight &\bf \ac{PDF} mean vector & \bf \ac{PDF} interval vector & \bf \ac{PDF} type & \bf Reliability & \multicolumn{3}{c}{\bf Set volume} \\
-	$\lambda$ & $\left\{c,\mathbf{D}\right\}$ & $FO$ & $W$ &$\boldsymbol{{\mu}}$ & $\boldsymbol{{\sigma}}$ & $t$ & $\mathbb{P}\left(\mathbf{p}\in C\right)$ & $V_R$ & $V_E$ & $V_C$ \\ \hline
+	$\lambda$ & $\left\{c,\mathbf{D}\right\}$ & $FO$ & $W$ &$\boldsymbol{\mu}$ & $\boldsymbol{\sigma}$ & $t$ & $\mathbb{P}\left(\mathbf{p}\in C\right)$ & $V_R$ & $V_E$ & $V_C$ \\ \hline
 	%================================================================
 	\multirow{5}{\cwaa}{\centering 109} & & \multirow{5}{\cwc}{\centering 2} & \multirow{5}{\cwd}{\centering 13.9 kg} & \multirow{5}{\cwe}{\centering $\begin{bmatrix} 0.375 \\ 0.5 \\ 0.5 \\0.625 \end{bmatrix}$} & \multirow{5}{\cwf}{\centering $\begin{bmatrix} 0.375 \\ 0.125 \\ 0.125 \\0.375 \end{bmatrix}$} & & & & & \multirow{5}{\cwb}{\centering 0.540} \\
 	 & $\{c = 1,$ & & & & & ``Uniform" & 0.3089 & 0.0352 & 0.529 \\
@@ -771,7 +808,7 @@ The requirements are defined in the parameter space by either a uniform or Gauss
 	\end{tabular}
 \end{table}
 
-We can see from the results in Table~\ref{table:pdf4Dexample} that the addition of one more deposits to the design arc $\left\{c = 1, \mathbf{D} = \left[1,2,4\right]\right\}$ increases its performance in terms of capability and reliability. However, this comes at the increased cost of an additional 4.6 kg of weight, reduced filtered outdegree and an additional excess of 0.327 and 0.335 for uniform and Gaussian \acp{PDF} respectively. The choice of design arc for a given requirement arc is driven by the need to maintain a minimum reliability while minimizing excess. We will look at such a problem using epoch-era analysis and combinatorial optimization for decision making.
+We can see from the results in Table~\ref{table:pdf4Dexample} that the addition of one more deposit to the design arc $\left\{c = 1, \mathbf{D} = \left[1,2,4\right]\right\}$ increases its performance in terms of capability and reliability. However, this comes at the increased cost of an additional 4.6 kg of weight, reduced filtered outdegree, and an additional excess of 0.327 and 0.335 for uniform and Gaussian \acp{PDF} respectively. The choice of design arc for a given requirement arc is driven by the need to maintain a minimum reliability while minimizing excess. We will look at such a problem using epoch-era analysis and combinatorial optimization for decision making.
 
 \begin{figure}[h!]
 	\centering
@@ -796,13 +833,13 @@ We solve the problem given by Equation~(\ref{eq:TSEoptproblem}) using \ac{MADS} 
 	\centering
 	\renewcommand{\arraystretch}{1.0}% Wider
 	\footnotesize\addtolength{\tabcolsep}{-5pt}
-	\caption{Requirement arc $\mathbf{R}_w$ details}
+	\caption{Requirement arc $\mathbf{R}_w$ details$^*$}
 	\label{table:requirementarcex}
 	\begin{tabular}{l>{\centering\arraybackslash}p{4.2cm}>{\centering\arraybackslash}p{6cm}c}
 	\hline\hline
 
 	\bf \ac{PDF} Index & \bf \ac{PDF} mean vector & \bf \ac{PDF} interval vector & \bf \ac{PDF} type \\
-	$F_\mathbf{X} \in \mathcal{R}$ &$\boldsymbol{{\mu}}$ & $\boldsymbol{{\sigma}}$ & $t$ \\ \hline
+	$F_\mathbf{X} \in \mathcal{R}$ &$\boldsymbol{\mu}$ & $\boldsymbol{\sigma}$ & $t$ \\ \hline
 
 	\hline
 	%================================================================
@@ -814,7 +851,8 @@ We solve the problem given by Equation~(\ref{eq:TSEoptproblem}) using \ac{MADS} 
 	$F_{\mathbf{X31}}$ & $\begin{bmatrix} 0.325 & 0.65 & 0.65 & 0.675 \end{bmatrix}$ & $\begin{bmatrix} 0.1875 & 0.125 & 0.125 & 0.1875 \end{bmatrix}$ & "Gaussian" \\
 	%================================================================
 	\hline\hline
-	\end{tabular}
+	\end{tabular}\\
+	\footnote[1]{}The transpose operator $^{\mathrm{T}}$ is dropped to avoid repetition
 \end{table}
 
 We plot the results from various decision arcs across epochs in Figure~\ref{fig:epocheraexample}. The first decision arc, $\left\{c=1,\mathbf{S}=\left[2,1,-1,-1,0,-1\right]\right\}$ (shown in red) does not satisfy the reliability constraints for the problem as shown in Figure~\ref{fig:Decisionarcreliability}. This is because at epoch $k=3$ the reliability of the corresponding design arc $\left\{c=1,\mathbf{D}=\left[2,1\right]\right\}$ is almost 0. No redesign occurred at epoch $k=3$ when it was needed to increase the reliability of the design arc above the threshold.
@@ -841,7 +879,7 @@ we solve the combinatorial problem given by Equation~(\ref{eq:TSEoptproblem}) to
 	\centering
 	% \renewcommand{\arraystretch}{1.0}% Wider
 	\footnotesize\addtolength{\tabcolsep}{-5pt}
-	\caption{Results obtained for example design arcs and requirement joint \acp{PDF}}
+	\caption{Results obtained for example decision arcs given a requirement arc $\mathbf{R}_w$}
 	\label{table:optresultsEA}
 	\begin{tabular}{>{\centering\arraybackslash}p{\ocwa}>{\centering\arraybackslash}p{\ocwb}|>{\centering\arraybackslash}p{\ocwc}>{\centering\arraybackslash}p{\ocwd}>{\centering\arraybackslash}p{\ocwe}}
 	\hline\hline
@@ -880,7 +918,7 @@ We will now solve similar combinatorial optimization problems for every requirem
 % Example calculation
 \subsection{Set-based design and tradespace exploration} \label{subsec:SBDTSE}
 
-We solve an optimization problem similar to the one in Section~\ref{subsec:exampleoptprob} for every requirement arc in $\Omega_R$ to obtain the set of parametric optimal design arcs when optimizing for cumulative excess ($S_E^*$) and cumulative weight ($S_W^*$). We plot the frequency of each design arc in $S_E^*$ and $S_W^*$ and normalize it by the cardinality $\beta$ of set $\Omega_R$ to obtain the histograms shown in Figure~\ref{fig:histogramplotsSBD}. 
+We solve an optimization problem similar to the one in Section~\ref{subsec:exampleoptprob} for every requirement arc in $\Omega_R$ to obtain the set of parametric optimal design arcs when optimizing for cumulative excess ($S_E^*$) and cumulative weight ($S_W^*$). We plot the frequency of each design arc in $S_E^*$ and $S_W^*$ and normalize it by the cardinality $s$ of set $\Omega_R$ to obtain the histograms shown in Figure~\ref{fig:histogramplotsSBD}. 
 
 We also evaluated the flexibility and robustness of each design arc in $\Omega_{cD}$ using the methodology in Figure~\ref{fig:methodology} and Algorithm~\ref{algo:SBDRobustalgo}. We present the set of design arcs ordered with respect to robustness and flexibility in Figures~\ref{fig:histogramR} and \ref{fig:histogramF} respectively.
 
@@ -896,7 +934,7 @@ We also evaluated the flexibility and robustness of each design arc in $\Omega_{
 	\centering
 	\subfloat[Set of robust design arcs \label{fig:histogramR}]{\includegraphics[width=0.45\textwidth]{12a_histogram_DOE_R}} \hspace{0.1\textwidth}%	
 	\subfloat[Set of flexible design arcs \label{fig:histogramF}]{\includegraphics[width=0.45\textwidth]{12b_histogram_DOE_F}} \hspace{0.1\textwidth}%	
-	\caption{Distribution of design arcs in set-based solutions}
+	\caption{Distribution of design arcs in robust and flexible set-based solutions}
 	\label{fig:histogramplots}
 \end{figure}
 
@@ -1064,7 +1102,7 @@ Similar observations can be seen for set $S_W$ in Figure~\ref{fig:reducedTSE_SW}
 	\label{fig:piechart_concept}
 \end{figure}
 
-We analyze the the distribution of the concept choices $c$ within the set $S_E$ in Figure \ref{fig:piechart_concept_SE}. We can see that concept choice $c=1$ dwarfs the other two concept choices. This is because the "hatched" concept has deposit choices with relatively high capability and excess. The discontinuous stiffener design featured by its various deposits provided sufficient reinforcement without overstiffening the outercasing. This contrasts the deposit choices available to the "wavy" and "tubular" stiffener concepts which are continuous.
+We analyze the distribution of the concept choices $c$ within the set $S_E$ in Figure \ref{fig:piechart_concept_SE}. We can see that concept choice $c=1$ dwarfs the other two concept choices. This is because the "hatched" concept has deposit choices with relatively high capability and excess. The discontinuous stiffener design featured by its various deposits provided sufficient reinforcement without overstiffening the outercasing. This contrasts the deposit choices available to the "wavy" and "tubular" stiffener concepts which are continuous.
 
 We also look at the distribution of concept choices $c$ within the set $S_W$ in Figure~\ref{fig:piechart_concept_SW}. Two concept choices, $c=0$ and $c=1$ are comparable in terms of frequency within the set. This is because both concepts contain deposit choices that are low in weight. Since the optimization objective for set $S_W$ is weight, the low-weight deposit choices within these concepts are equally preferred.
 
@@ -1095,4 +1133,4 @@ Tradespace exploration is used to visualize the set of optimal design arcs and c
 
 The work in this chapter extends the approach used in Chapter~\ref{ch:scalableSBD} to include problems where multiple changes in requirements may occur. This is represented by the requirement arcs discussed in this chapter. Furthermore, robustness in addition to flexibility was quantified and used as a design metric in this chapter.
 
-In the next chapter, we discuss emerging algorithms for obtaining sets of design solutions when uncertain parameters govern the design optimization problem. Such approaches can help address the need for extensive exploration of the parameter space or the set of possible requirements (given by $\Omega_R$) by reducing the number of needed function evaluations. We show how such approaches can substitute parts of the algorithms that have been developed in this chapter and Chapter~\ref{ch:scalableSBD}.
+In the next chapter, we discuss the use of stochastic optimization algorithms for obtaining sets of design solutions when uncertain parameters govern the design optimization problem. Such approaches can help address the need for extensive exploration of the parameter space or the set of possible requirements (given by $\Omega_R$) by reducing the number of needed function evaluations. We show how such approaches can substitute parts of the algorithms that have been developed in this chapter and Chapter~\ref{ch:scalableSBD}.

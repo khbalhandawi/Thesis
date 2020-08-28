@@ -6,7 +6,7 @@
 \label{ch:thermomechanical}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In this chapter we begin by introducing the industrial case study used to demonstrate our methodologies in Chapters \ref{ch:scalableSBD}, \ref{ch:TSEcont}, and \ref{ch:stohasticopt}. We begin by defining the thermomechanical model used to analyze the deposition process used to remanufacture the product. The product considered in this thesis is the \ac{TRS}. The models developed in this section are specific to the deposition of various stiffener geometries on the \acf{TRS}. However, the simplifications to the thermomechanical analysis used to compute the residual effects of directed energy deposition on the substrate are generalizable to any deposit and substrate.
+In this chapter, we introduce the industrial case study used to demonstrate our methodologies in Chapters \ref{ch:scalableSBD}, \ref{ch:TSEcont}, and \ref{ch:stohasticopt}. We define the thermomechanical model used to analyze the deposition process used to remanufacture the product. The product considered in this thesis is the \ac{TRS}. The models developed in this section are specific to the deposition of various stiffener geometries on the \acf{TRS}. However, the simplifications to the thermomechanical analysis used to compute the residual effects of directed energy deposition on the substrate are generalizable to any deposit and substrate.
 
 A \ac{TRS} is a structural aeroengine component at the turbine exhaust. It must sustain thermal and structural loads during flight due to exhaust gases while mounting the engine to the wing structure. Analysis of the component in the industry involves multiple disciplines (aerodynamic, structural, and thermal). 
 
@@ -25,14 +25,14 @@ The \ac{DED} of the stiffener increases the thickness of the outer casing as sho
 \begin{figure}[h!]
 	\centering
 	\subfloat[TRS schematic \label{fig:TRSiso}]{\includegraphics[width=0.3\textwidth]{1a_TRS_isometric}} \hspace{0.1\textwidth}%
-	\subfloat[Deposition variables \label{fig:stiffdims}]{\includegraphics[width=0.3\textwidth]{1b_TRS_overview}}	
+	\subfloat[Deposition variables \label{fig:stiffdims}]{\includegraphics[width=0.4\textwidth]{1b_TRS_overview}}	
 	\caption{TRS stiffener example}
 	\label{fig:TRSoverview}
 \end{figure}
 
 Comprehensive thermomechanical models feature a coupled transient heat transfer and fluid flow model to accurately calculate the transient temperature field. The temperature field is used for residual stress and distortion modeling \cite{Mukherjee2017}. Complex physical processes govern the temperature field making its computation intensive. Computations of the temperature field involve various simplifications and assumptions to make the calculations tractable. \citeauthor{Manvatkar2011} consider a \ac{FEA} conduction model for calculating the transient temperature field due to a moving Gaussian heat source on the substrate \cite{Manvatkar2011}. The problem of a moving heat source on an infinite plate was formulated and solved analytically by \citeauthor{rosenthal1946theory} \cite{rosenthal1946theory}. The Rosenthal model is used for cases where there is limited heat conduction in the through thickness dimension typical of thin plates \cite{Goldak1984}. The \ac{TRS} outer casing where the stiffener is to be deposited has a through thickness dimension considerably smaller than its width and circumference allowing us to approximate the heat source by a Gaussian heat source as in the Rosenthal model.
 
-The melt pool dimensions are estimated from the transient thermal model to determine the deposit width and depth. Figure~\ref{fig:gaussian} shows the details of the thermomechanical simulations for determining deposit size. A Gaussian heat source with a heat flux distribution given by Equation~(\ref{eg:gaussian}) scans the surface at a constant speed ${V}$ \cite{rosenthal1946theory}
+The melt pool dimensions are estimated from the transient thermal model to determine the deposit width and depth. Figure~\ref{fig:gaussian} shows the details of the thermomechanical simulations for determining deposit size. A Gaussian heat source with a heat flux distribution given by Equation~(\ref{eg:gaussian}) scans the surface at a constant speed ${V}$ \cite{rosenthal1946theory}.
 
 \begin{equation}
 	Q(r,\theta,t) = \dfrac{P_{\textrm{laser}}}{\pi{r_l}^2 D_p}e^{-2\left(\frac{r-{V}t}{r_l}\right)^2}, \label{eg:gaussian}
@@ -163,9 +163,9 @@ The \ac{TRS} shown in Figure~\ref{fig:TRSiso} is subject to thermal loads due to
 	\label{fig:thermalloadcases}
 \end{figure}
 
-The thermal load case is cycled and is used to compute the expected fatigue life of the \ac{TRS} using low-cycle fatigue calculations. We restrict the low-cycle fatigue analysis to the midsection of the outercasing shown in Figure~\ref{fig:TRSiso} in order to simplify computation and postprocessing. The stress state at the midsection of the outercasing is recorded before and after the load case to obtain the initial and final Von Mises stresses $\sigma_{v1}$ and $\sigma_{v2}$, respectively. 
+The thermal load case is cycled and is used to compute the expected fatigue life of the \ac{TRS} using low-cycle fatigue calculations. We restrict the low-cycle fatigue analysis to the midsection of the outercasing shown in Figure~\ref{fig:TRSisothermal} in order to simplify computation and postprocessing. The stress state at the midsection of the outercasing is recorded before and after the load case to obtain the initial and final Von Mises stresses $\sigma_{v1}$ and $\sigma_{v2}$, respectively. 
 
-The structural analyses presented for the thermomechanical, pressure and thermal load cases are performed using a \ac{FE} simulation model which is computationally expensive. As a result, we will construct surrogates for these models in Chapters \ref{ch:scalableSBD}, \ref{ch:TSEcont} and \ref{ch:stohasticopt} to alleviate the computational effort involved in exploring the design and parameter spaces for these problems.
+The structural analyses presented for the thermomechanical, pressure and thermal load cases are performed using a \ac{FE} simulation model which is computationally expensive. As a result, we will construct surrogates for these models in Chapters \ref{ch:scalableSBD}, \ref{ch:TSEcont}, and \ref{ch:stohasticopt} to alleviate the computational effort involved in exploring the design and parameter spaces for these problems.
 
 We explain how the safety factor $n_{\textrm{safety}}$ is computed for these load cases in the following section.
 
@@ -189,7 +189,7 @@ The safety factor $n_{\textrm{safety}}$ is used as a structural performance metr
 \section{Summary}
 \label{sec:thermosummary}
 
-This chapter presented the industrial case study that will be used throughout the thesis to demonstrate the developed frameworks. The chapter defined the thermomechanical model and two loadcases that the \ac{TRS} experiences in operation. The loadcase parameters and outputs are summarized in Tables \ref{table:modelinputs} and \ref{table:modeloutputs} respectively. Some parameters in Table \ref{table:modelinputs} are uncertain and are denoted by ranges. They will be elaborated on during the analysis in the following chapters.
+This chapter presented the industrial case study that will be used throughout the thesis to demonstrate the developed frameworks. The chapter defined the thermomechanical model and two loadcases that the \ac{TRS} experiences in operation. The loadcase parameters and outputs are summarized in Tables \ref{table:modelinputs} and \ref{table:modeloutputs} respectively. Some parameters in Table \ref{table:modelinputs} are uncertain and are denoted by ranges. They will be elaborated on during the analyses in the following chapters.
 
 \begin{table}[h!]
 	\centering
@@ -239,7 +239,7 @@ This chapter presented the industrial case study that will be used throughout th
 	Deposit length  & $L$ & mm \\
 	Scanning time  & $t_\textrm{scan}$ & s \\
 	Equivalent heat flux  & $Q_\textrm{eqv}$ & W/mm$^2$ \\
-	Safety factor against low-cycle fatigure & $n_{\textrm{safety}}$ & - \\
+	Safety factor against low-cycle fatigue & $n_{\textrm{safety}}$ & - \\
 	Number of lifecycles to failure (${P}_{\textrm{load}}$)& $N_f$ & - \\
 	Deposition temperature & $T_\textrm{deposit}$ & $^o$C \\
 	\hline\hline
