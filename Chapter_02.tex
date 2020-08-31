@@ -118,7 +118,7 @@ The amount of design changeability embedded in a product is derived from its fle
 	\begin{tabular}{lC{2.5cm}|C{\changeCW}C{\changeCW}C{\changeCW}C{\changeCW}C{\changeCW}C{\changeCW}C{\changeCW}C{\changeCW}C{\changeCW}C{\changeCW}|C{\mycontCW}C{\mycontCW}}
 	\hline\hline
 
-	\multicolumn{2}{c|}{ \multirow{2}{*}[-0.0pt]{\bf Feature} } & \multicolumn{9}{c}{\bf Contribution(s)} \\ \cline{3-14}
+	\multicolumn{2}{c|}{ \multirow{2}{*}[-0.0pt]{\bf Feature} } & \multicolumn{12}{c}{\bf Contribution(s)} \\ \cline{3-14}
 	 & & \cite{Tackett2014} & \cite{Olewnik2004} & \cite{Liu2008} & \cite{Suh2007} & \cite{Rehn2018} & \cite{Viscito2009} & \cite{Rapp2018} & $\dagger$ & \cite{McManus2007} & \cite{Small2019} & Chapter \ref{ch:scalableSBD} & Chapter \ref{ch:TSEcont} \\ \hline
 	%================================================================
 	\multirow{2}{*}[-0.0pt]{\bf Change type} & Internal & ~ & ~ & \cmark & ~ & ~ & ~ & \cmark & ~ & ~ & \cmark & ~ \\
@@ -167,7 +167,7 @@ Design margins can be managed by quantifying them explicitly to assess the cost 
 
 Few studies in the literature have focused on quantifying buffer and excess for use as metrics in product design.
 
-As explained at the end of Section \ref{sec:changeability}, design robustness and modifiability (evolvability) are dependant on the available design margins for absorbing change due to uncertain requirements. \citeauthor{Tackett2014} quantify the product system's evolvability based on the excess embedded in the design. Evolvability depends on the product's capacity for upgrade which in turn depends on the available excess for upgrading the product's capabilities. Product capability is defined as a weighted sum of multiple excess values for each requirement that the product must meet. Requirements depend on uncertain parameters and are usually defined in the parameter space which encompasses all the possible parameter values. Excess values are obtained by finding the range of uncertain parameters that exceed product requirements.
+As explained at the end of Section \ref{sec:changeability}, design robustness and modifiability (evolvability) are dependant on the available design margins for absorbing change due to uncertain requirements. \citeauthor{Tackett2014} quantify the product system's evolvability based on the excess embedded in the design. Evolvability depends on the product's capacity for upgrade which in turn depends on the available excess for upgrading the product's capabilities. Product capability is defined as a weighted sum of multiple excess values for each requirement that the product must meet. Requirements depend on uncertain parameters and are usually defined in the parameters space which encompasses all the possible parameter values. Excess values are obtained by finding the range of uncertain parameters that exceed product requirements.
 
 \citeauthor{Tackett2014} present an interesting perspective for computing capability and excess, however, they assume independence of the requirements from one another \cite{Tackett2014}. The example used in Chapter \ref{ch:TSEcont} shows that design problems could feature requirements that are dependant on multiple uncertain parameters. A change in one of the uncertain parameters could impact several requirements simultaneously. As a result, a linear combination of the excess values obtained by calculating the range of the parameters exceeding their respective requirements would overestimate the overall level of excess embedded in the design.
 
@@ -181,7 +181,7 @@ The need for scaling up the dimensionality of design problems in terms of number
 
 We summarize the methods reviewed for computing design margins in Table \ref{table:marginssummary} in terms of the dimensionality of the requirements considered and the numerical method used for calculating them. They are also compared to the methods used as part of our framework in Chapter \ref{ch:TSEcont}.
 
-Table \ref{table:marginssummary} shows that we present a novel method for quantifying and distinguishing the excess and buffer components of design margins. We use Monte Carlo integration to compute the size of the excess and buffer sets defined in a multi-dimensional parameter space.
+Table \ref{table:marginssummary} shows that we present a novel method for quantifying and distinguishing the excess and buffer components of design margins. We use Monte Carlo integration to compute the size of the excess and buffer sets defined in a multi-dimensional parameters space.
 
 In order to leverage the added design changeability enabled by strategically allocating design margins or scalability in product design, a set of equally changeable solutions is needed. We review the most recent advances in \ac{SBD} in the following section to use them as part of our frameworks.
 
@@ -197,7 +197,7 @@ In order to leverage the added design changeability enabled by strategically all
 	\begin{tabular}{lC{2.5cm}|C{\changeCW}C{\changeCW}C{\changeCW}C{\changeCW}C{\changeCW}|C{\mycontCW}C{\mycontCW}}
 	\hline\hline
 
-	\multicolumn{2}{c|}{ \multirow{2}{*}[-0.0pt]{\bf Feature} } & \multicolumn{6}{c}{\bf Contribution(s)} \\ \cline{3-9}
+	\multicolumn{2}{c|}{ \multirow{2}{*}[-0.0pt]{\bf Feature} } & \multicolumn{7}{c}{\bf Contribution(s)} \\ \cline{3-9}
 	 & & \cite{Tackett2014} & \cite{Cansler2016} & \cite{Rehn2018} & \cite{Cross2015} & \cite{Villanueva2014} & Chapter \ref{ch:scalableSBD} & Chapter \ref{ch:TSEcont} \\ \hline
 	%================================================================
 	\multirow{3}{*}[-0.0pt]{\bf Margins} & Excess & \cmark & \cmark & \cmark & ~ & ~ & ~ & \cmark \\
@@ -253,7 +253,7 @@ We classify the \ac{SBD} methods based on the set-based representation of the ob
 
 Finally, a number of techniques for narrowing down the set-based solution has been proposed. These techniques include Pareto set membership \cite{Olewnik2004,Miller2018}, optimality of a ranged set with respect to an objective function (design performance or flexibility) \cite{Hannapel2014,Liu2008,Suh2007}, and interval dominance for ranged sets \cite{Malak2009,Miller2018}.
 
-A summary of these findings are summarized in Table \ref{table:SBDsummary} with respect to the principles of set-based design established by \citeauthor{SobekIi1999} \cite{SobekIi1999}. Our contributions in Chapters \ref{ch:scalableSBD} and \ref{ch:TSEcont} are also compared against the most recent advances in \ac{SBD}.
+A summary of these findings is given in Table \ref{table:SBDsummary} with respect to the principles of set-based design established by \citeauthor{SobekIi1999} \cite{SobekIi1999}. Our contributions in Chapters \ref{ch:scalableSBD} and \ref{ch:TSEcont} are also compared against the most recent advances in \ac{SBD}.
 
 Table \ref{table:SBDsummary} shows that we address the limitation of using ranged sets to represents the solution set. We use response surfaces to identify set-based solutions in Chapter~\ref{ch:scalableSBD}. In Chapter~\ref{ch:TSEcont} we used a convex hull to represent our set-based solutions due to the finiteness and discreteness of the design space being considered. This is because the case study used in that chapter featured categorical and discrete design variables. However, as explained in Chapter~\ref{ch:conclusion} response surfaces should be used when adapting the methodology in Chapter~\ref{ch:TSEcont} for continuous or mixed variable problems.
 
@@ -272,13 +272,13 @@ Table \ref{table:SBDsummary} shows that we address the limitation of using range
 	\multicolumn{2}{c|}{ \multirow{2}{*}[-0.0pt]{\bf Features of reported sets} } & \multicolumn{13}{c}{\bf Contribution(s)} \\ \cline{3-15}
 	 & & \cite{Qureshi2014} & \cite{Nahm2005} & \cite{Olewnik2004} & \cite{Liu2008} & \cite{Gventer1999} & \cite{Kizer2014} & $\dagger$ & \cite{Miller2018} & \cite{Hannapel2014} & \cite{Suh2007} & \cite{Malak2009} & Chapter \ref{ch:scalableSBD} & Chapter \ref{ch:TSEcont} \\ \hline
 	%================================================================
-	\multirow{4}{*}[-0.0pt]{\bf Represenation} & Interval & \cmark & ~ & \cmark & \cmark & ~ & ~ & ~ & \cmark & \cmark & \cmark & \cmark & ~ & ~ \\
+	\multirow{4}{*}[-0.0pt]{\bf Set representation} & Interval & \cmark & ~ & \cmark & \cmark & ~ & ~ & ~ & \cmark & \cmark & \cmark & \cmark & ~ & ~ \\
 	 & Fuzzy set & ~ & \cmark & ~ & ~ & \cmark & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ \\
 	 & Convex hull & ~ & ~ & ~ & ~ & ~ & \cmark & ~ & ~ & ~ & ~ & ~ & ~ & \cmark \\
 	 & Metamodel & ~ & ~ & ~ & ~ & \cmark & ~ & \cmark & ~ & ~ & ~ & ~ & \cmark & ~ \\ \hline
 	%================================================================
-	\multirow{2}{*}[-0.0pt]{\bf Update ease} & resampling & \cmark & \cmark & \cmark & \cmark & ~ & \cmark & ~ & \cmark & \cmark & \cmark & \cmark & ~ & \cmark \\
-	 & no resampling & ~ & ~ & ~ & ~ & \cmark & ~ & \cmark & ~ & ~ & ~ & ~ & \cmark & ~ \\ 
+	\multirow{2}{*}[-0.0pt]{\bf Update ease} & Resampling & \cmark & \cmark & \cmark & \cmark & ~ & \cmark & ~ & \cmark & \cmark & \cmark & \cmark & ~ & \cmark \\
+	 & No resampling & ~ & ~ & ~ & ~ & \cmark & ~ & \cmark & ~ & ~ & ~ & ~ & \cmark & ~ \\ 
 	 \hline\hline
 	%================================================================
 	 & Pareto optimality & ~ & ~ & \cmark & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & ~ & \cmark \\
@@ -294,7 +294,7 @@ Table \ref{table:SBDsummary} shows that we address the limitation of using range
 	\footnote[2]{}\citeauthor{Shahan2012} \cite{Shahan2012}, \citeauthor{Yannou2003} \cite{Yannou2003}, \citeauthor{Ge2005} \cite{Ge2005}
 \end{table}
 
-Studies that utilize tradespace exploration will be reviewed in order to utilize the concepts presented as part of the framework in Chapter \ref{ch:TSEcont} for quantitatively comparing sets of design solutions.
+Studies that utilize tradespace exploration will be reviewed in order to quantitatively compare sets of design solutions in Chapter \ref{ch:TSEcont}. 
 
 %============================== TRADESPACE =============================%
 \section{The use of tradespace exploration for quantifying design margins and flexibility} 
@@ -308,7 +308,7 @@ Most studies focus on quantifying a robustness or resilience metric for use as a
 
 Furthermore, the design margin components reviewed in Section \ref{sec:margins} such as buffer and excess could be used as part of the multi-attribute function governing our tradespace exploration strategy since they impact robustness.
 
-The real utility of tradespace exploration lies in its ability to visualize and categorize designs into sets of solutions. \citeauthor{Viscito2009} use pareto optimality to extract flexible cost-efficient designs from the tradespace and plot a reduced tradespace to further analyze this reduced set \cite{Viscito2009}. \citeauthor{Small2019} categorize solutions into sets by allocating design solutions into bins based on the value of the decision variable governing each solution \cite{Small2019}. Combining tradespace exploration with a robustness metric as the utility while investigating flexibility via filtered outdegree should prove useful for helping designers understand the tradeoff between these design metrics.
+The real utility of tradespace exploration lies in its ability to visualize and categorize designs into sets of solutions. \citeauthor{Viscito2009} use Pareto optimality to extract flexible cost-efficient designs from the tradespace and plot a reduced tradespace to further analyze this reduced set \cite{Viscito2009}. \citeauthor{Small2019} categorize solutions into sets by allocating design solutions into bins based on the value of the decision variable governing each solution \cite{Small2019}. Combining tradespace exploration with a robustness metric as the utility while investigating flexibility via filtered outdegree should prove useful for helping designers understand the tradeoff between these design metrics.
 
 The gaps in the studies reviewed so far will be identified in order to position our contributions relative to the literature.
 
@@ -316,7 +316,7 @@ The gaps in the studies reviewed so far will be identified in order to position 
 \section{Research gaps and opportunities}
 \label{sec:bgsummary}
 
-The literature reviewed on this subject featured several studies that have attempted to quantify the aspects of changeability related to modifiability, robustness and scalability of the design. We narrow down these studies to those that report set-based solutions. Among those studies, several research gaps in the field are evident.
+The literature reviewed on this subject featured several studies that have attempted to quantify the aspects of changeability related to modifiability, robustness, and scalability of the design. We narrow down these studies to those that report set-based solutions. Among those studies, several research gaps in the field are evident.
 
 \begin{itemize}
 	\item None of the set-based representations featured a metamodel to represent the arbitrarily\-shaped solutions sets. Intervals where used for reporting set-based solutions.
@@ -328,15 +328,15 @@ We aim to address these research gaps in our first contribution. Our objective i
 
 We propose a systematic design space reduction methodology using optimization and response surfaces. An optimization problem is formulated to include parameters reflecting the requirements at the current stage of the product development process or its lifecycle. We then obtain a set of parametric optimal solutions to maximize the performance of the remanufactured products. 
 
-Since designers must commit to a solution eventually, it is important to consider the {changeability} of a product throughout its lifecycle and not just at the current stage to allow products to retain most of their economic value \cite{Fricke2005}. We therefore incorporate a scalability constraint in our \ac{SBD} methodology to further reduce our solutions set to readily changeable designs. The scalability constraint is evaluated in the requirements space since changeability and scalability by proxy are defined in the requirements space. The set of possible parameter values related to performance requirements are used as a proxy for the requirements space. We provide a mapping between the design space and the parameter space to transfer scalable designs identified in the parameter space back to the design space.
+Since designers must commit to a solution eventually, it is important to consider the {changeability} of a product throughout its lifecycle and not just at the current stage to allow products to retain most of their economic value \cite{Fricke2005}. We therefore incorporate a scalability constraint in our \ac{SBD} methodology to further reduce our solutions set to readily changeable designs. The scalability constraint is evaluated in the requirements space since changeability and scalability by proxy are defined in the requirements space. The set of possible parameter values related to performance requirements are used as a proxy for the requirements space. We provide a mapping between the design space and the parameters space to transfer scalable designs identified in the parameters space back to the design space.
 
 The proposed methodology is based on:
 \begin{itemize}
 	\item surrogates of the computational models for rapid evaluations during optimization,
 	\item numerical optimization for identifying the best performing feasible designs as for different design parameter values, i.e., a set of \textit{parametric} optimal designs,%. This is the first set-based solution.
-	\item response surfaces of the parametric optimal design solutions that provide a mapping of design solutions between the design and parameter spaces,
+	\item response surfaces of the parametric optimal design solutions that provide a mapping of design solutions between the design and parameters spaces,
 	\item sensitivity analysis of design variables with respect to design parameters,
-	\item a remanufacturing constraint based on the sensitivity of design variables to design parameters and manufacturing process capabilities that reduces the set of parametric optimal designs to a set of {scalable} optimal designs in the parameter space.
+	\item a remanufacturing constraint based on the sensitivity of design variables to design parameters and manufacturing process capabilities that reduces the set of parametric optimal designs to a set of {scalable} optimal designs in the parameters space.
 \end{itemize}
 
 %=======================================================================%
@@ -355,13 +355,13 @@ In our second contribution, we propose a methodology where we define the compone
 Our methodology features:
 %BulletList
 \begin{itemize}
-	\item a method for calculating design capability relative to a feasibility constraint in the uncertain parameter space using Monte Carlo integration,
+	\item a method for calculating design capability relative to a feasibility constraint in the uncertain parameters space using Monte Carlo integration,
 	\item requirements modelled using \aclp{PDF},
-	\item a method for computing buffer and excess relative to requirements in the parameter space using Monte Carlo integration,
+	\item a method for computing buffer and excess relative to requirements in the parameters space using Monte Carlo integration,
 	\item an epoch-era analysis for chaining multiple requirement \aclp{PDF} to generate requirement arcs,
 	\item a combinatorial optimization method for identifying a design arc that minimizes excess while satisfying reliability constraints for a corresponding requirement arc,
 	\item a Monte Carlo simulation tool for generating a set of optimal design arcs with respect to excess,
 	\item a tradespace for visualizing the set of optimal design arcs and positioning it relative to sets that maximize filtered outdegree (flexible design set) and sets that satisfy the largest number of requirement arcs without regards to minimizing excess (robust design sets).
 \end{itemize}
 
-In the following chapter, we describe the design problem that we use to demonstrate the efficacy of our frameworks. It is an industrial case study were we consider the remanufacturing of an aeroengine structural component that is subject to changing load requirements. The details of our contributions are outlined in the following chapters.
+In the following chapter, we describe the design problem that we use to demonstrate the efficacy of our frameworks. It is an industrial case study where we consider the remanufacturing of an aeroengine structural component that is subject to changing load requirements. The details of our contributions are outlined in the following chapters.

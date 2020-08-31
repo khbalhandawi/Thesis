@@ -27,11 +27,11 @@ Consider the optimization problem defined in Section \ref{subsec:SBDparametric} 
 
 where $\mathbb{E}_{\mathbf{P}}$ denotes the expectation with respect to the vector of random variables $\mathbf{P}$. $\hat{f}_{\mathbf{P}}(\mathbf{x})$ and $\hat{\mathbf{g}}_{\mathbf{P}}(\mathbf{x})$ denote the stochastic version of the surrogate models for the engineering design problem being solved.
 
-$\hat{f}_{\mathbf{P}}(\mathbf{x})$ and $\hat{\mathbf{g}}_{\mathbf{P}}(\mathbf{x})$ are obtained from their deterministic counterparts $\hat{f}(\mathbf{x};{\mathbf{p}})$ and $\hat{\mathbf{g}}(\mathbf{x};{\mathbf{p}})$ by randomly sampling the components of the parameter vector $\mathbf{p}$ from a joint \ac{PDF} $F_{\mathbf{X}}(\mathbf{p})$. In this chapter we use a uniform distribution for the joint \ac{PDF} although other distributions can be used depending on the problem.
+$\hat{f}_{\mathbf{P}}(\mathbf{x})$ and $\hat{\mathbf{g}}_{\mathbf{P}}(\mathbf{x})$ are obtained from their deterministic counterparts $\hat{f}(\mathbf{x};{\mathbf{p}})$ and $\hat{\mathbf{g}}(\mathbf{x};{\mathbf{p}})$ by randomly sampling the components of the parameters vector $\mathbf{p}$ from a joint \ac{PDF} $F_{\mathbf{X}}(\mathbf{p})$. In this chapter we use a uniform distribution for the joint \ac{PDF} although other distributions can be used depending on the problem.
 
 The optimization problem in Equation~(\ref{eq:STOoptproblem}) is solved via \texttt{StoMADS} to obtain a set of candidate solutions for the optimizer $\mathbf{X}^*=  \{ \mathbf{x}^*_1,\mathbf{x}^*_2,\ldots,\mathbf{x}^*_w \} $.
 
-We demonstrate the capabilities of \texttt{StoMADS} by solving a \ac{TRS} remanufacturing problem where uncertain parameters ae involved.
+We demonstrate the capabilities of \texttt{StoMADS} by solving a \ac{TRS} remanufacturing problem where uncertain parameters are involved.
 
 %========================= APPLICATION PROBLEM =======================%
 \section{Application problem} \label{sec:STOcasestudy}
@@ -51,7 +51,7 @@ We investigate the deposition of a circumferential stiffener on the outer casing
 
 The objective function is obtained from a surrogate model for the safety factor $\hat{n_{\textrm{safety}}}$ where the inputs are the stiffener dimensions $x_1,x_2,$ and $x_3$ and temperature loads $T_1,T_2,T_3,$ and $T_4$.
 
-The design variables for this problem govern the circumferential stiffener geometry (given by $x_1,x_2,$ and $x_3$). The uncertain parameters for this problem are the 4 temperature loads experienced by the \ac{TRS} ($T_1,T_2,T_3,$ and $T_4$). We extract the relevant design variables and parameters from Table~\ref{table:modelinputs} and list them in the tables below:
+The design variables for this problem govern the circumferential stiffener geometry (given by $x_1,x_2,$ and $x_3$). The uncertain parameters for this problem are the 4 temperature loads experienced by the \ac{TRS} ($T_1,T_2,T_3,$ and $T_4$). We extract the relevant design variables and parameters from Table~\ref{table:modelinputs} and list them in the tables below.
 
 
 \begin{table}[h!]
@@ -209,9 +209,9 @@ We will now summarize the implications of this approach for obtaining set-based 
 \section{Summary}
 \label{sec:stohasticoptsummary}
 
-This chapter presented an alternative strategy for solving parametric optimization problems. Rather than sampling the parameter space and solving the optimization problem for a given sample of parameter values, \texttt{StomMADS} can be used to directly obtain a set of solutions with an equivalent stochastic objective and constraint functions where the parameters are sampled from their respective random distributions.
+This chapter presented an alternative strategy for solving parametric optimization problems. Rather than sampling the parameters space and solving the optimization problem for a given sample of parameter values, \texttt{StomMADS} can be used to directly obtain a set of solutions with an equivalent stochastic objective and constraint functions where the parameters are sampled from their respective random distributions.
 
-The approach presented in this chapter can be used to improve Algorithms~\ref{algo:PODalgo} and \ref{algo:SBDOptalgo}. Solving the problem in Equation~(\ref{eq:STOoptproblem}) can substitute steps 1 through 8 in Algorithm~\ref{algo:PODalgo}. However, the solution to the problem in Equation~(\ref{eq:STOoptproblem}) only outputs the optimizer values in the design space. Corresponding parameter values cannot be obtained since they are intrinsic to the stochastic version of the objective and constraint functions. The set of optimizers and their corresponding parameter values are needed by Algorithm~\ref{algo:PODalgo} to construct a response surface in the parameter space.
+The approach presented in this chapter can be used to improve Algorithms~\ref{algo:PODalgo} and \ref{algo:SBDOptalgo}. Solving the problem in Equation~(\ref{eq:STOoptproblem}) can substitute steps 1 through 8 in Algorithm~\ref{algo:PODalgo}. However, the solution to the problem in Equation~(\ref{eq:STOoptproblem}) only outputs the optimizer values in the design space. Corresponding parameter values cannot be obtained since they are intrinsic to the stochastic version of the objective and constraint functions. The set of optimizers and their corresponding parameter values are needed by Algorithm~\ref{algo:PODalgo} to construct a response surface in the parameters space.
 
 However, the approach in this chapter can substitute steps 3 through 5 within Algorithm \ref{algo:SBDOptalgo} by randomly selecting requirement arcs from $\Omega_R$ in the stochastic version of the problem. The requirement arc corresponding to each solution in $S_{E}^*$ is not needed since only the frequency of the design arcs is needed to isolate the set-based solution.
 

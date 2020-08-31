@@ -10,22 +10,22 @@ This chapter describes a novel design tool for identifying a set of scalable des
 
 The methodology in this chapter is demonstrated using an industrial case study for the remanufacturing of a \ac{TRS}. The thermomechanical model described in Section~\ref{sec:thermomech} along with the load case in Section~\ref{subsec:iploadcase} is used to define the design variables and uncertain parameters involved in the remanufacturing design problem. Remanufacturing is performed by \ac{AM} using laser \ac{DED}. However, our methodology can be extended to remanufacturing problems where subtractive manufacturing is used.
 
-We begin by defining the methodology for obtaining the set-based solutions for arbitrary design and parameter spaces in Section~\ref{sec:SBDmethods}. We then demonstrate the methodology for the remanufacturing of the \ac{TRS} in Section~\ref{sec:SBDusecase}. We provide some insights and conclusions about the uses and limitations of the developed framework in Section~\ref{sec:scalableSBDsummary}.
+We begin by defining the methodology for obtaining the set-based solutions for arbitrary design and parameters spaces in Section~\ref{sec:SBDmethods}. We then demonstrate the methodology for the remanufacturing of the \ac{TRS} in Section~\ref{sec:SBDusecase}. We provide some insights and conclusions about the uses and limitations of the developed framework in Section~\ref{sec:scalableSBDsummary}.
 
 %============================ METHODOLOGY ============================%
 \section{Methodology} \label{sec:SBDmethods}
 
-Engineering design optimization problems involve decision variables $\mathbf{x}  \in \mathbb{R}^n$ and design parameters ${\mathbf{p}}  \in \mathbb{R}^m$. Objective (${f}(\mathbf{x};\mathbf{p})$) and constraint ($\mathbf{g}(\mathbf{x};\mathbf{p})$) functions are used to reflect design requirements. Given bounded design optimization variables and parameters $\mathbf{L} \leq \mathbf{x} \leq \mathbf{U}$ and $\mathbf{L}_p \leq \mathbf{p} \leq \mathbf{U}_p$, respectively, we define the design space $\mathit{D}$ and the parameter space $\mathit{P}$. We also consider constraint sets $\mathit{C}_u$ for $u = 1,2,\ldots,q$ where $q$ is the number of constraints. In a product design context, constraints are part of the design requirements and are driven by the parameters $\mathbf{p}$. Finally, the feasible set $\mathit{F}$ is defined as the intersection of all constraint sets and contains designs that meet all design requirements. The set $\mathit{F}$ is the \ac{FDS} and represents the outcome of \ac{SBD} before elimination of potential designs. 
+Engineering design optimization problems involve decision variables $\mathbf{x}  \in \mathbb{R}^n$ and design parameters ${\mathbf{p}}  \in \mathbb{R}^m$. Objective (${f}(\mathbf{x};\mathbf{p})$) and constraint ($\mathbf{g}(\mathbf{x};\mathbf{p})$) functions are used to reflect design requirements. Given bounded design optimization variables and parameters $\mathbf{L} \leq \mathbf{x} \leq \mathbf{U}$ and $\mathbf{L}_p \leq \mathbf{p} \leq \mathbf{U}_p$, respectively, we define the design space $\mathit{D}$ and the parameters space $\mathit{P}$. We also consider constraint sets $\mathit{C}_u$ for $u = 1,2,\ldots,q$ where $q$ is the number of constraints. In a product design context, constraints are part of the design requirements and are driven by the parameters $\mathbf{p}$. Finally, the feasible set $\mathit{F}$ is defined as the intersection of all constraint sets and contains designs that meet all design requirements. The set $\mathit{F}$ is the \ac{FDS} and represents the outcome of \ac{SBD} before elimination of potential designs. 
 
-Design parameters may affect the optimal solution of the optimization problem due to their influence on design requirements. As a result, designs that are optimal throughout the parameter space $\mathit{P}$ and satisfy the design requirements comprise the set of parametric optimal designs which is a reduction of the \ac{FDS}. Since practical \ac{SBD} methodolog\-ies require solutions sets that can be easily communicated across design teams, response surfaces are used as a surrogate model to evaluate feasibility and performance and to classify membership of each design to the feasible set and the set of parametric optimal designs. 
+Design parameters may affect the optimal solution of the optimization problem due to their influence on design requirements. As a result, designs that are optimal throughout the parameters space $\mathit{P}$ and satisfy the design requirements comprise the set of parametric optimal designs which is a reduction of the \ac{FDS}. Since practical \ac{SBD} methodolog\-ies require solutions sets that can be easily communicated across design teams, response surfaces are used as a surrogate model to evaluate feasibility and performance and to classify membership of each design to the feasible set and the set of parametric optimal designs. 
 
 % --------------------------- Surrogate modeling ------------------------------ %
 \subsection{Surrogate modeling} \label{subsec:RSM}
 
 The objective and constraint functions used to represent design requirements are evaluated using computer-aided engineering (CAE) tools that model the repair/remanufacturing process.  
-These computational models are computationally expensive. Any SBD methodology requires a large number of function evaluations to investigate not only the design but also the parameter space. Therefore, we resort to building less expensive response surfaces to be used as surrogate models.
+These computational models are computationally expensive. Any SBD methodology requires a large number of function evaluations to investigate not only the design but also the parameters space. Therefore, we resort to building less expensive response surfaces to be used as surrogate models.
 
-We conduct designs of experiments to sample the aggregate design and parameter spaces and then exercise the computational models at these sample points to generate adequate training data. An ensemble of surrogate models is then constructed and denoted by $\hat{f}(\mathbf{x};{\mathbf{p}})$ and $\hat{\mathbf{g}}(\mathbf{x};{\mathbf{p}})$. An open source surrogate model library is used to build the surrogates \cite{Talgorn2018,Lophaven2002}.
+We conduct designs of experiments to sample the aggregate design and parameters spaces and then exercise the computational models at these sample points to generate adequate training data. An ensemble of surrogate models is then constructed and denoted by $\hat{f}(\mathbf{x};{\mathbf{p}})$ and $\hat{\mathbf{g}}(\mathbf{x};{\mathbf{p}})$. An open source surrogate model library is used to build the surrogates \cite{Talgorn2018,Lophaven2002}.
 
 An order-based metric is used to assess the predictive capability of the surrogates \cite{Audet2018}. This metric ensures the consistency between the computationally expensive and surrogate model predictions. The order-based metric is also used for constructing response surfaces of the parametric optimal solutions with respect to varying design parameters in subsequent sections and is discussed using a numerical example in Section~\ref{subsec:numex}.
 % is a measure of how well the ordering of function values throughout the analysis model agrees with that of the \ac{SM}. If this condition is observed in the response surface \ac{SM}, the solution to the minimization problem of the analysis model $f(\mathbf{x})$ and the surrogate model $\hat{f}(\mathbf{x})$ should be consistent. The conditions can be stated as follows and are adopted from \cite{Audet2018}:
@@ -52,7 +52,7 @@ The surrogate optimization problem is formulated as
 	\end{aligned}
 	\label{eq:SBDoptproblem}
 \end{equation}
-and solved to obtain the solution $\mathbf{x}^*({\mathbf{p}})$. Given intervals for the parameters $\mathbf{p}$, sampling techniques can be used to obtain a set of $m$ combinations. Here, we use \ac{LH} sampling which produces a uniform random distribution over the parameter space \cite{McKay1979}
+and solved to obtain the solution $\mathbf{x}^*({\mathbf{p}})$. Given intervals for the parameters $\mathbf{p}$, sampling techniques can be used to obtain a set of $m$ combinations. Here, we use \ac{LH} sampling which produces a uniform random distribution over the parameters space \cite{McKay1979}
 \begin{equation}
 	 {\mathbf{P}} = \begin{bmatrix}
 	 	\mathbf{p}_{1}^{\text T} \\ 
@@ -67,7 +67,7 @@ and solved to obtain the solution $\mathbf{x}^*({\mathbf{p}})$. Given intervals 
 	\end{bmatrix}.
 \end{equation}
 
-\ac{LH} sampling is used since the number of samples needed to fit an adequate response surface scales better with dimensionality relative to uniform sampling techniques such as full factorial sampling. Once we have obtained a solution $\mathbf{x}^*({\mathbf{p}})$ for each of the $w$ parameter vectors, a response surface $\hat{\mathbf{x}^*}(\mathbf{p})$ is built using the set of parametric optimal designs $\mathbf{X}^*=  \{ \mathbf{x}^*(\mathbf{p}_1),\mathbf{x}^*(\mathbf{p}_2),\ldots,\mathbf{x}^*(\mathbf{p}_w) \}$. A rule of thumb indicates that the initial sample size should be about an order of magnitude larger than the dimensionality of the problem, i.e., $w \approx 10m$) \cite{Loeppky2008}. To potentially save computational cost, we also monitor the convergence rate of the order-based error as more samples are added and accept the response surface as adequate once it has reached an appropriate threshold. An example of this procedure is provided in Section~\ref{subsec:numex}. The response surface $\hat{\mathbf{x}^*}(\mathbf{p)}$ is used to predict parametric optimal designs throughout the parameter space.
+\ac{LH} sampling is used since the number of samples needed to fit an adequate response surface scales better with dimensionality relative to uniform sampling techniques such as full factorial sampling. Once we have obtained a solution $\mathbf{x}^*({\mathbf{p}})$ for each of the $w$ parameter vectors, a response surface $\hat{\mathbf{x}^*}(\mathbf{p})$ is built using the set of parametric optimal designs $\mathbf{X}^*=  \{ \mathbf{x}^*(\mathbf{p}_1),\mathbf{x}^*(\mathbf{p}_2),\ldots,\mathbf{x}^*(\mathbf{p}_w) \}$. A rule of thumb indicates that the initial sample size should be about an order of magnitude larger than the dimensionality of the problem, i.e., $w \approx 10m$) \cite{Loeppky2008}. To potentially save computational cost, we also monitor the convergence rate of the order-based error as more samples are added and accept the response surface as adequate once it has reached an appropriate threshold. An example of this procedure is provided in Section~\ref{subsec:numex}. The response surface $\hat{\mathbf{x}^*}(\mathbf{p)}$ is used to predict parametric optimal designs throughout the parameters space.
 
 Sensitivity gradients of the design variables with respect to the parameters allow designers to understand the effect of requirement changes to optimal designs.
 The Jacobian of $\hat{\mathbf{x}^*}(\mathbf{p})$ is
@@ -89,7 +89,7 @@ It can be estimated using the derivatives of the basis functions used to constru
 
 For the remainder of this subsection, let us use the typical notation between an independent variable $x$ and a dependent variable $y$ recalling however, that in our context $\hat{\mathbf{x}^*}(\mathbf{p})$ is corresponding to $y$ (dependent variable) while $\mathbf{p}$ is corresponding to $x$ (independent variable).
 
-\ac{KS} models consist of a weighted sum of training points where the weight for each training point decreases as the distance from the prediction point increases:
+\ac{KS} models consist of a weighted sum of training points where the weight for each training point decreases as the distance from the prediction point increases.
 \begin{multline}
  \label{eq:ksexpansion}
 	\hat{y}(\mathbf{x}) = \dfrac{\sum_{j=1}^{w} \phi_j(\mathbf{x})y_j}{\sum_{j=1}^{k} \phi_j(\mathbf{x})} =
@@ -126,14 +126,14 @@ We used the Gaussian kernel function (and its gradient ) defined as
 \end{gather}
 where $\lambda$ is the bandwidth of the kernel function. The bandwidth parameter's effect on the order-based error is also used to determine the optimal bandwidth for adequately capturing the Jacobian of the \ac{KS} model.
 
-Equations~(\ref{eq:kernelfunction}) and (\ref{eq:kernelfunctiongrad}) are substituted into Equation~(\ref{eq:jacobiancomponent}) to provide the gradient of the prediction function $\hat{y}(\mathbf{x})$. This process is repeated for each of the design variables $\hat{x_1^*}(\mathbf{p}), \hat{x_2^*}(\mathbf{p}), \cdots \hat{x_n^*}(\mathbf{p})$ to populate the Jacobian in Equation~(\ref{eq:jacobian}). The Jacobian is used to formulate a transition rule in the parameter space to obtain the set of scalable optimal designs.
+Equations~(\ref{eq:kernelfunction}) and (\ref{eq:kernelfunctiongrad}) are substituted into Equation~(\ref{eq:jacobiancomponent}) to provide the gradient of the prediction function $\hat{y}(\mathbf{x})$. This process is repeated for each of the design variables $\hat{x_1^*}(\mathbf{p}), \hat{x_2^*}(\mathbf{p}), \cdots \hat{x_n^*}(\mathbf{p})$ to populate the Jacobian in Equation~(\ref{eq:jacobian}). The Jacobian is used to formulate a transition rule in the parameters space to obtain the set of scalable optimal designs.
 
-Algorithm~\ref{algo:PODalgo} presents the methodology followed to obtain the set of parametric optimal designs. The procedure including the calculcation of the order-based error is demonstrated by means of a numerical example in Section~\ref{subsec:numex}.
+Algorithm~\ref{algo:PODalgo} presents the methodology followed to obtain the set of parametric optimal designs. The procedure including the calculation of the order-based error is demonstrated by means of a numerical example in Section~\ref{subsec:numex}.
 
 \begin{algorithm}
 	\DontPrintSemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
 	\KwIn{
-		Design space bounds $\mathbf{L}$ and $\mathbf{U}$, Parameter space bounds $\mathbf{L}_p$ and $\mathbf{U}_p$, Surrogate model $\hat{f}(\mathbf{x};{\mathbf{p}})$ and $\hat{\mathbf{g}}(\mathbf{x};{\mathbf{p}})$, \ac{LH} samples of parameter space $\left[\mathbf{p}_{1},\mathbf{p}_{2}, \cdots, \mathbf{p}_{w}\right]^{\text T}$, number of cross-validation samples $n_{cv}$, \ac{LH} cross-validation set $\mathbf{X_{cv}}^*=  \{ \mathbf{x}^*(\mathbf{p}_1),\mathbf{x}^*(\mathbf{p}_2),\ldots,\mathbf{x}^*(\mathbf{p}_{n_{cv}}) \}$
+		Design space bounds $\mathbf{L}$ and $\mathbf{U}$, Parameters space bounds $\mathbf{L}_p$ and $\mathbf{U}_p$, Surrogate model $\hat{f}(\mathbf{x};{\mathbf{p}})$ and $\hat{\mathbf{g}}(\mathbf{x};{\mathbf{p}})$, \ac{LH} samples of parameters space $\left[\mathbf{p}_{1},\mathbf{p}_{2}, \cdots, \mathbf{p}_{w}\right]^{\text T}$, number of cross-validation samples $n_{cv}$, \ac{LH} cross-validation set $\mathbf{X_{cv}}^*=  \{ \mathbf{x}^*(\mathbf{p}_1),\mathbf{x}^*(\mathbf{p}_2),\ldots,\mathbf{x}^*(\mathbf{p}_{n_{cv}}) \}$
 	}
 	\KwOut{$\mathbf{X}^*$, $\hat{\mathbf{x}^*}(\mathbf{p})$, $\nabla\hat{\mathbf{x}^*}(\mathbf{p})$}
 	\For{$k \gets 1$ to $w$} {
@@ -142,7 +142,7 @@ Algorithm~\ref{algo:PODalgo} presents the methodology followed to obtain the set
 		Solve the parametric optimization problem in Equation~(\ref{eq:SBDoptproblem}) to obtain $\mathbf{x}^*(\mathbf{p}_k)$\;
 		Augment $\mathbf{X}^* \gets \mathbf{X}^* \cup \{ \mathbf{x}^*(\mathbf{p}_k) \} $\;
 		Train response surface $\hat{\mathbf{x}^*}(\mathbf{p})$ using $\mathbf{X}^*$\;
-		Compute order-based error for $k$th sample $\varepsilon_{OE}$ using Equation~(\ref{eq:oeobjective}), $\hat{\mathbf{x}^*}(\mathbf{p})$, and $\mathbf{X_{cv}}^*$\;
+		Compute order-based error up to and including $k$th sample $\varepsilon_{OE}$ using Equation~(\ref{eq:oeobjective}), $\hat{\mathbf{x}^*}(\mathbf{p})$, and $\mathbf{X_{cv}}^*$\;
 	}
 	Find index $k_{\textrm{min}}$ that minimizes order-based error $\varepsilon_{OE}$\;
 	Set $k \gets k_{\textrm{min}} $ \;
@@ -150,7 +150,7 @@ Algorithm~\ref{algo:PODalgo} presents the methodology followed to obtain the set
 	Train response surface $\hat{\mathbf{x}^*}(\mathbf{p})$ using $\mathbf{X}^*$ \;
 	Find bandwidth $\lambda$ that minimizes order-based error of response surface $\hat{\mathbf{x}^*}(\mathbf{p})$\;
 	Compute Jacobian of response surface $\nabla\hat{{x}^*}(\mathbf{p)}$ using Equation~(\ref{eq:jacobiancomponent})\;
-	\caption{Pseudo-algorithm for obtaining the set of parametric optimal designs $\mathbf{X}^*$ and \ac{KS} response surface of parameter space $\hat{{x}^*}(\mathbf{p})$}
+	\caption{Pseudo-algorithm for obtaining the set of parametric optimal designs $\mathbf{X}^*$ and \ac{KS} response surface of parameters space $\hat{{x}^*}(\mathbf{p})$}
 	\label{algo:PODalgo}
 \end{algorithm}
 
@@ -208,22 +208,22 @@ Every element of the resulting matrix must be greater than or equal to zero in o
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.4\textwidth]{5a_parameter_demo_ge0}
-	\caption{Isocontours of the response surface ${x_1}^*(\mathbf{p})$ and transition rule $\mathbf{N}~\mathbf{J}^{\text T}(\mathbf{p})\mathbf{M} \ge \mathbf{0}$ in a two-dimensional parameter space}
+	\caption{Isocontours of the response surface ${x_1}^*(\mathbf{p})$ and transition rule $\mathbf{N}~\mathbf{J}^{\text T}(\mathbf{p})\mathbf{M} \ge \mathbf{0}$ in a two-dimensional parameters space}
 	\label{fig:contourdemo}
 \end{figure}
 
-To illustrate Equation~(\ref{eq:transitionrulematrix}), a two-dimensional parameter space example is shown in Figure~\ref{fig:contourdemo}. 
+To illustrate Equation~(\ref{eq:transitionrulematrix}), a two-dimensional parameters space example is shown in Figure~\ref{fig:contourdemo}. 
 
-The change agent vector $\mathbf{n}$ describes a quadrant (or hyper-octant in higher dimensions) in the parameter space that should contain the gradient vector $\nabla\hat{\mathbf{x}^*}(\mathbf{p})$. The sign of the gradient vector is modified by the monotonicity vector $\mathbf{m}$. Figure~\ref{fig:contourdemo} shows an example when $m_l\nabla\hat{{x_1}^*}(\mathbf{p}) \ge 0$ and lies within the quadrant defined by $\mathbf{n}$. Designs within the change agent quadrant and having gradients leading to an increase in their value are considered scalable.
+The change agent vector $\mathbf{n}$ describes a quadrant (or hyper-octant in higher dimensions) in the parameters space that should contain the gradient vector $\nabla\hat{\mathbf{x}^*}(\mathbf{p})$. The sign of the gradient vector is modified by the monotonicity vector $\mathbf{m}$. Figure~\ref{fig:contourdemo} shows an example when $m_l\nabla\hat{{x_1}^*}(\mathbf{p}) \ge 0$ and lies within the quadrant defined by $\mathbf{n}$. Designs within the change agent quadrant and having gradients leading to an increase in their value are considered scalable.
 
-In order to map scalable designs from the parameter space to the design space, the design space is resampled randomly and the transition rule (Equation~(\ref{eq:transitionrulematrix})) is checked for every sample $\mathbf{p}_o$. If $\mathbf{N}~\mathbf{J}^{\text T}(\mathbf{p}_o)\mathbf{M} \ge \mathbf{0}$ is satisfied then the corresponding design $\hat{\mathbf{x}^*}(\mathbf{p}_o)$ is retrieved and appended to a set of scalable solutions $\mathbf{X}_s$.
+In order to map scalable designs from the parameters space to the design space, the design space is resampled randomly and the transition rule (Equation~(\ref{eq:transitionrulematrix})) is checked for every sample $\mathbf{p}_o$. If $\mathbf{N}~\mathbf{J}^{\text T}(\mathbf{p}_o)\mathbf{M} \ge \mathbf{0}$ is satisfied then the corresponding design $\hat{\mathbf{x}^*}(\mathbf{p}_o)$ is retrieved and appended to a set of scalable solutions $\mathbf{X}_s$.
 
 The procedure for obtaining the set of scalable optimal solutions is presented in Algorithm~\ref{algo:SODalgo}.
 
 \begin{algorithm}
 	\DontPrintSemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
 	\KwIn{
-		Parameter space bounds $\mathbf{L}_p$ and $\mathbf{U}_p$, \ac{KS} response surface of parameter space $\hat{\mathbf{x}^*}(\mathbf{p})$, Jacobian of parameter space $\nabla\hat{\mathbf{x}^*}(\mathbf{p})$, Monotonicity matrix $\mathbf{M}$, Change agent matrix $\mathbf{N}$, \ac{LH} samples of parameter space $\left[\mathbf{p}_{1},\mathbf{p}_{2}, \cdots, \mathbf{p}_{o}\right]^{\text T}$
+		Parameter space bounds $\mathbf{L}_p$ and $\mathbf{U}_p$, \ac{KS} response surface of parameters space $\hat{\mathbf{x}^*}(\mathbf{p})$, Jacobian of parameters space $\nabla\hat{\mathbf{x}^*}(\mathbf{p})$, Monotonicity matrix $\mathbf{M}$, Change agent matrix $\mathbf{N}$, \ac{LH} samples of parameters space $\left[\mathbf{p}_{1},\mathbf{p}_{2}, \cdots, \mathbf{p}_{o}\right]^{\text T}$
 	}
 	\KwOut{$\mathbf{X}_s$}		
 	\For{$k \gets 1$ to $o$} {
@@ -231,7 +231,7 @@ The procedure for obtaining the set of scalable optimal solutions is presented i
 		%				Update the RAM using built SM\;
 
 		\If{$\mathbf{N}~\mathbf{J}^{\text T}(\mathbf{p}_k)\mathbf{M} \ge \mathbf{0}$} {
-			Find design variables corresponding to parameter sample using response surface $\mathbf{x}^*(\mathbf{p}_k) = \hat{\mathbf{x}^*}(\mathbf{p_k})$\;
+			Find design variables corresponding to parameters sample using response surface $\mathbf{x}^*(\mathbf{p}_k) = \hat{\mathbf{x}^*}(\mathbf{p_k})$\;
 			Augment $\mathbf{X}_s \gets \mathbf{X}_s \cup \{ \mathbf{x}^*(\mathbf{p}_k) \} $\;
 		}
 		\Else{
@@ -257,7 +257,7 @@ The procedure for obtaining the set of scalable optimal solutions is presented i
 	\centering
 	\subfloat[Test function \label{fig:testfunanalytical}]{\includegraphics[width=0.4\textwidth]{test_problem}} \hspace{0.07\textwidth}%
 	\subfloat[\ac{KS} approximation \label{fig:testfunKS}]{\includegraphics[width=0.4\textwidth]{test_problem_KS}}	
-	\caption{Approximation of scalable set using \ac{KS} with non-scalable regions of the parameter space hatched}
+	\caption{Approximation of scalable set using \ac{KS} with non-scalable regions of the parameters space hatched}
 	\label{fig:testfun}
 \end{figure*}
 
@@ -292,12 +292,12 @@ where $n_{cv}$ is the number of validation points. The function $\theta$ is defi
 \end{equation}
 %
 where xor is the logical \textit{exclusive or} operator.
-Figure~\ref{fig:HPeffect} shows the effect of the number of training points ($n_{samples}$) and the bandwidth ($\lambda$) on the cross validation and order-based errors.
+Figure~\ref{fig:HPeffect} shows the effect of the number of training points ($n_{\textrm{samples}}$) and the bandwidth ($\lambda$) on the cross validation and order-based errors.
 
-It can be seen that there is a unique combination of $n_{samples}$ and $\lambda$ that yield the best response surface for assessing scalability in the parameter space. The true and estimated scalable sets are shown in Figure~\ref{fig:testfun}. The \ac{KS} model used for the estimation is trained using 2305 training samples and a bandwidth of $\lambda = 0.054$.
+It can be seen that there is a unique combination of $n_{\textrm{samples}}$ and $\lambda$ that yield the best response surface for assessing scalability in the parameters space. The true and estimated scalable sets are shown in Figure~\ref{fig:testfun}. The \ac{KS} model used for the estimation is trained using 2305 training samples and a bandwidth of $\lambda = 0.054$.
 Figure~\ref{fig:testfun} shows that \ac{KS} is capable of capturing the scalable set despite underestimating the magnitude of the test function. Figure~\ref{fig:HPeffect} shows that the order-based error is a good indication of the prediction accuracy of the \ac{KS} model for the scalable set. As a result, the \ac{KS} parameters and number of training points can be determined by minimizing the order-based error.
 
-In summary, the proposed methodology consists of two design filters that determine a set of scalable optimal designs to be considered for further development. The first filter retains designs that dominate in terms of performance throughout the parameter space (set of parametric optimal designs $\mathbf{X}^*$). The second filter retains designs that are scalable by remanufacturing (scalable design set $\mathbf{X}_s$). The number of samples for the \ac{KS} response surface is chosen such that the order-based error is minimized with respect to a validation set. The methods developed in this section are now applied to an industrial case study.
+In summary, the proposed methodology consists of two design filters that determine a set of scalable optimal designs to be considered for further development. The first filter retains designs that dominate in terms of performance throughout the parameters space (set of parametric optimal designs $\mathbf{X}^*$). The second filter retains designs that are scalable by remanufacturing (scalable design set $\mathbf{X}_s$). The number of samples for the \ac{KS} response surface is chosen such that the order-based error is minimized with respect to a validation set. The methods developed in this section are now applied to an industrial case study.
 
 The proposed methodology, is presented as a flow diagram in Figure~\ref{fig:SBDmethods}
 
@@ -379,12 +379,12 @@ where $n_{\textrm{safety}}$ is the safety factor against low cycle fatigue or fi
 % --------------------------- Design space reduction to parametric optimal design set ------------------------------ %
 \subsection{Parametric optimal design results} \label{subsec:reduceddesignspace}
 
-The design optimization problem in Equation~(\ref{eq:SBCEopt}) is solved using the \ac{MADS} algorithm. We use the \texttt{OrthoMADS} implementation provided by the \texttt{NOMAD} algorithm \cite{LeDigabel2011}. The termination criterion for \ac{MADS} was the minimum mesh size (defined by Audet and Dennis \cite{Audet2006a}) reached in the virtually discretized design variable space. Non-opportunistic latin hypercube search was used during the search step. A progressive barrier approach was used for handling constraints. This choice of algorithm is motivated by the possible non-existence of gradients or the inability to approximate them with reasonable computational cost and warranted due to its rigorous convergence properties.
+The design optimization problem in Equation~(\ref{eq:SBCEopt}) is solved using the \ac{MADS} algorithm. We use the \texttt{OrthoMADS} implementation provided by the \texttt{NOMAD} algorithm \cite{LeDigabel2011}. The termination criterion for \ac{MADS} was the minimum mesh size (defined by Audet and Dennis \cite{Audet2006a}) reached in the virtually discretized design variable space. Non-opportunistic latin hypercube search was used during the search step. A progressive barrier approach was used for handling constraints \cite{Audet2009}. This choice of algorithm is motivated by the possible non-existence of gradients or the inability to approximate them with reasonable computational cost and warranted due to its rigorous convergence properties.
 
 As described earlier, \acp{LH} are used to sample the design and parameters spaces defined by the bounds and ranges of the design variables and parameters, respectively (see Tables 
 ~\ref{table:SBDvariables} and \ref{table:SBDparametervar}).
 
-For our numerical investigations, the design optimization problem is solved for 1200 \ac{LH} samples of the parameter space to obtain a set of parametric optimal design solutions. Up to 900 samples are used as a training set for the \ac{KS} model, while the remaining 300 are reserved for use as a validation set to check the order-based error.
+For our numerical investigations, the design optimization problem is solved for 1200 \ac{LH} samples of the parameters space to obtain a set of parametric optimal design solutions. Up to 900 samples are used as a training set for the \ac{KS} model, while the remaining 300 are reserved for use as a validation set to check the order-based error.
 
 The effect of the parameters on the optimizer is illustrated by 3 sample results shown in Figure~\ref{fig:SBD1sens2P1} (see Table~\ref{table:optresults}).
 
@@ -422,18 +422,18 @@ $f(\mathbf{x}^*)$ & - & \multicolumn{3}{c|}{-11} & \multicolumn{3}{c|}{-11} & \m
 \end{tabular}
 \end{table*}
 These 3 samples have been chosen to include one interior optimal design (Figure~\ref{fig:9a}), one boundary optimal design with one active constraint ((Figure~\ref{fig:9b}), and one boundary optimal design with two active constraints (Figure~\ref{fig:9c}).
-The optimizers obtained by sampling the parameter space are used to construct a convex hull to quantify the size of the set of parametric optimal designs. The \texttt{qhull} algorithm was used to construct the 4-dimensional polygon (polytope) characterizing the convex hull \cite{Barber2002}.
+The optimizers obtained by sampling the parameters space are used to construct a convex hull to quantify the size of the set of parametric optimal designs. The \texttt{qhull} algorithm was used to construct the 4-dimensional polygon (polytope) characterizing the convex hull \cite{Barber2002}.
 
 % --------------------------- Scalable Design Space ------------------------------ %
 \subsection{Scalable optimal design results} \label{subsec:scalabledesignspace}
 
 Of the 900 parametric optimal designs obtained by solving the optimization problem for different parameter values, 592 samples were used to construct a response surface that can predict a parametric optimal design for other parameter values. As explained in Section~\ref{subsec:numex} the order-based error relative to a validation set was minimized to determine the number of training samples. The kernel bandwidth ($\lambda$) was determined to be 0.71. This result is shown in Figure~\ref{fig:HPeffectSBD}.
 
-Designs meeting scalability requirements in the parameter space are identified using the scalability constraint in Section~\ref{subsec:SBDfAM}. The monotonicity vector is defined as $\mathbf{m} = [0~1~1~0]^{\text T}$ for the variables in Table~\ref{table:SBDvariables}. The {change agent} vector is defined as $\mathbf{n} = [1~-1~-1]^{\text T}$. As an illustrative example, the two-dimensional projections of the parameter space for the optimal width design variable are depicted in Figure~\ref{fig:parameterspacescaled}.
+Designs meeting scalability requirements in the parameters space are identified using the scalability constraint in Section~\ref{subsec:SBDfAM}. The monotonicity vector is defined as $\mathbf{m} = [0~1~1~0]^{\text T}$ for the variables in Table~\ref{table:SBDvariables}. The {change agent} vector is defined as $\mathbf{n} = [1~-1~-1]^{\text T}$. As an illustrative example, the two-dimensional projections of the parameters space for the optimal width design variable are depicted in Figure~\ref{fig:parameterspacescaled}.
 \begin{figure*}%[t]
 	\centering
 	\includegraphics[width=1\textwidth]{12_parameter_space_scaled_V2.pdf} %12_parameter_space_scaled.pdf
-	\caption{ \label{fig:parameterspacescaled} Projections of the optimal width design variable $\hat{x_3}^{*}$ with non-scalable regions of the parameter space hatched}
+	\caption{ \label{fig:parameterspacescaled} Projections of the optimal width design variable $\hat{x_3}^{*}$ with non-scalable regions of the parameters space hatched}
 \end{figure*}
 \begin{figure*}[h!]
 	\centering
@@ -443,7 +443,7 @@ Designs meeting scalability requirements in the parameter space are identified u
 	\label{fig:HPeffectSBD}
 \end{figure*}
 
-The scalability transition rule results in pockets within the parameter space that can be mapped back to design space by evaluating the optimizer response surface within these pockets. The parameter space is sampled using a full factorial grid and designs meeting the scalability constraint are tabulated and projected on the design space in Figure~\ref{fig:FullM}.
+The scalability transition rule results in pockets within the parameters space that can be mapped back to design space by evaluating the optimizer response surface within these pockets. The parameters space is sampled using a full factorial grid and designs meeting the scalability constraint are tabulated and projected on the design space in Figure~\ref{fig:FullM}.
 \begin{figure*}[h!]
 	\centering
 	\subfloat[$\mathbf{m} = [0~1~1~0{]}^{\text T}$, $\mathbf{n} = [1~-1~-1{]}^{\text T}$ \label{fig:FullM}]{\includegraphics[width=1\textwidth]{8_design_space_V3.pdf}}\\
@@ -461,7 +461,7 @@ Adhering to scalability constraints allows designers the flexibility to scale de
 % --------------------------- Design space variability ------------------------------ %
 \subsection{Design set variability and comparison} \label{subsec:dspacevar}
 
-Having generated the feasible design set, the set of parametric optimal design, and the set of scalable optimal designs for the \ac{TRS} remanufacturing problem, some comparisons can be made.
+Having generated the feasible design set, the set of parametric optimal designs, and the set of scalable optimal designs for the \ac{TRS} remanufacturing problem, some comparisons can be made.
 Several metrics exist in the literature for comparing the variability of a design solution set generated by parametric optimal design tools such as those formulated in this thesis. The volume of the convex hull provides a good perception of design variability provided that there are sufficient points to construct the polytope characterizing the convex hull \cite{Brown2019}. The convex hull volume was used to compare the reduction in the design sets as our methodology was applied to the \ac{TRS} problem. The lower and upper bounds (LB and UB, respectively) of the ranged set containing each solution set are also found. They are used to compute the volume of the bounding hyper-rectangle. The hyper-rectangle volume provides a benchmark against the ranged set representation used for previous \ac{SBD} studies \cite{Qureshi2014, Nahm2005, Olewnik2004,Liu2008,Suh2007}.
 
 % Case with one active variable
@@ -489,7 +489,7 @@ Several metrics exist in the literature for comparing the variability of a desig
 	\end{tabular}
 \end{table*}
 
-Table~\ref{table:designvariability} summarizes the results of this comparison. It can be seen that a significant reduction of the design space was caused by each set-based filter step of our methodology. This is because smaller values for the laser power $P_{\textrm{laser}}$ and thickness $x_2$ resulted in consistently suboptimal designs with respect to performance. However, among the scalable designs many featured axial positions ($x_1$) and widths ($x_3$) near the upper and lower bounds for each variable respectively. This is due the positive monotonicity of the volume with respect to $x_3$. Such designs have the greatest potential for scalability. The relative volume of the convex hull to that of the design space is calculated in the last row of the table. The design space volume was normalized to 1 for ease of comparison. Feasible solutions comprised about three fourths of the design space (77.\%). The parametric optimal design solutions comprised only 2.8\%. The scalable solutions obtained for $\mathbf{m} = [0~1~1~0]^{\text T}$ and $\mathbf{m} = [0~0~1~0]^{\text T}$ comprised $6.3\times10^{-7}\%$ and 0.00104\% of the design space respectively. While these proportions may seem small, they are significant in size in the considered 4-dimensional design space. For comparison, the volume of the hyper-rectangle enclosing the design sets was also calculated since most of the surveyed set-based design methods used hyper-rectangles to prescribe their solution sets. The design variable bounds where normalized relative to the upper and lower bounds of the design space and corresponding volume was computed by finding the product of the length of the ``edges'' of the hyper-rectangle. It can be seen that the hyper-rectangle overestimates the volume of the design sets due to its inability to capture the arbitrary shape of the different design sets shown in Figure~\ref{fig:designspace}. 
+Table~\ref{table:designvariability} summarizes the results of this comparison. It can be seen that a significant reduction of the design space was caused by each set-based filter step of our methodology. This is because smaller values for the laser power $P_{\textrm{laser}}$ and thickness $x_2$ resulted in consistently suboptimal designs with respect to performance. However, among the scalable designs many featured axial positions ($x_1$) and widths ($x_3$) near the upper and lower bounds for each variable respectively. This is due the positive monotonicity of the volume with respect to $x_3$. Such designs have the greatest potential for scalability. The relative volume of the convex hull to that of the design space is calculated in the last row of the table. The design space volume was normalized to 1 for ease of comparison. Feasible solutions comprised about three fourths of the design space (77.\%). The parametric optimal design solutions comprised only 2.8\%. The scalable solutions obtained for $\mathbf{m} = [0~1~1~0]^{\text T}$ and $\mathbf{m} = [0~0~1~0]^{\text T}$ comprised $6.3\times10^{-7}\%$ and 0.00104\% of the design space, respectively. While these proportions may seem small, they are significant in size in the considered 4-dimensional design space. For comparison, the volume of the hyper-rectangle enclosing the design sets was also calculated since most of the surveyed set-based design methods used hyper-rectangles to prescribe their solution sets. The design variable bounds were normalized relative to the upper and lower bounds of the design space and corresponding volume was computed by finding the product of the length of the ``edges'' of the hyper-rectangle. It can be seen that the hyper-rectangle overestimates the volume of the design sets due to its inability to capture the arbitrary shape of the different design sets shown in Figure~\ref{fig:designspace}. 
 
 The results of this remanufacturing case study  demonstrate the usefulness of the transition rule formulated in this chapter for providing scalable remanufacturing design solutions for a range of design requirements. By accommodating variability in the design stage and incorporating flexible design principles, future potential losses in raw material and manufacturing effort are alleviated by avoiding disposal and replacement scenarios. Even previously commissioned components can be scaled by our methodology as shown in this chapter by carefully designing the remanufactured additions to the component. This will ensure continued scalability of the component in the future.
 

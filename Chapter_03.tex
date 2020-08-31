@@ -69,7 +69,7 @@ The energy is divided by an equivalent step time $t_{\textrm{step}}$ used for st
 	Q_{\textrm{eqv}} = \dfrac{P_{\textrm{laser}}}{2D_{p}}\dfrac{t_{\textrm{scan}}}{t_{\textrm{step}}}\dfrac{1}{A_{\textrm{stiff}}}.
 \end{equation}
 
-A special case of stiffener is the circumferential stiffener shown in Figure~\ref{fig:TRSoverview}. For this type of stiffener, Equation~(\ref{eq:powereqv}) can be simplified by setting $L = 2\pi R_{\textrm{outer}}$, where $R_{\textrm{outer}} = 0.5$ m is the radius of the outer casing of the \ac{TRS}. This results in $t_{scan} = 2\pi R_{\textrm{outer}}/V$. The deposit surface area becomes $A_{\textrm{deposit}} = 2\pi {R_{\textrm{outer}}}D_w$ to yield the equivalent heat flux per unit depth:
+A special case of stiffener is the circumferential stiffener shown in Figure~\ref{fig:TRSoverview}. For this type of stiffener, Equation~(\ref{eq:powereqv}) can be simplified by setting $L = 2\pi R_{\textrm{outer}}$, where $R_{\textrm{outer}} = 0.5$ m is the radius of the outer casing of the \ac{TRS}. This results in $t_{scan} = 2\pi R_{\textrm{outer}}/V$. The deposit surface area becomes $A_{\textrm{deposit}} = 2\pi {R_{\textrm{outer}}}D_w$ to yield the equivalent heat flux per unit depth.
 
 \begin{equation}
 	\label{eq:powereqvcirc}
@@ -165,7 +165,7 @@ The \ac{TRS} shown in Figure~\ref{fig:TRSiso} is subject to thermal loads due to
 
 The thermal load case is cycled and is used to compute the expected fatigue life of the \ac{TRS} using low-cycle fatigue calculations. We restrict the low-cycle fatigue analysis to the midsection of the outercasing shown in Figure~\ref{fig:TRSisothermal} in order to simplify computation and postprocessing. The stress state at the midsection of the outercasing is recorded before and after the load case to obtain the initial and final Von Mises stresses $\sigma_{v1}$ and $\sigma_{v2}$, respectively. 
 
-The structural analyses presented for the thermomechanical, pressure and thermal load cases are performed using a \ac{FE} simulation model which is computationally expensive. As a result, we will construct surrogates for these models in Chapters \ref{ch:scalableSBD}, \ref{ch:TSEcont}, and \ref{ch:stohasticopt} to alleviate the computational effort involved in exploring the design and parameter spaces for these problems.
+The structural analyses presented for the thermomechanical, pressure, and thermal load cases are performed using a \ac{FE} simulation model which is computationally expensive. As a result, we will construct surrogates for these models in Chapters \ref{ch:scalableSBD}, \ref{ch:TSEcont}, and \ref{ch:stohasticopt} to alleviate the computational effort involved in exploring the design and parameters spaces for these problems.
 
 We explain how the safety factor $n_{\textrm{safety}}$ is computed for these load cases in the following section.
 
@@ -183,7 +183,7 @@ The midrange stress ($\sigma_m = -\textrm{sign}(\sigma_P)\left( \sigma_{v1} + \s
     \caption{ \label{fig:GMcrit} Modified Goodman criterion }
 \end{figure}
 
-The safety factor $n_{\textrm{safety}}$ is used as a structural performance metric throughout this thesis. We know summarize all the relevant inputs and outputs to the introduced thermomechanical models and loadcases.
+The safety factor $n_{\textrm{safety}}$ is used as a structural performance metric throughout this thesis. We now summarize all the relevant inputs and outputs to the introduced thermomechanical models and loadcases.
 
 %============================== SUMMARY ================================%
 \section{Summary}
@@ -203,7 +203,7 @@ This chapter presented the industrial case study that will be used throughout th
 	Stiffener axial position & $x_1$ & mm & $91 \pm 54$ \\
 	Stiffener thickness  & $x_2$ & mm & $6 \pm 4$ \\
 	Stiffener width & $x_3$ & mm & $25 \pm 15$  \\
-	Laser Power & ${P}$ & W & $3750 \pm 250$\\ \hline
+	Laser Power & ${P_{\textrm{laser}}}$ & W & $3750 \pm 250$\\ \hline
 	Internal pressure load  & ${P}_{\textrm{load}}$ & MPa & $2 \pm 0.5$ \\ 
 	Deposit melting point & $T_m$ & $^o$C & $1,500 \pm 100$ \\
 	Substrate base width & $W_{\textrm{total}}$ & mm & $137.5 \pm 17.5$ \\
