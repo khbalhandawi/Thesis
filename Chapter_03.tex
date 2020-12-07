@@ -6,7 +6,7 @@
 \label{ch:thermomechanical}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In this chapter, we introduce the industrial case study used to demonstrate our methodologies in Chapters \ref{ch:scalableSBD}, \ref{ch:TSEcont}, and \ref{ch:stohasticopt}. We define the thermomechanical model used to analyze the deposition process used to remanufacture the product. The product considered in this thesis is the \ac{TRS}. The models developed in this section are specific to the deposition of various stiffener geometries on the \acf{TRS}. However, the simplifications to the thermomechanical analysis used to compute the residual effects of directed energy deposition on the substrate are generalizable to any deposit and substrate.
+In this chapter, we introduce the industrial application example used to demonstrate our methodologies in Chapters \ref{ch:scalableSBD}, \ref{ch:TSEcont}, and \ref{ch:stohasticopt}. We define the thermomechanical model used to analyze the deposition process used to remanufacture the product. The product considered in this thesis is the \ac{TRS}. The models developed in this section are specific to the deposition of various stiffener geometries on the \acf{TRS}. However, the simplifications to the thermomechanical analysis used to compute the residual effects of directed energy deposition on the substrate are generalizable to any deposit and substrate.
 
 A \ac{TRS} is a structural aeroengine component at the turbine exhaust. It must sustain thermal and structural loads during flight due to exhaust gases while mounting the engine to the wing structure. Analysis of the component in the industry involves multiple disciplines (aerodynamic, structural, and thermal). 
 
@@ -14,7 +14,7 @@ We consider the deposition of a stiffener on the \ac{TRS} to support higher load
 
 Any subsequent loading of the \ac{TRS} during operation results in a new stress state ($\sigma_{v2}$). The mean and amplitude of the initial and final stress states are used to compute the safety factor against low-cycle fatigue as a structural performance metric. We consider two different load cases in Chapters \ref{ch:scalableSBD} and \ref{ch:TSEcont}. However, the calculation of the safety factor against low-cycle fatigue is independent of the load case used in the analysis.
 
-The following section outlines the thermomechanical models used to predict the residual stresses that result from the \ac{AM} deposition process.
+The following section outlines the thermomechanical models used to predict the residual stresses that result from the \ac{AM} deposition process. All the loadcases presented in this thesis take advantage of the cyclic symmetry of the \ac{TRS} by restricting the analysis to one sector. Some figures reveal the entire \ac{TRS} for illustration purposes despite the analysis being restricted to one sector.
 
 %========================== THERMOMECHANICAL ===========================%
 \section{Thermomechanical modeling}
@@ -145,7 +145,7 @@ We describe the first load case in the following section.
     \caption{ \label{fig:ipload} \ac{TRS} pressure load case }
 \end{figure}
 
-The first load case is due to the internal pressure $P_{\textrm{load}}$ applied on the outer casing of the \ac{TRS} by the hot exhaust gases. A pressurization/depressurization cycle is shown in Figure~\ref{fig:ipload}. The load case is cycled and is used to compute the expected fatigue life of the \ac{TRS} using low-cycle fatigue calculations. The stress state at the foot of a strut (shown in Figure~\ref{fig:ipload}) is monitored before and after the load case to obtain the initial and final Von mises stresses $\sigma_{v1}$ and $\sigma_{v2}$, respectively. Note that $\sigma_{v1} \neq 0$ due to the residual stress state in the structure from prior thermomechanical loads. 
+The first load case is due to the internal pressure $P_{\textrm{load}}$ applied on the outer casing of the \ac{TRS} by the hot exhaust gases. A pressurization/depressurization cycle on a sector of the \ac{TRS} is shown in Figure~\ref{fig:ipload}. The load case is cycled and is used to compute the expected fatigue life of the \ac{TRS} using low-cycle fatigue calculations. The stress state at the foot of a strut (shown in Figure~\ref{fig:ipload}) is monitored before and after the load case to obtain the initial and final Von mises stresses $\sigma_{v1}$ and $\sigma_{v2}$, respectively. Note that $\sigma_{v1} \neq 0$ due to the residual stress state in the structure from prior thermomechanical loads. 
 
 We now describe the thermal loadcase due to the temperature of the exhaust gases.
 
@@ -153,7 +153,7 @@ We now describe the thermal loadcase due to the temperature of the exhaust gases
 % Thermal load case
 \subsection{Thermal load case} \label{subsec:thermalloadcase}
 
-The \ac{TRS} shown in Figure~\ref{fig:TRSiso} is subject to thermal loads due to the temperature gradients it experiences during operation. The temperature profile of a \ac{TRS} during operation is shown in Figure~\ref{fig:thermalloads}. These temperature loads are specified by the engine architect to the \ac{TRS} \ac{OEM} in the form of uncertain parameters.
+The \ac{TRS} shown in Figure~\ref{fig:TRSiso} is subject to thermal loads due to temperature gradients experienced during operation. The temperature profile of a \ac{TRS} during operation is shown in Figure~\ref{fig:thermalloads}. These temperature loads are specified by the \ac{OEM} engine architect to the \ac{TRS} component supplier in the form of changing parameters.
 
 \begin{figure}[h!]
 	\centering
@@ -163,9 +163,9 @@ The \ac{TRS} shown in Figure~\ref{fig:TRSiso} is subject to thermal loads due to
 	\label{fig:thermalloadcases}
 \end{figure}
 
-The thermal load case is cycled and is used to compute the expected fatigue life of the \ac{TRS} using low-cycle fatigue calculations. We restrict the low-cycle fatigue analysis to the midsection of the outercasing shown in Figure~\ref{fig:TRSisothermal} in order to simplify computation and postprocessing. The stress state at the midsection of the outercasing is recorded before and after the load case to obtain the initial and final Von Mises stresses $\sigma_{v1}$ and $\sigma_{v2}$, respectively. 
+The thermal load case is cycled and is used to compute the expected fatigue life of the \ac{TRS} using low-cycle fatigue calculations. The stress state at the midsection of the outer casing is recorded before and after the load case to obtain the initial and final Von Mises stresses $\sigma_{v1}$ and $\sigma_{v2}$, respectively.
 
-The structural analyses presented for the thermomechanical, pressure, and thermal load cases are performed using a \ac{FE} simulation model which is computationally expensive. As a result, we will construct surrogates for these models in Chapters \ref{ch:scalableSBD}, \ref{ch:TSEcont}, and \ref{ch:stohasticopt} to alleviate the computational effort involved in exploring the design and parameters spaces for these problems.
+The structural analyses presented for the thermomechanical, pressure, and thermal load cases are performed using a \ac{FE} simulation model which is computationally expensive. As a result, we will construct surrogates for these models in Chapters \ref{ch:scalableSBD}, \ref{ch:TSEcont}, and \ref{ch:stohasticopt} to alleviate the computational effort involved in exploring the design and parameter spaces for these application example.
 
 We explain how the safety factor $n_{\textrm{safety}}$ is computed for these load cases in the following section.
 
@@ -175,7 +175,7 @@ We explain how the safety factor $n_{\textrm{safety}}$ is computed for these loa
 
 We use the initial and final Von Mises stresses $\sigma_{v1}$ and $\sigma_{v2}$ obtained before and after the application of either load case described earlier to compute the safety factor against low-cycle fatigue.
 
-The midrange stress ($\sigma_m = -\textrm{sign}(\sigma_P)\left( \sigma_{v1} + \sigma_{v2}\right) / 2$) and the amplitude stress ($\sigma_a = \left| \sigma_{v1} - \sigma_{v2}\right| / 2$) are calculated, where $\textrm{sign}(\sigma_P)$ is the sign of the pressure given by the sum of the principle stresses ($\sigma_P = -(1/3) (\sigma_1 + \sigma_2 + \sigma_3)$) and provides of measure of the compressive or tensile state of the stress. A negative $\sigma_P$ implies tension while a positive value implies compression. The failure locus is determined by the modified Goodman criterion for high cycle fatigue as shown in Figure~\ref{fig:GMcrit}. The endurance limit ($S_e$), yield stress ($\sigma_y$), and ultimate strength ($S_{ut}$) are defined as parameters and are obtained from mechanical design handbooks \cite{Budynas2015}. The number of lifecycles to failure is estimated from W{\"o}hler relations ($N_f = \left(\sigma_{\textrm{rev}}/a\right)^b$), where $a$ and $b$ are empirical constants. The safety factor is calculated as $n_{\textrm{safety}} = 1/\left({\frac{\sigma_a}{S_e}+\frac{\sigma_m}{S_{ut}}}\right)$ for each load case.
+The midrange stress ($\sigma_m = -\textrm{sign}(\sigma_P)\left( \sigma_{v1} + \sigma_{v2}\right) / 2$) and the amplitude stress ($\sigma_a = \left| \sigma_{v1} - \sigma_{v2}\right| / 2$) are calculated, where $\textrm{sign}(\sigma_P)$ is the sign of the pressure given by the sum of the principle stresses ($\sigma_P = -(1/3) (\sigma_1 + \sigma_2 + \sigma_3)$) and provides of measure of the compressive or tensile state of the stress. A negative $\sigma_P$ implies tension while a positive value implies compression. The failure locus is determined by the modified Goodman criterion for low-cycle fatigue as shown in Figure~\ref{fig:GMcrit}. The endurance limit ($S_e$), yield stress ($\sigma_y$) and ultimate strength ($S_{ut}$) are defined as parameters and are obtained from mechanical design handbooks \cite{Budynas2015}. The number of lifecycles to failure is estimated from W{\"o}hler's relation ($N_f = \left(\sigma_{\textrm{rev}}/a\right)^b$), where $a$ and $b$ are empirical constants. The safety factor is calculated as $n_{\textrm{safety}} = 1/\left({\frac{\sigma_a}{S_e}+\frac{\sigma_m}{S_{ut}}}\right)$ for each load case. 
 
 \begin{figure}[h!]
     \centering
@@ -189,7 +189,7 @@ The safety factor $n_{\textrm{safety}}$ is used as a structural performance metr
 \section{Summary}
 \label{sec:thermosummary}
 
-This chapter presented the industrial case study that will be used throughout the thesis to demonstrate the developed frameworks. The chapter defined the thermomechanical model and two loadcases that the \ac{TRS} experiences in operation. The loadcase parameters and outputs are summarized in Tables \ref{table:modelinputs} and \ref{table:modeloutputs} respectively. Some parameters in Table \ref{table:modelinputs} are uncertain and are denoted by ranges. They will be elaborated on during the analyses in the following chapters.
+This chapter presented the industrial application example that will be used throughout the thesis to demonstrate the developed frameworks. The chapter defined the thermomechanical model and two loadcases that the \ac{TRS} experiences in operation. The loadcase parameters and outputs are summarized in Tables \ref{table:modelinputs} and \ref{table:modeloutputs} respectively. Some parameters in Table \ref{table:modelinputs} are uncertain and are denoted by ranges. They will be elaborated on during the analyses in the following chapters.
 
 \begin{table}[h!]
 	\centering
