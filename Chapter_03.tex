@@ -14,7 +14,7 @@ We consider the deposition of a stiffener on the \ac{TRS} to support higher load
 
 Any subsequent loading of the \ac{TRS} during operation results in a new stress state ($\sigma_{v2}$). The mean and amplitude of the initial and final stress states are used to compute the safety factor against low-cycle fatigue as a structural performance metric. We consider two different load cases in Chapters \ref{ch:scalableSBD} and \ref{ch:TSEcont}. However, the calculation of the safety factor against low-cycle fatigue is independent of the load case used in the analysis.
 
-The following section outlines the thermomechanical models used to predict the residual stresses that result from the \ac{AM} deposition process. All the loadcases presented in this thesis take advantage of the cyclic symmetry of the \ac{TRS} by restricting the analysis to one sector. Some figures reveal the entire \ac{TRS} for illustration purposes despite the analysis being restricted to one sector.
+The following section outlines the thermomechanical models used to predict the residual stresses that result from the \ac{AM} deposition process. {\color{red} All the loadcases presented in this thesis take advantage of the cyclic symmetry of the \ac{TRS} by restricting the analysis to one sector.}
 
 %========================== THERMOMECHANICAL ===========================%
 \section{Thermomechanical modeling}
@@ -32,13 +32,13 @@ The \ac{DED} of the stiffener increases the thickness of the outer casing as sho
 
 Comprehensive thermomechanical models feature a coupled transient heat transfer and fluid flow model to accurately calculate the transient temperature field. The temperature field is used for residual stress and distortion modeling \cite{Mukherjee2017}. Complex physical processes govern the temperature field making its computation intensive. Computations of the temperature field involve various simplifications and assumptions to make the calculations tractable. \citeauthor{Manvatkar2011} consider a \ac{FEA} conduction model for calculating the transient temperature field due to a moving Gaussian heat source on the substrate \cite{Manvatkar2011}. The problem of a moving heat source on an infinite plate was formulated and solved analytically by \citeauthor{rosenthal1946theory} \cite{rosenthal1946theory}. The Rosenthal model is used for cases where there is limited heat conduction in the through thickness dimension typical of thin plates \cite{Goldak1984}. The \ac{TRS} outer casing where the stiffener is to be deposited has a through thickness dimension considerably smaller than its width and circumference allowing us to approximate the heat source by a Gaussian heat source as in the Rosenthal model.
 
-The melt pool dimensions are estimated from the transient thermal model to determine the deposit width and depth. Figure~\ref{fig:gaussian} shows the details of the thermomechanical simulations for determining deposit size. A Gaussian heat source with a heat flux distribution given by Equation~(\ref{eg:gaussian}) scans the surface at a constant speed ${V}$ \cite{rosenthal1946theory}.
-
+The melt pool dimensions are estimated from the transient thermal model to determine the deposit width and depth. Figure~\ref{fig:gaussian} shows the details of the thermomechanical simulations for determining deposit size. A Gaussian heat source scanning the surface of a substrate at a constant speed ${V}$ has a heat flux distribution given by
+%
 \begin{equation}
 	Q(r,\theta,t) = \dfrac{P_{\textrm{laser}}}{\pi{r_l}^2 D_p}e^{-2\left(\frac{r-{V}t}{r_l}\right)^2}, \label{eg:gaussian}
 \end{equation}
-
-where ${r_l}$ is the laser beam radius, $P_{\textrm{laser}}$ is the laser power and $D_p$ is the depth of penetration of the laser source. The coordinates $r$ and $\theta$ are defined on the surface of the deposit as shown in Figure~\ref{fig:gaussianheat}. 
+%
+where ${r_l}$ is the laser beam radius, $P_{\textrm{laser}}$ is the laser power, and $D_p$ is the depth of penetration of the laser source \cite{rosenthal1946theory}. The coordinates $r$ and $\theta$ are defined on the surface of the deposit as shown in Figure~\ref{fig:gaussianheat}. 
 
 \begin{figure}[h!]
 	\centering
@@ -53,30 +53,29 @@ The resulting deposit width $D_w$ and depth $D_d$ are used to partition the stif
 For deposition on the \ac{TRS} outercasing, a further simplification of the transient conduction model can be made by applying the heat flux uniformly on the surface of the deposit \cite{Nickel2001}. We use a static model with a uniformly distributed heat flux to compute residual stresses. This idealization (relative to using a transient heat transfer model) reduces the number of variables and parameters involved and alleviates computational cost by exploiting TRS symmetry without sacrificing accuracy excessively.
 
 Each deposit is heated uniformly by an equivalent heat flux that supplies the same energy as a moving Gaussian heat source scanning the entire deposit surface. The power at $t=0$ is given by the surface integral of the heat flux over an infinite plane
-
+%
 \begin{equation}
 	\label{eq:power}
 	P(t=0) = \dfrac{P_{\textrm{laser}}}{\pi{r_l}^2 D_p} \Int_{0}^{2\pi} \Int_{0}^{\infty} e^{-2\left(\frac{r}{r_l}\right)^2} \,rdr\,d\theta = \dfrac{P_{\textrm{laser}}}{\pi{r_l}^2 D_p}\dfrac{\pi{r_l}^2}{2} = \dfrac{P_{\textrm{laser}}}{2D_p}.
 \end{equation}
-
-
+%
 The power per unit depth $P(t=0)$ is multiplied by the scanning time $t_{scan}$ to obtain the heat energy input to the deposit. The scanning time is calculated for each stiffener by dividing total distance traveled by the heat source (stiffener length) by the scanning speed $t_{scan} = L/V$. $A_{\textrm{stiff}}$ is the surface area of the stiffener where heat is applied. These values are obtained from the geometry of the stiffener using \ac{CAD} tools.
 
-The energy is divided by an equivalent step time $t_{\textrm{step}}$ used for static thermal analysis in lieu of a transient thermal analysis to obtain the equivalent uniformly distributed power per unit depth $P_{\textrm{eqv}}$. $P_{\textrm{eqv}}$ is divided by the area of the deposit $A_{\textrm{stiff}}$ to yield the equivalent heat flux per unit depth $Q_{\textrm{eqv}}$:
-
+The energy is divided by an equivalent step time $t_{\textrm{step}}$ used for static thermal analysis in lieu of a transient thermal analysis to obtain the equivalent uniformly distributed power per unit depth $P_{\textrm{eqv}}$. $P_{\textrm{eqv}}$ is divided by the area of the deposit $A_{\textrm{stiff}}$ to yield the equivalent heat flux per unit depth
+%
 \begin{equation}
 	\label{eq:powereqv}
 	Q_{\textrm{eqv}} = \dfrac{P_{\textrm{laser}}}{2D_{p}}\dfrac{t_{\textrm{scan}}}{t_{\textrm{step}}}\dfrac{1}{A_{\textrm{stiff}}}.
 \end{equation}
 
-A special case of stiffener is the circumferential stiffener shown in Figure~\ref{fig:TRSoverview}. For this type of stiffener, Equation~(\ref{eq:powereqv}) can be simplified by setting $L = 2\pi R_{\textrm{outer}}$, where $R_{\textrm{outer}} = 0.5$ m is the radius of the outer casing of the \ac{TRS}. This results in $t_{scan} = 2\pi R_{\textrm{outer}}/V$. The deposit surface area becomes $A_{\textrm{deposit}} = 2\pi {R_{\textrm{outer}}}D_w$ to yield the equivalent heat flux per unit depth.
-
+A special case of stiffener is the circumferential stiffener shown in Figure~\ref{fig:TRSoverview}. For this type of stiffener, Equation~(\ref{eq:powereqv}) can be simplified by setting $L = 2\pi R_{\textrm{outer}}$, where $R_{\textrm{outer}} = 0.5$ m is the radius of the outer casing of the \ac{TRS}. This results in $t_{scan} = 2\pi R_{\textrm{outer}}/V$. The deposit surface area becomes $A_{\textrm{deposit}} = 2\pi {R_{\textrm{outer}}}D_w$ to yield the equivalent heat flux per unit depth
+%
 \begin{equation}
 	\label{eq:powereqvcirc}
 	Q_{\textrm{eqv}} = P(t=0)\dfrac{2\pi R_{\textrm{outer}}}{V}\dfrac{1}{t_{\textrm{step}}}\dfrac{1}{2\pi {R_{\textrm{outer}}}D_w} = P(t=0)\dfrac{1}{{V}t_{\textrm{step}}D_w} = \dfrac{P_{\textrm{laser}}}{{2V}t_{\textrm{step}}D_wD_p}.
 \end{equation}
-
-We assume here that the radius of the deposit is equal to the radius of the outer casing $R_{\textrm{outer}}$ since the thickness of the deposit is small relative to the outer casing.
+%
+Here, we assume that the radius of the deposit is equal to the radius of the outer casing $R_{\textrm{outer}}$ since the thickness of the deposit is small relative to the outer casing.
 
 An example of the application of $Q_{\textrm{eqv}}$ to the surface of a circumferential deposit layer is shown in Figure~\ref{fig:depload}.
 
@@ -125,13 +124,13 @@ In all our analyses throughout the thesis, the scanning speed is considered cons
 
 The principal stresses provide an indication of the compressive or tensile nature of the stress state and will be used in subsequent failure analysis to determine the safety factor. There is a general agreement in the value of the predicted stresses with lower values recorded for the transient model due to the time taken by the substrate to reach steady state temperatures as the heat source scans its surface. Furthermore, the static model overpredicts the maximum principal stress making it a more conservative choice for thermomechanical modelling.
 
-In the following section we describe the different load cases that the \ac{TRS} may experience in operation
+In the following section we describe the different load cases that the \ac{TRS} may experience in operation.
 
 %============================= LOAD CASES ==============================%
 \section{Load cases applied to turbine rear structure}
 \label{sec:loadcases}
 
-The \ac{TRS} experiences a number of thermal and mechanical loads due to the exhaust gases it directs while providing structural support to the engine. Two significant load cases are used for the analyses in this thesis to address the uncertainty involved in their parameters and their significance regarding the functionality of the \ac{TRS}.
+The \ac{TRS} experiences a number of thermal and mechanical loads due to the exhaust gases it directs while providing structural support to the engine. Two significant load cases are used for the analyses in this thesis to address the effect of changing parameters on the functionality of the \ac{TRS}.
 
 We describe the first load case in the following section.
 
@@ -145,7 +144,7 @@ We describe the first load case in the following section.
     \caption{ \label{fig:ipload} \ac{TRS} pressure load case }
 \end{figure}
 
-The first load case is due to the internal pressure $P_{\textrm{load}}$ applied on the outer casing of the \ac{TRS} by the hot exhaust gases. A pressurization/depressurization cycle on a sector of the \ac{TRS} is shown in Figure~\ref{fig:ipload}. The load case is cycled and is used to compute the expected fatigue life of the \ac{TRS} using low-cycle fatigue calculations. The stress state at the foot of a strut (shown in Figure~\ref{fig:ipload}) is monitored before and after the load case to obtain the initial and final Von mises stresses $\sigma_{v1}$ and $\sigma_{v2}$, respectively. Note that $\sigma_{v1} \neq 0$ due to the residual stress state in the structure from prior thermomechanical loads. 
+The first load case is due to the internal pressure $P_{\textrm{load}}$ applied on the outer casing of the \ac{TRS} by the hot exhaust gases. A pressurization/depressurization cycle on a sector of the \ac{TRS} is shown in Figure~\ref{fig:ipload}. The load case is cycled and is used to compute the expected fatigue life of the \ac{TRS} using low-cycle fatigue calculations. The stress state at the foot of a strut (shown in Figure~\ref{fig:ipload}) is monitored before and after the load case to obtain the initial and final Von Mises stresses $\sigma_{v1}$ and $\sigma_{v2}$, respectively. Note that $\sigma_{v1} \neq 0$ due to the residual stress state in the structure from prior thermomechanical loads. 
 
 We now describe the thermal loadcase due to the temperature of the exhaust gases.
 
@@ -165,7 +164,7 @@ The \ac{TRS} shown in Figure~\ref{fig:TRSiso} is subject to thermal loads due to
 
 The thermal load case is cycled and is used to compute the expected fatigue life of the \ac{TRS} using low-cycle fatigue calculations. The stress state at the midsection of the outer casing is recorded before and after the load case to obtain the initial and final Von Mises stresses $\sigma_{v1}$ and $\sigma_{v2}$, respectively.
 
-The structural analyses presented for the thermomechanical, pressure, and thermal load cases are performed using a \ac{FE} simulation model which is computationally expensive. As a result, we will construct surrogates for these models in Chapters \ref{ch:scalableSBD}, \ref{ch:TSEcont}, and \ref{ch:stohasticopt} to alleviate the computational effort involved in exploring the design and parameter spaces for these application example.
+The structural analyses presented for the thermomechanical, pressure, and thermal load cases are performed using a \ac{FE} simulation model which is computationally expensive. As a result, we will construct surrogates for these models in Chapters \ref{ch:scalableSBD}, \ref{ch:TSEcont}, and \ref{ch:stohasticopt} to alleviate the computational effort involved in exploring the design and parameter spaces for these application examples.
 
 We explain how the safety factor $n_{\textrm{safety}}$ is computed for these load cases in the following section.
 
@@ -175,7 +174,7 @@ We explain how the safety factor $n_{\textrm{safety}}$ is computed for these loa
 
 We use the initial and final Von Mises stresses $\sigma_{v1}$ and $\sigma_{v2}$ obtained before and after the application of either load case described earlier to compute the safety factor against low-cycle fatigue.
 
-The midrange stress ($\sigma_m = -\textrm{sign}(\sigma_P)\left( \sigma_{v1} + \sigma_{v2}\right) / 2$) and the amplitude stress ($\sigma_a = \left| \sigma_{v1} - \sigma_{v2}\right| / 2$) are calculated, where $\textrm{sign}(\sigma_P)$ is the sign of the pressure given by the sum of the principle stresses ($\sigma_P = -(1/3) (\sigma_1 + \sigma_2 + \sigma_3)$) and provides of measure of the compressive or tensile state of the stress. A negative $\sigma_P$ implies tension while a positive value implies compression. The failure locus is determined by the modified Goodman criterion for low-cycle fatigue as shown in Figure~\ref{fig:GMcrit}. The endurance limit ($S_e$), yield stress ($\sigma_y$) and ultimate strength ($S_{ut}$) are defined as parameters and are obtained from mechanical design handbooks \cite{Budynas2015}. The number of lifecycles to failure is estimated from W{\"o}hler's relation ($N_f = \left(\sigma_{\textrm{rev}}/a\right)^b$), where $a$ and $b$ are empirical constants. The safety factor is calculated as $n_{\textrm{safety}} = 1/\left({\frac{\sigma_a}{S_e}+\frac{\sigma_m}{S_{ut}}}\right)$ for each load case. 
+The midrange stress ($\sigma_m = -\textrm{sign}(\sigma_P)\left( \sigma_{v1} + \sigma_{v2}\right) / 2$) and the amplitude stress ($\sigma_a = \left| \sigma_{v1} - \sigma_{v2}\right| / 2$) are calculated, where $\textrm{sign}(\sigma_P)$ is the sign of the pressure given by the sum of the principle stresses ($\sigma_P = -(1/3) (\sigma_1 + \sigma_2 + \sigma_3)$) and provides of measure of the compressive or tensile state of the stress. A negative $\sigma_P$ implies tension while a positive value implies compression. The failure locus is determined by the modified Goodman criterion for low-cycle fatigue as shown in Figure~\ref{fig:GMcrit}. The endurance limit ($S_e$), yield stress ($\sigma_y$), and ultimate strength ($S_{ut}$) are defined as parameters and are obtained from mechanical design handbooks \cite{Budynas2015}. The number of lifecycles to failure is estimated from W{\"o}hler's relation ($N_f = \left(\sigma_{\textrm{rev}}/a\right)^b$), where $a$ and $b$ are empirical constants. The safety factor is calculated as $n_{\textrm{safety}} = 1/\left({\frac{\sigma_a}{S_e}+\frac{\sigma_m}{S_{ut}}}\right)$ for each load case. 
 
 \begin{figure}[h!]
     \centering
@@ -183,13 +182,13 @@ The midrange stress ($\sigma_m = -\textrm{sign}(\sigma_P)\left( \sigma_{v1} + \s
     \caption{ \label{fig:GMcrit} Modified Goodman criterion }
 \end{figure}
 
-The safety factor $n_{\textrm{safety}}$ is used as a structural performance metric throughout this thesis. We now summarize all the relevant inputs and outputs to the introduced thermomechanical models and loadcases.
+The safety factor $n_{\textrm{safety}}$ is used as a structural performance metric throughout this thesis. We now summarize all the relevant model inputs and outputs for the thermomechanical models and loadcases.
 
 %============================== SUMMARY ================================%
 \section{Summary}
 \label{sec:thermosummary}
 
-This chapter presented the industrial application example that will be used throughout the thesis to demonstrate the developed frameworks. The chapter defined the thermomechanical model and two loadcases that the \ac{TRS} experiences in operation. The loadcase parameters and outputs are summarized in Tables \ref{table:modelinputs} and \ref{table:modeloutputs} respectively. Some parameters in Table \ref{table:modelinputs} are uncertain and are denoted by ranges. They will be elaborated on during the analyses in the following chapters.
+This chapter presented the industrial application example that will be used throughout the thesis to demonstrate the developed frameworks. The chapter defined the thermomechanical model and two loadcases that the \ac{TRS} experiences in operation. The loadcase parameters and outputs are summarized in Tables \ref{table:modelinputs} and \ref{table:modeloutputs} respectively. Some parameters in Table \ref{table:modelinputs} can change and are denoted by ranges. They will be elaborated on during the analyses in the following chapters.
 
 \begin{table}[h!]
 	\centering

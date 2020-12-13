@@ -6,27 +6,27 @@
 \label{ch:conclusion}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-This thesis presented a novel design methodology for managing problems involving uncertain requirements and parameters. The developed frameworks were implemented by the use of parametric design optimization to exhaustively explore multi-dimensional design and parameters spaces and is distinguished by the following features.
+This thesis presented a novel design methodology for managing problems involving changing requirements and parameters. The developed frameworks were implemented by the use of parametric design optimization to exhaustively explore multi-dimensional design and parameter space and is distinguished by the following features.
 
 \begin{itemize}
     \item It manages an instantaneous or gradual change in design requirements.
-    \item It constructs surrogate models of expensive engineering models to mitigate the computational cost of exploring the design and parameters spaces.
-    \item It utilizes rigorous derivative free optimization tools for exploring multi-dimensional design and parameters spaces without the need for gradients or their approximation.
+    \item It constructs surrogate models of expensive engineering models to mitigate the computational cost of exploring the design and parameter space.
+    \item It utilizes rigorous derivative-free optimization tools for exploring multi-dimensional design and parameter space without the need for gradients or their approximation.
     \item It provides sets of design solutions represented by response surfaces or convex hulls for multi-dimensional continuous or discrete design spaces respectively.
     \item Provides a mathematical formulation for qualitative design characteristics such as flexibility, scalability, and excess.
 \end{itemize}
 
 A total of four algorithms were developed, demonstrated, and applied to multiple remanufacturing design problems of a \ac{TRS} with different design variables, design space types (continuous or categorical), and varying requirements change scenarios (instantaneous or gradual). 
 
-A method for mapping between design and parameters spaces using response surfaces was provided in Algorithm~\ref{algo:PODalgo}. A scalability constraint was formulated and applied to a remanufacturing design problem of a \ac{TRS} in Algorithm~\ref{algo:SODalgo}. These two algorithms are combined to identify a set of scalable optimal designs in the parameters space of a design problem when an instantaneous change in requirements occurs. Application of these algorithms to the \ac{TRS} remanufacturing problem provided a relatively small albeit varied set of scalable design solutions. This set of solutions is useful for reducing the design space to a manageable set of solutions for further development and detailed analysis.
+A method for mapping between design and parameter space using response surfaces was provided in Algorithm~\ref{algo:PODalgo}. A scalability constraint was formulated and applied to a remanufacturing design problem of a \ac{TRS} in Algorithm~\ref{algo:SODalgo}. These two algorithms are combined to identify a set of scalable optimal designs in the parameters space of a design problem when an instantaneous change in requirements occurs. Application of these algorithms to the \ac{TRS} remanufacturing problem provided a relatively small albeit varied set of scalable design solutions. This set of solutions is useful for reducing the design space to a manageable set of solutions for further development and detailed analysis.
 
 Two additional algorithms were developed to manage a cascade of requirement chang\-es at discrete times in a product's lifecycle or development cycle. As part of Algorithm \ref{algo:SBDOptalgo}, three design metrics were quantified mathematically. They allow designers to quantify the capability, buffer, and excess embedded in a design. The mathematical formulation of these design metrics is novel and allows them to be quantified in a multi-dimensional parameters space where multiple parameters may change simultaneously. The algorithm favors designs that minimize cost or excess throughout the product's cycle. This algorithm was applied to a \ac{TRS} remanufacturing problem featuring a categorical design space governed by a finite set of possible design choices. The resulting set-based solution obtained by this algorithm was displayed on a tradespace.
 
 The fourth and final algorithm, Algorithm~\ref{algo:SBDRobustalgo} was used to obtain robust and flexible design sets using tools and definitions from the literature that were adapted for a gradual change in requirements. The algorithm was also applied to the categorical \ac{TRS} remanufacturing problem and its resulting sets were superpositioned on the same tradespace used to visualize the set-based solution obtained by minimizing excess. The tradespace revealed that utilizing design optimization can help balance the amount of robustness and flexibility in a design, a problem which is difficult to address in the early stages of the product cycle due to the relatively high uncertainty during this time period.
 
-Finally, we proposed some stochastic optimization tools that can be used to substitute parts of Algorithms~\ref{algo:PODalgo} and \ref{algo:SBDOptalgo} to make managing design and parameters spaces with relatively large dimensionality more tractable.
+Finally, we proposed some stochastic optimization tools that can be used to substitute parts of Algorithms~\ref{algo:PODalgo} and \ref{algo:SBDOptalgo} to make managing design and parameter spaces with relatively large dimensionality more tractable.
 
-To the best of our knowledge, Algorithms~\ref{algo:SODalgo} and \ref{algo:SBDOptalgo} and their metrics and constraints are novel and are a first attempt at a systematic approach for managing a wide range of requirement change scenarios that are frequently encountered in the industry.
+To the best of our knowledge, Algorithms~\ref{algo:SODalgo} and \ref{algo:SBDOptalgo}, their metrics, and constraints are novel and are a first attempt at a systematic approach for managing a wide range of requirement change scenarios that are frequently encountered in the industry.
 
 \section{Recommendations for future work}
 \label{sec:futurework}
@@ -43,4 +43,8 @@ The \acp{PDF} used to model the uncertain requirements in this thesis assume tha
 
 Importance sampling was used to make the management of a large number of requirement change scenarios more tractable. More advanced sampling techniques can be used to make the parametric studies used in this thesis more efficient. One such approach was demonstrated in Chapter \ref{ch:stohasticopt}.
 
-By taking advantage of advances in numerical derivative free optimization and methods for quantifying lifecycle costs, a huge variety of requirement change scenarios can be managed in design optimization. Building on the methods developed in this thesis, should allow designers to make decisions in the early stages of the product's development process or lifecycle when innovation potential is at its highest.
+{\color{red} The algorithms were designed to accommodate a wide range of optimization and search methods for managing different kinds of design problems. Application of the algorithms to different design problems featuring similar definitions of scalability, buffer, and excess but with different search methods used in lieu of \ac{MADS} would provide more insight on the effectiveness of \ac{MADS} within the developed framework.
+
+The metrics developed in this thesis such as scalability could be generalized for other design problems where manufacturing constraints are not the only concern governing the scalability. The concept of the Jacobian provides a powerful tool for understanding the effect of changing parameters on design variables and could be used to cover a wide range of redesign scenarios in practice.}
+
+Building on the methods developed in this thesis, should allow designers to make decisions in the early stages of the product's development process or lifecycle when innovation potential is at its highest.
