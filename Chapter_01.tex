@@ -12,7 +12,7 @@ In the aerospace industry, requirement changes can occur for a variety of reason
 
 If the product's specifications fall short of the requirements during development or product lifecycle, an upgrade to the specifications is warranted to maintain functionality. This may involve a complete redesign of the product depending on the severity of the required changes. Complete redesign involves discarding the current iteration of the product and starting a new development cycle with the changed requirements as inputs. This cradle-to-grave approach is extremely inefficient when considering a \ac{CE} where value is generated from each unit of resource by recovering and regenerating products and materials at the end of each service life \cite{MacArthur2013b}. In order to increase the recoverability of the product, and avoid loss in value due to disposal, products should be designed for such activities in order to increase their relevance in a \ac{CE} and extract as much value from them as possible. Recovering a product involves returning its specifications to its pre-disposal levels. However, requirements are seldom the same after a product's lifecycle has run its course. As a result, the product's specifications have to be upgraded to meet the set of requirements expected of current generation products. Designing products for such unforeseeable requirements is the main subject of this thesis.
 
-This thesis utilizes numerical methods for addressing the problem of designing prod\-ucts for remanufacturing activities where requirements are expected to be highly dynamic. In this chapter, Section \ref{sec:motivation} provides motivation for implementing the design para\-digms introduced in this thesis to mitigate the challenges that arise due to changing product requirements. The research objectives of this thesis are then discussed in the context of product remanufacturing design problems. The contributions of this thesis to the field of engineering design for uncertain requirements are then outlined in Section~\ref{sec:contribution}. The chapter concludes by outlining the remainder of the thesis in Section \ref{sec:outline}.
+This thesis utilizes numerical methods for addressing the problem of designing prod\-ucts for remanufacturing activities where requirements are expected to be highly dynamic. In this chapter, Section \ref{sec:motivation} provides motivation for implementing the design para\-digms introduced in this thesis to mitigate the challenges that arise due to changing product requirements. The research objectives of this thesis are then discussed in the context of product remanufacturing design problems. The chapter concludes by outlining the remainder of the thesis in Section \ref{sec:outline}.
 
 %============================= MOTIVATION ==============================%
 \section{Motivation}
@@ -75,7 +75,7 @@ We aim to address the shortcomings of either design strategy that were identifie
 
 %---------------------------------------------------------------------%
 % Thesis objectives
-\subsection{Objectives} \label{subsec:objectives}
+\section{Objectives} \label{sec:objectives}
 
 % Furthermore, there is a trade-off between the flexibility that can be enabled by \ac{AM} and other attributes of the design (such as weight, manufacturing costs and excess) that need to be optimized in the early design phases. We review a number of studies that utilize tradespace exploration strategies so that the tradeoff between product costs and its degree of flexibility or robustness as given by the metrics developed in this thesis can be studied. These studies are summarized in Section~\ref{sec:tradespace}.
 
@@ -113,47 +113,9 @@ The objectives are summarized as follows.
 % 	\item {Minimize cumulative excess throughout product development process or lifecycle to mitigate overdesign}
 % 	\item{Obtain sets of optimal, flexible and robust design solutions corresponding to different product development or lifecycle scenarios}
 % \end{itemize}
-%=========================== CONTRIBUTIONS =============================%
-%============================= MOTIVATION ==============================%
-\section{Contributions}
-\label{sec:contribution}
-
-The contributions of this thesis are as follows.
-
-\begin{enumerate}
-	\item{An \ac{SBD} framework for identifying sets of parametric optimal designs and scalable optimal designs.}
-	
-	The following metrics and algorithms were developed as part of this framework.
-	
-	\begin{enumerate}
-		\item{A surrogate-enabled parametric optimization scheme using derivative-free methods for obtaining parametric optimal designs.}
-		\item{A response surface methodology for performing post-optimality analysis on the parametric optimal designs and evaluating their scalability.}
-		\item{A scalability constraint formulated in the parameter space}
-		\item{A methodology for mapping scalable optimal designs from the parameter space to the design space using random sampling techniques.}
-	\end{enumerate}
-	%
-	\item{A design margin quantification and allocation tool for addressing changing requirements throughout a product's lifecycle or development process.}
-	
-	The following metrics and algorithms were developed as part of this framework.
-	
-	\begin{enumerate}
-		\item{A method for computing reliability and excess of a particular design and requirement using Monte Carlo integration.}
-		\item{A method for generating different product development or lifecycle scenarios using Monte Carlo simulation and importance sampling.}
-		\item{An \ac{SBD} combinatorial optimization approach for obtaining sets of optimal designs.}
-		\item{An \ac{SBD} method for obtaining flexible and robust sets of solutions.}
-		\item{A tradespace exploration strategy for visualizing and comparing flexible, robust, and optimal sets of solutions.}
-	\end{enumerate}
-\end{enumerate}
-
-The contributions of this thesis have been tested and applied to the following industrial application examples.
-
-\begin{enumerate}
-	\item{Parametric optimal and scalable \ac{SBD} solutions were obtained for a \ac{TRS} remanufacturing problem involving deposition of a simple circumferential stiffener subject to internal pressure loads.}
-	\item{Sets of optimal, robust, and flexible design decisions were obtained for a problem involving the deposition of a stiffener on the outer casing of a \ac{TRS} subject to multiple uncertain temperature loads.}
-\end{enumerate}
 
 %============================== OUTLINE ================================%
 \section{Outline}
 \label{sec:outline}
 
-The thesis is organized through the following chapters. Chapter \ref{ch:background} presents a detailed literature review of the main aspects featured in our contributions. We review literature related to remanufacturing design, design changeability, design margins, \ac{SBD}, and tradespace exploration. Chapter \ref{ch:thermomechanical} presents the thermomechanical models used to model the \ac{AM} remanufacturing process of a \ac{TRS} used in both frameworks as described in subsequent chapters. Chapter \ref{ch:scalableSBD} describes a \ac{SBD} framework for identifying scalable optimal designs during an instant in the product development process or lifecycle. An application problem based on the remanufacturing of a \ac{TRS} subject to varying requirements and loads is used to demonstrate the framework. Chapter \ref{ch:TSEcont} presents a framework for minimizing design excess throughout the product development process or lifecycle while maintaining a threshold reliability given uncertain requirements. The \ac{TRS} remanufacturing problem used for demonstrating this framework is modified to feature multiple epochs at which design decisions must be made. \ac{SBD} results are obtained using the described framework for minimizing excess and are compared against flexible and robust design sets using tradespace exploration. Chapter \ref{ch:stohasticopt} discusses the application of stochastic optimization algorithms for providing sets of design solutions when requirements are uncertain. Based on the results of stochastic optimization, recommendations for improving the frameworks in Chapters \ref{ch:scalableSBD} and \ref{ch:TSEcont} are made. The conclusion and thesis contributions are presented in Chapter \ref{ch:conclusion}.
+The thesis is organized through the following chapters. Chapter \ref{ch:background} presents a detailed literature review of the main aspects featured in our contributions. We review literature related to remanufacturing design, design changeability, design margins, \ac{SBD}, and tradespace exploration. Chapter \ref{ch:thermomechanical} presents the thermomechanical models used to model the \ac{AM} remanufacturing process of a \ac{TRS} used in both frameworks as described in subsequent chapters. Chapter \ref{ch:scalableSBD} describes a \ac{SBD} framework for identifying scalable optimal designs during an instant in the product development process or lifecycle. An example based on the remanufacturing of a \ac{TRS} subject to varying requirements and loads is used to demonstrate the framework. Chapter \ref{ch:TSEcont} presents a framework for minimizing design excess throughout the product development process or lifecycle while maintaining a threshold reliability given uncertain requirements. The \ac{TRS} example used for demonstrating this framework is modified to feature multiple epochs at which design decisions must be made. \ac{SBD} results are obtained using the described framework for minimizing excess and are compared against flexible and robust design sets using tradespace exploration. Chapter \ref{ch:stohasticopt} discusses the application of stochastic optimization algorithms for providing sets of design solutions when requirements are uncertain. Based on the results of stochastic optimization, recommendations for improving the frameworks in Chapters \ref{ch:scalableSBD} and \ref{ch:TSEcont} are made. The conclusion and thesis contributions are presented in Chapter \ref{ch:conclusion}.

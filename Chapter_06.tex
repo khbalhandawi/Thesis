@@ -6,12 +6,12 @@
 \label{ch:stohasticopt}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-This chapter explores the use of state-of-the-art stochastic optimization algorithms for managing uncertain requirements in design problems. We show how a set of design solutions can be obtained from the models defined in Chapter~\ref{ch:thermomechanical} via a stochastic version of \ac{MADS}, \texttt{StoMADS} \cite{Audet2019}. {\color{red}\texttt{StoMADS} returns a set of candidate solutions for a given stochastic programming problem which makes it an ideal choice for set-based design.}
+This chapter explores the use of state-of-the-art stochastic optimization algorithms for managing uncertain requirements in design problems. We show how a set of design solutions can be obtained from the models defined in Chapter~\ref{ch:thermomechanical} via a stochastic version of \ac{MADS}, \texttt{StoMADS} \cite{Audet2019}. \texttt{StoMADS} returns a set of candidate solutions for a given stochastic programming problem which makes it an ideal choice for set-based design.
 
 The method described in this chapter can help simplify the algorithms introduced in Chapters \ref{ch:scalableSBD} and \ref{ch:TSEcont} by eliminating the steps involved in searching for a set of parametric optimal solutions.
 
-%============================ METHODOLOGY ============================%
-\section{Methodology} \label{sec:STOmethods}
+%=============================== METHOD ==============================%
+\section{Method} \label{sec:STOmethods}
 
 Consider the optimization problem defined in Section \ref{subsec:SBDparametric} in Equation~(\ref{eq:SBDoptproblem}). The objectives and constraints are a function of uncertain parameters $\mathbf{p}$. In this section we denote the uncertain parameters by random variables $\mathbf{P} = \left[P_1,P_2,\cdots,P_m\right]$ (not to be confused with the reliability vector defined in Chapter~\ref{ch:TSEcont}). The objective and constraints functions in Equation~(\ref{eq:SBDoptproblem}) are deterministic in nature. By replacing the uncertain parameters with their random counterparts, the objective and constraint functions become stochastic
 
@@ -34,9 +34,9 @@ The optimization problem in Equation~(\ref{eq:STOoptproblem}) is solved via \tex
 We demonstrate the capabilities of \texttt{StoMADS} by solving a \ac{TRS} remanufacturing problem where uncertain parameters are involved.
 
 %========================= APPLICATION PROBLEM =======================%
-\section{Application problem} \label{sec:STOcasestudy}
+\section{Example} \label{sec:STOcasestudy}
 
-We investigate the deposition of a circumferential stiffener on the outer casing of a \ac{TRS} (shown in Figure~\ref{fig:TRSoverview}) subject to 4 uncertain temperature loads (shown in Figure~\ref{fig:thermalloads}). We formulate the problem as follows:
+We investigate the deposition of a circumferential stiffener on the outer casing of a \ac{TRS} (shown in Figure~\ref{fig:TRSoverview}) subject to 4 uncertain temperature loads (shown in Figure~\ref{fig:thermalloads}). We formulate the problem as
 %
 \begin{equation} \label{eq:Stoproblemdet}
     \begin{aligned}
@@ -204,8 +204,8 @@ We will now summarize the implications of this approach for obtaining set-based 
 
 This chapter presented an alternative strategy for solving parametric optimization problems. Rather than sampling the parameter space and solving the optimization problem for a given sample of parameter values, \texttt{StomMADS} can be used to directly obtain a set of solutions with an equivalent stochastic objective and constraint functions where the parameters are sampled from their respective random distributions.
 
-The approach presented in this chapter can be used to improve Algorithms~\ref{algo:PODalgo} and \ref{algo:SBDOptalgo}. Solving the problem in Equation~(\ref{eq:STOoptproblem}) can substitute steps 1 through 8 in Algorithm~\ref{algo:PODalgo}. However, the solution to the problem in Equation~(\ref{eq:STOoptproblem}) only outputs the optimizer values in the design space. Corresponding parameter values cannot be obtained since they are intrinsic to the stochastic version of the objective and constraint functions. The set of optimizers and their corresponding parameter values are needed by Algorithm~\ref{algo:PODalgo} to construct a response surface in the parameter space.
+The approach presented in this chapter can be used to improve Algorithms~\ref{algo:PODalgo} and \ref{algo:SBDOptalgo}. Solving the problem in Equation~(\ref{eq:STOoptproblem}) can substitute steps 1 through 10 in Algorithm~\ref{algo:PODalgo}. However, the solution to the problem in Equation~(\ref{eq:STOoptproblem}) only outputs the optimizer values in the design space. Corresponding parameter values cannot be obtained since they are intrinsic to the stochastic version of the objective and constraint functions. The set of optimizers and their corresponding parameter values are needed by Algorithm~\ref{algo:PODalgo} to construct a response surface in the parameter space.
 
-However, the approach in this chapter can substitute steps 3 through 5 within Algorithm \ref{algo:SBDOptalgo} by randomly selecting requirement arcs from $\Omega_R$ in the stochastic version of the problem. The requirement arc corresponding to each solution in $S_{E}^*$ is not needed since only the frequency of the design arcs is needed to isolate the set-based solution. However, the development version of \texttt{StoMADS} is restricted to optimization problems with continous variables and needs to be further developed to include mixed variable programming problems such as those in Chapter~\ref{ch:TSEcont}.
+However, the approach in this chapter can substitute steps 3 through 6 within Algorithm \ref{algo:SBDOptalgo} by randomly selecting requirement arcs from $\Omega_R$ in the stochastic version of the problem. The requirement arc corresponding to each solution in $S_{E}^*$ is not needed since only the frequency of the design arcs is needed to isolate the set-based solution. However, the development version of \texttt{StoMADS} is restricted to optimization problems with continous variables and needs to be further developed to include mixed variable programming problems such as those in Chapter~\ref{ch:TSEcont}.
 
 The approach presented in this chapter can prove useful to designers who are accustomed to more traditional design practices involving point-based design. This is because \texttt{StoMADS} has a similar interface to most available deterministic design optimization approaches that output a single design solution.

@@ -8,22 +8,22 @@
 
 This chapter describes a novel design tool for identifying a set of scalable designs for product remanufacturing using parametric design optimization. Scalability is an enabler for product remanufacturing since it provides components with the flexibility to have their specifications upgraded to meet higher requirement levels.
 
-The methodology in this chapter is demonstrated using an industrial application example for the remanufacturing design of a \ac{TRS}. The thermomechanical model described in Section~\ref{sec:thermomech} along with the load case in Section~\ref{subsec:iploadcase} is used to define the design variables and uncertain parameters involved in the remanufacturing design problem. Remanufacturing is performed by \ac{AM} using laser \ac{DED}. However, our methodology can be extended to remanufacturing problems where subtractive manufacturing is used.
+The method in this chapter is demonstrated using an industrial application example for the remanufacturing design of a \ac{TRS}. The thermomechanical model described in Section~\ref{sec:thermomech} along with the load case in Section~\ref{subsec:iploadcase} is used to define the design variables and uncertain parameters involved in the remanufacturing design problem. Remanufacturing is performed by \ac{AM} using laser \ac{DED}. However, our method can be extended to remanufacturing problems where subtractive manufacturing is used.
 
-We begin by defining the methodology for obtaining the set-based solutions for arbitrary design and parameter spaces in Section~\ref{sec:SBDmethods}. We then demonstrate the methodology for the remanufacturing of the \ac{TRS} in Section~\ref{sec:SBDusecase}. We provide some insights and conclusions about the uses and limitations of the developed framework in Section~\ref{sec:scalableSBDsummary}.
+We begin by defining the method for obtaining the set-based solutions for arbitrary design and parameter spaces in Section~\ref{sec:SBDmethods}. We then demonstrate the method for the remanufacturing of the \ac{TRS} in Section~\ref{sec:SBDusecase}. We provide some insights and conclusions about the uses and limitations of the developed framework in Section~\ref{sec:scalableSBDsummary}.
 
-%============================ METHODOLOGY ============================%
-\section{Methodology} \label{sec:SBDmethods}
+%=============================== METHOD ==============================%
+\section{Method} \label{sec:SBDmethods}
 
 Engineering design optimization problems involve decision variables $\mathbf{x}  \in \mathbb{R}^n$ and design parameters ${\mathbf{p}}  \in \mathbb{R}^m$. Objective (${f}(\mathbf{x};\mathbf{p})$) and constraint ($\mathbf{g}(\mathbf{x};\mathbf{p})$) functions are used to reflect design requirements. Given bounded design optimization variables and parameters $\mathbf{L} \leq \mathbf{x} \leq \mathbf{U}$ and $\mathbf{L}_p \leq \mathbf{p} \leq \mathbf{U}_p$, respectively, we define the design space $\mathit{D}$ and the parameter space $\mathit{P}$. We also consider constraint sets $\mathit{C}_u$ for $u = 1,2,\ldots,q$ where $q$ is the number of constraints. In a product design context, constraints are part of the design requirements and are driven by the parameters $\mathbf{p}$. Finally, the feasible set $\mathit{F}$ is defined as the intersection of all constraint sets and contains designs that meet all design requirements. The set $\mathit{F}$ is the \ac{FDS} and represents the outcome of \ac{SBD} before elimination of potential designs. 
 
-Design parameters may affect the optimal solution of the optimization problem due to their influence on design requirements. As a result, designs that are optimal throughout the parameter space $\mathit{P}$ and satisfy the design requirements comprise the set of parametric optimal designs which is a reduction of the \ac{FDS}. Since practical \ac{SBD} methodolog\-ies require solutions sets that can be easily communicated across design teams, response surfaces are used as a surrogate model to evaluate feasibility and performance and to classify membership of each design to the feasible set and the set of parametric optimal designs. 
+Design parameters may affect the optimal solution of the optimization problem due to their influence on design requirements. As a result, designs that are optimal throughout the parameter space $\mathit{P}$ and satisfy the design requirements comprise the set of parametric optimal designs which is a reduction of the \ac{FDS}. Since practical \ac{SBD} methods require solutions sets that can be easily communicated across design teams, response surfaces are used as a surrogate model to evaluate feasibility and performance and to classify membership of each design to the feasible set and the set of parametric optimal designs. 
 
 % --------------------------- Surrogate modeling ------------------------------ %
 \subsection{Surrogate modeling} \label{subsec:RSM}
 
 The objective and constraint functions used to represent design requirements are evaluated using computer-aided engineering (CAE) tools that model the repair/remanufacturing process.  
-These computational models are computationally expensive. Any SBD methodology requires a large number of function evaluations to investigate not only the design but also the parameter space. Therefore, we resort to building less expensive response surfaces to be used as surrogate models.
+These computational models are computationally expensive. Any SBD method requires a large number of function evaluations to investigate not only the design but also the parameter space. Therefore, we resort to building less expensive response surfaces to be used as surrogate models.
 
 We conduct designs of experiments to sample the aggregate design and parameter spaces and then exercise the computational models at these sample points to generate adequate training data. An ensemble of surrogate models is then constructed and denoted by $\hat{f}(\mathbf{x};{\mathbf{p}})$ and $\hat{\mathbf{g}}(\mathbf{x};{\mathbf{p}})$. An open source surrogate model library is used to build the surrogates \cite{Talgorn2018,Lophaven2002}.
 
@@ -74,7 +74,7 @@ and solved to obtain the solution $\mathbf{x}^*({\mathbf{p}})$. Given intervals 
 	\varepsilon_{OE} = \frac{1}{n_{cv}^2} \sum_{i=1}^{n_{cv}} \sum_{l=1}^{n_{cv}} \theta\left(\mathbf{x}^*(\mathbf{p}_i) - \mathbf{x}^*(\mathbf{p}_l),\hat{\mathbf{x}^*}(\mathbf{p}_i) - \hat{\mathbf{x}^*}(\mathbf{p}_l)\right),
 \end{equation}
 %
-where $n_{cv}$ is the number of validation points. {\color{red} In our work, $n_{cv}$ is set equal to the number of samples used for training the response surface.} The function $\theta$ is defined as
+where $n_{cv}$ is the number of validation points. In our work, $n_{cv}$ is set equal to the number of samples used for training the response surface. The function $\theta$ is defined as
 %
 \begin{equation}
     \label{eq:theta}
@@ -99,7 +99,7 @@ The Jacobian of $\hat{\mathbf{x}^*}(\mathbf{p})$ is
 	\end{bmatrix}.
 	 \label{eq:jacobian}
 \end{equation}
-It can be estimated using the derivatives of the basis functions used to construct the response surface. Differentiation of the response surface is possible because it is based on a linear combination of basis functions. The ability of a response surface to accurately predict the Jacobian is described by the order-based error metric which determines the computational expense for obtaining the necessary number of training samples to achieve the threshold error value. {\color{red} The type of surrogate model used to obtain the response surface should feature differentiable basis functions such as the correlation function used in Kriging metamodels or the kernel function used in \acl{KS} metamodels}.
+It can be estimated using the derivatives of the basis functions used to construct the response surface. Differentiation of the response surface is possible because it is based on a linear combination of basis functions. The ability of a response surface to accurately predict the Jacobian is described by the order-based error metric which determines the computational expense for obtaining the necessary number of training samples to achieve the threshold error value. The type of surrogate model used to obtain the response surface should feature differentiable basis functions such as the correlation function used in Kriging metamodels or the kernel function used in \acl{KS} metamodels.
 
 We use a \acf{KS} model to build  $\hat{\mathbf{x}^*}(\mathbf{p})$ and estimate the Jacobian $\mathbf{J}(\mathbf{p})$ using the linear combination of the gradient of the kernel functions. \ac{KS} was used to construct the response surface due to their immediate computation since it does not require matrix inversions. Furthermore, \ac{KS} models typically respect the order of the output which reflects its ability to predict the correct order of values of any two evaluation points. This is very important for this application since it relies on differentiating the KS model \cite{Audet2018}.
 
@@ -146,19 +146,19 @@ where $\lambda$ is the bandwidth of the kernel function. The bandwidth parameter
 
 Equations~(\ref{eq:kernelfunction}) and (\ref{eq:kernelfunctiongrad}) are substituted into Equation~(\ref{eq:jacobiancomponent}) to provide the gradient of the prediction function $\hat{y}(\mathbf{x})$. This process is repeated for each of the design variables $\hat{x_1^*}(\mathbf{p}), \hat{x_2^*}(\mathbf{p}), \cdots \hat{x_n^*}(\mathbf{p})$ to populate the Jacobian in Equation~(\ref{eq:jacobian}). The Jacobian is used to formulate a transition rule in the parameter space to obtain the set of scalable optimal designs.
 
-Algorithm~\ref{algo:PODalgo} presents the methodology followed to obtain the set of parametric optimal designs. The procedure including the calculation of the order-based error is demonstrated by means of a numerical example in Section~\ref{subsec:numex}.
+Algorithm~\ref{algo:PODalgo} presents the method followed to obtain the set of parametric optimal designs. The procedure including the calculation of the order-based error is demonstrated by means of a numerical example in Section~\ref{subsec:numex}.
 
 \begin{algorithm}
 	\DontPrintSemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
 	\KwIn{
-		Surrogate model $\hat{f}(\mathbf{x};{\mathbf{p}})$ and $\hat{\mathbf{g}}(\mathbf{x};{\mathbf{p}})$, {\color{red} number of parameter space samples $w$, number of cross-validation samples $n_{cv}$}
+		Surrogate model $\hat{f}(\mathbf{x};{\mathbf{p}})$ and $\hat{\mathbf{g}}(\mathbf{x};{\mathbf{p}})$, number of parameter space samples $w$, number of cross-validation samples $n_{cv}$
 	}
 	\KwOut{$\mathbf{X}^*$, $\hat{\mathbf{x}^*}(\mathbf{p})$, $\nabla\hat{\mathbf{x}^*}(\mathbf{p})$}
-	{\color{red} Initialize $\mathbf{X}^* = \emptyset$ and ${\mathbf{X}_{cv}}^* = \emptyset$}\;
+	Initialize $\mathbf{X}^* = \emptyset$ and ${\mathbf{X}_{cv}}^* = \emptyset$\;
 	Generate \ac{LH} samples of parameter space $\left[\mathbf{p}_{1},\mathbf{p}_{2}, \cdots, \mathbf{p}_{w}\right]^{\text T}$ and $\left[\mathbf{p}_{1},\mathbf{p}_{2}, \cdots, \mathbf{p}_{n_{cv}}\right]^{\text T}$\;
-	\For{{\color{red} $k \gets 1$ to $n_{cv}$}} {
-		{\color{red} Solve the parametric optimization problem in Equation~(\ref{eq:SBDoptproblem}) to obtain $\mathbf{x}^*(\mathbf{p}_k)$}\;
-		{\color{red} Augment cross-validation set ${\mathbf{X}_{cv}}^* \gets {\mathbf{X}_{cv}}^* \cup \{ \mathbf{x}^*(\mathbf{p}_k) \} $}\;
+	\For{$k \gets 1$ to $n_{cv}$} {
+		Solve the parametric optimization problem in Equation~(\ref{eq:SBDoptproblem}) to obtain $\mathbf{x}^*(\mathbf{p}_k)$\;
+		Augment cross-validation set ${\mathbf{X}_{cv}}^* \gets {\mathbf{X}_{cv}}^* \cup \{ \mathbf{x}^*(\mathbf{p}_k) \}$\;
 	}
 	\For{$k \gets 1$ to $w$} {
 		Solve the parametric optimization problem in Equation~(\ref{eq:SBDoptproblem}) to obtain $\mathbf{x}^*(\mathbf{p}_k)$\;
@@ -248,10 +248,10 @@ The procedure for obtaining the set of scalable optimal solutions is presented i
 \begin{algorithm}
 	\DontPrintSemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
 	\KwIn{
-		\ac{KS} response surface of parameter space $\hat{\mathbf{x}^*}(\mathbf{p})$, Jacobian of parameter space $\nabla\hat{\mathbf{x}^*}(\mathbf{p})$, Monotonicity matrix $\mathbf{M}$, Change agent matrix $\mathbf{N}$, {\color{red} number of parameter space \ac{LH} samples $o$}
+		\ac{KS} response surface of parameter space $\hat{\mathbf{x}^*}(\mathbf{p})$, Jacobian of parameter space $\nabla\hat{\mathbf{x}^*}(\mathbf{p})$, Monotonicity matrix $\mathbf{M}$, Change agent matrix $\mathbf{N}$, number of parameter space \ac{LH} samples $o$
 	}
 	\KwOut{$\mathbf{X}_s$}	
-	{\color{red}Initialize $\mathbf{X}_s = \emptyset$}\;
+	Initialize $\mathbf{X}_s = \emptyset$\;
 	Generate \ac{LH} samples of parameter space $\left[\mathbf{p}_{1},\mathbf{p}_{2}, \cdots, \mathbf{p}_{o}\right]^{\text T}$\;
 	\For{$k \gets 1$ to $o$} {
 		%				Populate possible points using LH and store them in $S_k$\;
@@ -288,7 +288,7 @@ The procedure for obtaining the set of scalable optimal solutions is presented i
 	\label{fig:testfun}
 \end{figure*}
 
-We demonstrate the concepts related to constructing a \ac{KS} response surface to estimate the Jacobian using a numerical example. We also show how the estimated Jacobian can be used for identifying the scalable design set. Himmelblau's test function is used as it features multiple local minima. {\color{red} This results in a discontinuous set of scalable optimal designs which is not trivial to compute and has been identified as one of the challenges associated with set-based design \cite{Shahan2012}}. The test function and its Jacobian are
+We demonstrate the concepts related to constructing a \ac{KS} response surface to estimate the Jacobian using a numerical example. We also show how the estimated Jacobian can be used for identifying the scalable design set. Himmelblau's test function is used as it features multiple local minima. This results in a discontinuous set of scalable optimal designs which is not trivial to compute and has been identified as one of the challenges associated with set-based design \cite{Shahan2012}. The test function and its Jacobian are
 \begin{displaymath}
 %	\begin{aligned}
 		{x}^*(p_1,p_2) = ({p_1}^{2}+{p_2}-11)^{2}+({p_1}+{p_2}^{2}-7)^{2} 
@@ -309,20 +309,20 @@ Figure~\ref{fig:HPeffect} shows the effect of the number of training points ($n_
 It can be seen that there is a unique combination of $n_{\textrm{samples}}$ and $\lambda$ that yield the best response surface for assessing scalability in the parameter space. The true and estimated scalable sets are shown in Figure~\ref{fig:testfun}. The \ac{KS} model used for the estimation is trained using 2305 training samples and a bandwidth of $\lambda = 0.054$.
 Figure~\ref{fig:testfun} shows that \ac{KS} is capable of capturing the scalable set despite underestimating the magnitude of the test function. Figure~\ref{fig:HPeffect} shows that the order-based error is a good indication of the prediction accuracy of the \ac{KS} model for the scalable set. As a result, the \ac{KS} parameters and number of training points can be determined by minimizing the order-based error.
 
-In summary, the proposed methodology consists of two design filters that determine a set of scalable optimal designs to be considered for further development. The first filter retains designs that dominate in terms of performance throughout the parameter space (set of parametric optimal designs $\mathbf{X}^*$). The second filter retains designs that are scalable by remanufacturing (scalable design set $\mathbf{X}_s$). The number of samples for the \ac{KS} response surface is chosen such that the order-based error is minimized with respect to a validation set. The methods developed in this section are demonstrated using the application example.
+In summary, the proposed method consists of two design filters that determine a set of scalable optimal designs to be considered for further development. The first filter retains designs that dominate in terms of performance throughout the parameter space (set of parametric optimal designs $\mathbf{X}^*$). The second filter retains designs that are scalable by remanufacturing (scalable design set $\mathbf{X}_s$). The number of samples for the \ac{KS} response surface is chosen such that the order-based error is minimized with respect to a validation set. The methods developed in this section are demonstrated using the application example.
 
-The proposed methodology, is presented as a flow diagram in Figure~\ref{fig:SBDmethods}.
+The proposed method, is presented as a flow diagram in Figure~\ref{fig:SBDmethods}.
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=.95\textwidth]{5_methodology_V2.pdf}
-	\caption{ \label{fig:SBDmethods} Set-based design space reduction methodology}
+	\caption{ \label{fig:SBDmethods} Set-based design space reduction method}
 \end{figure}
 
 %=========================== APPLICATION EXAMPLE ===============================%
 \section{Application example: aeroengine component remanufacturing} \label{sec:SBDusecase}
 
-The \ac{TRS} structural aeroengine component described in Chapter~\ref{ch:thermomechanical} is used to demonstrate the methodology for obtaining scalable optimal designs when considering it for remanufacturing. The safety factor against low-cycle fatigue is computed using the model in Section~\ref{subsec:fatigueanalysis} as a structural performance requirement. The design variables for the circumferential stiffener shown in Figure~\ref{fig:TRSoverview} are extracted from Table~\ref{table:modelinputs} and listed in Table~\ref{table:SBDvariables} along with their monotonicity. Similarly, the design parameters relevant to the problem in this chapter are extracted from Table~\ref{table:modelinputs} and are listed in Table~\ref{table:SBDparametervar} along with their change agent values.
+The \ac{TRS} structural aeroengine component described in Chapter~\ref{ch:thermomechanical} is used to demonstrate the method for obtaining scalable optimal designs when considering it for remanufacturing. The safety factor against low-cycle fatigue is computed using the model in Section~\ref{subsec:fatigueanalysis} as a structural performance requirement. The design variables for the circumferential stiffener shown in Figure~\ref{fig:TRSoverview} are extracted from Table~\ref{table:modelinputs} and listed in Table~\ref{table:SBDvariables} along with their monotonicity. Similarly, the design parameters relevant to the optimization problem in this chapter are extracted from Table~\ref{table:modelinputs} and are listed in Table~\ref{table:SBDparametervar} along with their change agent values.
 
 \begin{table}[h!]
 \centering
@@ -384,7 +384,7 @@ where $n_{\textrm{safety}}$ is the safety factor against low cycle fatigue or fi
 % --------------------------- Design space reduction to parametric optimal design set ------------------------------ %
 \subsection{Parametric optimal design results} \label{subsec:reduceddesignspace}
 
-The design optimization problem in Equation~(\ref{eq:SBCEopt}) is solved using the \ac{MADS} algorithm. We use the \texttt{OrthoMADS} implementation provided by the \texttt{NOMAD} algorithm \cite{LeDigabel2011}. The termination criterion for \ac{MADS} was the minimum mesh size (defined by Audet and Dennis \cite{Audet2006a}) reached in the virtually discretized design variable space. Non-opportunistic latin hypercube search was used during the search step. A progressive barrier approach was used for handling constraints \cite{Audet2009}. {\color{red} This choice of algorithm is motivated by the discussion in Section~\ref{sec:optLR}.}
+The design optimization problem in Equation~(\ref{eq:SBCEopt}) is solved using the \ac{MADS} algorithm. We use the \texttt{OrthoMADS} implementation provided by the \texttt{NOMAD} algorithm \cite{LeDigabel2011}. The termination criterion for \ac{MADS} was the minimum mesh size (defined by Audet and Dennis \cite{Audet2006a}) reached in the virtually discretized design variable space. Non-opportunistic latin hypercube search was used during the search step. A progressive barrier approach was used for handling constraints \cite{Audet2009}. This choice of algorithm is motivated by the discussion in Section~\ref{sec:optLR}.
 
 As described earlier, \acp{LH} are used to sample the design and parameter spaces defined by the bounds and ranges of the design variables and parameters, respectively (see Tables 
 ~\ref{table:SBDvariables} and \ref{table:SBDparametervar}).
@@ -466,8 +466,8 @@ Adhering to scalability constraints allows designers the flexibility to scale de
 % --------------------------- Design space variability ------------------------------ %
 \subsection{Design set variability and comparison} \label{subsec:dspacevar}
 
-Having generated the feasible design set, the set of parametric optimal designs, and the set of scalable optimal designs for the \ac{TRS} remanufacturing problem, some comparisons can be made.
-Several metrics exist in the literature for comparing the variability of a design solution set generated by parametric optimal design tools such as those formulated in this thesis. The volume of the convex hull provides a good perception of design variability provided that there are sufficient points to construct the polytope characterizing the convex hull \cite{Brown2019}. The convex hull volume was used to compare the reduction in the design sets as our methodology was applied to the \ac{TRS} problem. The lower and upper bounds (LB and UB, respectively) of the ranged set containing each solution set are also found. They are used to compute the volume of the bounding hyper-rectangle. The hyper-rectangle volume provides a benchmark against the ranged set representation used for previous \ac{SBD} studies \cite{Qureshi2014, Nahm2005, Olewnik2004,Liu2008,Suh2007}.
+Having generated the feasible design set, the set of parametric optimal designs, and the set of scalable optimal designs for the \ac{TRS} remanufacturing example, some comparisons can be made.
+Several metrics exist in the literature for comparing the variability of a design solution set generated by parametric optimal design tools such as those formulated in this thesis. The volume of the convex hull provides a good perception of design variability provided that there are sufficient points to construct the polytope characterizing the convex hull \cite{Brown2019}. The convex hull volume was used to compare the reduction in the design sets as our method was applied to the \ac{TRS} example. The lower and upper bounds (LB and UB, respectively) of the ranged set containing each solution set are also found. They are used to compute the volume of the bounding hyper-rectangle. The hyper-rectangle volume provides a benchmark against the ranged set representation used for previous \ac{SBD} studies \cite{Qureshi2014, Nahm2005, Olewnik2004,Liu2008,Suh2007}.
 
 % Case with one active variable
 \begin{table*}[h!]
@@ -494,23 +494,22 @@ Several metrics exist in the literature for comparing the variability of a desig
 	\end{tabular}
 \end{table*}
 
-Table~\ref{table:designvariability} summarizes the results of this comparison. It can be seen that a significant reduction of the design space was caused by each set-based filter step of our methodology. This is because smaller values for the laser power $P_{\textrm{laser}}$ and thickness $x_2$ resulted in consistently suboptimal designs with respect to performance. However, among the scalable designs many featured axial positions ($x_1$) and widths ($x_3$) near the upper and lower bounds for each variable respectively. This is due the positive monotonicity of the volume with respect to $x_3$. Such designs have the greatest potential for scalability. The relative volume of the convex hull to that of the design space is calculated in the last row of the table. The design space volume was normalized to 1 for ease of comparison. Feasible solutions comprised about three fourths of the design space (77.\%). The parametric optimal design solutions comprised only 2.8\%. The scalable solutions obtained for $\mathbf{m} = [0~1~1~0]^{\text T}$ and $\mathbf{m} = [0~0~1~0]^{\text T}$ comprised $6.3\times10^{-7}\%$ and 0.00104\% of the design space, respectively. While these proportions may seem small, they are significant in size in the considered 4-dimensional design space. For comparison, the volume of the hyper-rectangle enclosing the design sets was also calculated since most of the surveyed set-based design methods used hyper-rectangles to prescribe their solution sets. The design variable bounds were normalized relative to the upper and lower bounds of the design space and corresponding volume was computed by finding the product of the length of the ``edges'' of the hyper-rectangle. It can be seen that the hyper-rectangle overestimates the volume of the design sets due to its inability to capture the arbitrary shape of the different design sets shown in Figure~\ref{fig:designspace}. 
+Table~\ref{table:designvariability} summarizes the results of this comparison. It can be seen that a significant reduction of the design space was caused by each set-based filter step of our method. This is because smaller values for the laser power $P_{\textrm{laser}}$ and thickness $x_2$ resulted in consistently suboptimal designs with respect to performance. However, among the scalable designs many featured axial positions ($x_1$) and widths ($x_3$) near the upper and lower bounds for each variable respectively. This is due the positive monotonicity of the volume with respect to $x_3$. Such designs have the greatest potential for scalability. The relative volume of the convex hull to that of the design space is calculated in the last row of the table. The design space volume was normalized to 1 for ease of comparison. Feasible solutions comprised about three fourths of the design space (77.\%). The parametric optimal design solutions comprised only 2.8\%. The scalable solutions obtained for $\mathbf{m} = [0~1~1~0]^{\text T}$ and $\mathbf{m} = [0~0~1~0]^{\text T}$ comprised $6.3\times10^{-7}\%$ and 0.00104\% of the design space, respectively. While these proportions may seem small, they are significant in size in the considered 4-dimensional design space. For comparison, the volume of the hyper-rectangle enclosing the design sets was also calculated since most of the surveyed set-based design methods used hyper-rectangles to prescribe their solution sets. The design variable bounds were normalized relative to the upper and lower bounds of the design space and corresponding volume was computed by finding the product of the length of the ``edges'' of the hyper-rectangle. It can be seen that the hyper-rectangle overestimates the volume of the design sets due to its inability to capture the arbitrary shape of the different design sets shown in Figure~\ref{fig:designspace}. 
 
-The results of this application example demonstrate the usefulness of the transition rule formulated in this chapter for providing scalable remanufacturing design solutions for a range of design requirements. By accommodating variability in the design stage and incorporating flexible design principles, future potential losses in raw material and manufacturing effort are alleviated by avoiding disposal and replacement scenarios. Even previously commissioned components can be scaled by our methodology as shown in this chapter by carefully designing the remanufactured additions to the component. This will ensure continued scalability of the component in the future.
+The results of this application example demonstrate the usefulness of the transition rule formulated in this chapter for providing scalable remanufacturing design solutions for a range of design requirements. By accommodating variability in the design stage and incorporating flexible design principles, future potential losses in raw material and manufacturing effort are alleviated by avoiding disposal and replacement scenarios. Even previously commissioned components can be scaled by our method as shown in this chapter by carefully designing the remanufactured additions to the component. This will ensure continued scalability of the component in the future.
 
-{\color{red}
 %========================= COMPUTATIONAL COST ==========================%
-\section{Comment on computational cost of methods used}
+\section{Computational cost}
 \label{sec:comptcostSBD}
 
-The methodology presented involves the computational cost of constructing the surrogate model used for solving the parametric optimization problem given by Equation~(\ref{eq:SBDoptproblem}). The remainder of the methodology given by Algorithms \ref{algo:PODalgo} and \ref{algo:SODalgo} depend on using the surrogate model for making predictions in the design and parameter spaces and incur relatively low computational costs. A breakdown of the computational time for obtaining the set of scalable optimal designs for the \ac{TRS} remanufacturing problem is shown in Table~\ref{table:SBDcomputation}. It can be seen that obtaining surrogate models for the design requirements (objective $\hat{f}(\mathbf{x};\mathbf{p})$ and constraint functions $\hat{\mathbf{g}}(\mathbf{x};\mathbf{p})$) amounts for 89$\%$ of the computational cost and scales with the number of samples needed depending on the dimensionality of the problem. The total time of 40.7 days is justified for problems such as the ones discussed in this thesis due to the relatively long lifecycle of aerospace components which spans decades. The potential benefits of extending the useful lifecycles of aerospace components by a few years via remanufacturing outweigh the computational cost of our methodology. However, the same cannot be said for problems involving the design of products with short lead times and frequently changing requirements (such as patient-specific medical equipment).}
+The method presented involves the computational cost of constructing the surrogate model used for solving the parametric optimization problem given by Equation~(\ref{eq:SBDoptproblem}). The remainder of the method given by Algorithms \ref{algo:PODalgo} and \ref{algo:SODalgo} depends on using the surrogate model for making predictions in the design and parameter spaces and incurs relatively low computational cost. A breakdown of the computational cost for obtaining the set of scalable optimal designs for the \ac{TRS} remanufacturing example is shown in Table~\ref{table:SBDcomputation}. It can be seen that obtaining surrogate models for the design requirements (objective $\hat{f}(\mathbf{x};\mathbf{p})$ and constraint functions $\hat{\mathbf{g}}(\mathbf{x};\mathbf{p})$) amounts for 89$\%$ of the computational cost and scales with the number of samples needed depending on the dimensionality of the problem. The total cost of 40.9 days is justified for problems such as the ones discussed in this thesis due to the relatively long lifecycle of aerospace components which spans decades. The potential benefits of extending the useful lifecycles of aerospace components by a few years via remanufacturing outweigh the computational cost of our method. However, the same cannot be said for problems involving the design of products with short lead times and frequently changing requirements (such as patient-specific medical equipment).
 
 \newcommand{\resultsCW}{1.7cm}
 \begin{table*}[t]
 	\centering
 	\renewcommand{\arraystretch}{1.2}% Wider
 	\footnotesize\addtolength{\tabcolsep}{-5pt}
-	\caption{Breakdown of total computational time}
+	\caption{Breakdown of total computational cost}
 	\label{table:SBDcomputation}
 	\begin{tabular}{>{\centering\arraybackslash}m{\resultsCW}>{\centering\arraybackslash}m{\resultsCW}>{\centering\arraybackslash}m{\resultsCW}>{\centering\arraybackslash}m{\resultsCW}>{\centering\arraybackslash}m{\resultsCW}>{\centering\arraybackslash}m{\resultsCW}>{\centering\arraybackslash}m{\resultsCW}}
 	\hline\hline
@@ -520,10 +519,10 @@ The methodology presented involves the computational cost of constructing the su
 	 & step 6 & - & - & 1200 & 320 s & \multirow{2}{\resultsCW}{\centering 4.4 days} \\
 	 & sub-step 7 & $\approx$160 & 2 s & 1 & 320 s \\ \hline
 	%================================================================
-	\multirow{2}{\resultsCW}{\centering \ref{algo:SODalgo}} & step 3 & - & - & 20000 & 6 ms & \multirow{2}{\resultsCW}{\centering 2 mins} \\
-	& sub-step 4-8 & $\approx$140 & 6 ms & 1 & 2 min \\ \hline
+	\multirow{2}{\resultsCW}{\centering \ref{algo:SODalgo}} & step 3 & - & - & 20000 & 0.84 s & \multirow{2}{\resultsCW}{\centering 4.7 Hrs} \\
+	& sub-step 4-8 & $\approx$140 & 6 ms & 1 & 0.84 s \\ \hline
 	%================================================================
-	& \bf Total time & \multicolumn{5}{c}{40.7 days} \\
+	& \bf Total cost & \multicolumn{5}{c}{40.9 days} \\
 	\hline\hline
 	\end{tabular}
 \end{table*}
@@ -531,16 +530,16 @@ The methodology presented involves the computational cost of constructing the su
 \section{Summary}
 \label{sec:scalableSBDsummary}
 
-This chapter presented a set-based design methodology that utilizes surrogate-assisted numerical optimization, post-optimality analysis, and monotonicity-driven transition rules related to additive or subtractive manufacturing to generate a set of scalable optimal designs. This methodology can be used either for considering several different alternative solutions during initial design stages where requirements are still open-ended or, in combination with remanufacturing, to implement redesigns that can satisfy changed requirements, extending thus the useful lifetime of components and systems.
+This chapter presented a set-based design method that utilizes surrogate-assisted numerical optimization, post-optimality analysis, and monotonicity-driven transition rules related to additive or subtractive manufacturing to generate a set of scalable optimal designs. This method can be used either for considering several different alternative solutions during initial design stages where requirements are still open-ended or, in combination with remanufacturing, to implement redesigns that can satisfy changed requirements, extending thus the useful lifetime of components and systems.
 
-An application example was used to demonstrate the methodology for the remanufacturing design of an aeroengine component: a set of parametric optimal design solutions was generated and scalable design solutions were successfully extracted. Since we are only considering a finite, albeit large, amount of designs, we used convex hulls to quantify approximately the cardinality of the sets in order to make relative comparisons among them. 
+An application example was used to demonstrate the method for the remanufacturing design of an aeroengine component: a set of parametric optimal design solutions was generated and scalable design solutions were successfully extracted. Since we are only considering a finite, albeit large, amount of designs, we used convex hulls to quantify approximately the cardinality of the sets in order to make relative comparisons among them. 
 
 The scalability assessment assumed monotonicity of component volume in the considered design variables, which is not uncommon in many engineering design and remanufacturing problems. Nevertheless, the scalability assessment presented here may be extendable to include nonmonotonic variables by performing localized monotonicity assessments in the design space. 
 
-{\color{red} We defined scalability in terms of volume of material added during remanufacturing. Equation~(\ref{eq:transitionrulematrix}) is a specific case of scalability where remanufacturing by \ac{AM} or subtractive manufacturing is being considered. However, scalability does not necessarily depend on manufacturing constraints exclusively. There are other effects that could be considered for general remanufacturing problems such as cost, tooling and assembly. These effects can be accommodated by our framework for identifying scalable designs by defining the appropriate functions in terms of the Jacobian components to substitute the constraint function given by Equation~(\ref{eq:transitionrulematrix}) in Algorithm~\ref{algo:SODalgo}.}
+We defined scalability in terms of volume of material added during remanufacturing. Equation~(\ref{eq:transitionrulematrix}) is a specific case of scalability where remanufacturing by \ac{AM} or subtractive manufacturing is being considered. However, scalability does not necessarily depend on manufacturing constraints exclusively. There are other effects that could be considered for general remanufacturing problems such as cost, tooling, and assembly. These effects can be accommodated by our framework for identifying scalable designs by defining the appropriate functions in terms of the Jacobian components to substitute the constraint function given by Equation~(\ref{eq:transitionrulematrix}) in Algorithm~\ref{algo:SODalgo}.
 
 This work enables design changes by remanufacturing through the derived transition rules. The formulated optimization problem is driven by thermomechanical performance requirements that impact its useful lifetime and how it can be extended.
 
 The framework presented by this chapter addressed the problem of designing a product for remanufacturing due to a change in requirements. However, the changes in requirements that have been considered so far are based on the current state of the component being remanufactured and its desired state after the requirement change is implemented. In practice, requirement changes occur several times throughout a product's lifecycle or development process. Decisions about the optimal remanufacturing design strategy should incorporate past and current knowledge about the state of the component and its requirements. This helps designers address future changes in the requirements that are not immediately apparent.
 
-{\color{red} This chapter only considers incorporating scalability and flexibility by proxy in product design to mitigate changing requirements. Alternatively, designs can incorporate design margins to passively absorb changing requirements. This is an example of robust design. The following chapter investigates a tool for strategically allocating both design flexibility and robustness to address changing requirements by the use of design margins.}
+This chapter only considers incorporating scalability and flexibility by proxy in product design to mitigate changing requirements. Alternatively, designs can incorporate design margins to passively absorb changing requirements. This is an example of robust design. The following chapter investigates a tool for strategically allocating both design flexibility and robustness to address changing requirements by the use of design margins.

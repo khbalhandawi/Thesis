@@ -6,7 +6,7 @@
 \label{ch:thermomechanical}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-In this chapter, we introduce the industrial application example used to demonstrate our methodologies in Chapters \ref{ch:scalableSBD}, \ref{ch:TSEcont}, and \ref{ch:stohasticopt}. We define the thermomechanical model used to analyze the deposition process used to remanufacture the product. The product considered in this thesis is the \ac{TRS}. The models developed in this section are specific to the deposition of various stiffener geometries on the \acf{TRS}. However, the simplifications to the thermomechanical analysis used to compute the residual effects of directed energy deposition on the substrate are generalizable to any deposit and substrate.
+In this chapter, we introduce the industrial application example used to demonstrate our methods in Chapters \ref{ch:scalableSBD}, \ref{ch:TSEcont}, and \ref{ch:stohasticopt}. We define the thermomechanical model used to analyze the deposition process used to remanufacture the product. The product considered in this thesis is the \ac{TRS}. The models developed in this section are specific to the deposition of various stiffener geometries on the \acf{TRS}. However, the simplifications to the thermomechanical analysis used to compute the residual effects of directed energy deposition on the substrate are generalizable to any deposit and substrate.
 
 A \ac{TRS} is a structural aeroengine component at the turbine exhaust. It must sustain thermal and structural loads during flight due to exhaust gases while mounting the engine to the wing structure. Analysis of the component in the industry involves multiple disciplines (aerodynamic, structural, and thermal). 
 
@@ -14,7 +14,7 @@ We consider the deposition of a stiffener on the \ac{TRS} to support higher load
 
 Any subsequent loading of the \ac{TRS} during operation results in a new stress state ($\sigma_{v2}$). The mean and amplitude of the initial and final stress states are used to compute the safety factor against low-cycle fatigue as a structural performance metric. We consider two different load cases in Chapters \ref{ch:scalableSBD} and \ref{ch:TSEcont}. However, the calculation of the safety factor against low-cycle fatigue is independent of the load case used in the analysis.
 
-The following section outlines the thermomechanical models used to predict the residual stresses that result from the \ac{AM} deposition process. {\color{red} All the loadcases presented in this thesis take advantage of the cyclic symmetry of the \ac{TRS} by restricting the analysis to one sector.}
+The following section outlines the thermomechanical models used to predict the residual stresses that result from the \ac{AM} deposition process. All the loadcases presented in this thesis take advantage of the cyclic symmetry of the \ac{TRS} by restricting the analysis to one sector.
 
 %========================== THERMOMECHANICAL ===========================%
 \section{Thermomechanical modeling}
@@ -122,7 +122,7 @@ In all our analyses throughout the thesis, the scanning speed is considered cons
 	\caption{ \label{fig:Sprinciple} Spatial distribution of principle residual stresses along the circumference of the \ac{TRS} obtained using transient and static models}
 \end{figure}
 
-The principal stresses provide an indication of the compressive or tensile nature of the stress state and will be used in subsequent failure analysis to determine the safety factor. There is a general agreement in the value of the predicted stresses with lower values recorded for the transient model due to the time taken by the substrate to reach steady state temperatures as the heat source scans its surface. Furthermore, the static model overpredicts the maximum principal stress making it a more conservative choice for thermomechanical modelling.
+The principal stresses provide an indication of the compressive or tensile nature of the stress state and will be used in subsequent failure analysis to determine the safety factor. There is a general agreement in the value of the predicted stresses with lower values recorded for the transient model due to the time taken by the substrate to reach steady state temperatures as the heat source scans its surface. Furthermore, the static model overpredicts the maximum principal stress making it a more conservative choice for thermomechanical modeling.
 
 In the following section we describe the different load cases that the \ac{TRS} may experience in operation.
 
@@ -245,4 +245,4 @@ This chapter presented the industrial application example that will be used thro
 	\end{tabular}
 \end{table}
 
-We describe the methodology for obtaining scalable design solutions for product remanfuacturing in the following chapter. The internal pressure loadcase described in Section~\ref{subsec:iploadcase} will be used to demonstrate this framework. The thermal loadcase described in Section \ref{subsec:thermalloadcase} will be used for demonstrating the design margin allocation tool developed in Chapter \ref{ch:TSEcont}.
+We describe the method for obtaining scalable design solutions for product remanfuacturing in the following chapter. The internal pressure loadcase described in Section~\ref{subsec:iploadcase} will be used to demonstrate this framework. The thermal loadcase described in Section \ref{subsec:thermalloadcase} will be used for demonstrating the design margin allocation tool developed in Chapter \ref{ch:TSEcont}.
